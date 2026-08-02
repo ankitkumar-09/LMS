@@ -1,0 +1,388 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #007bff;
+  --color-primary-light: #e7f3ff;
+  
+  --color-answered: #28a745;
+  --color-not-answered: #dc3545;
+  --color-marked: #6f42c1;
+  --color-answered-marked: #fd7e14;
+  --color-not-visited: #6c757d;
+
+  --color-gray-100: #f8f9fa;
+  --color-gray-200: #e9ecef;
+  --color-gray-300: #dee2e6;
+  --color-gray-500: #adb5bd;
+  --color-gray-700: #495057;
+  --color-gray-900: #212529;
+}
+
+/* Reset and base.
+   IMPORTANT: everything custom in this file must live inside a @layer.
+   Tailwind v4 puts its utilities in `@layer utilities`, and unlayered CSS always
+   beats layered CSS regardless of specificity. A bare `* { padding: 0 }` here
+   silently kills every padding and margin utility in the whole app. */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-gray-100);
+    color: var(--color-gray-900);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  /* ===== Cards & surfaces =====
+     These classes are used throughout the admin and student pages. Without them the
+     pages render as unstyled stacked text, so keep them in sync with the markup. */
+  .admin-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.04);
+  }
+
+  @media (max-width: 640px) {
+    .admin-card {
+      padding: 1.125rem;
+      border-radius: 12px;
+    }
+  }
+
+  .admin-card + .admin-card {
+    margin-top: 0;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 40px rgba(16, 24, 40, 0.08);
+  }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  /* ===== Animations ===== */
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .animate-slide-up {
+    animation: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-fade-in {
+    animation: fade-in 0.25s ease both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-slide-up,
+    .animate-fade-in {
+      animation: none;
+    }
+  }
+
+  /* ===== Scoped scrollbar ===== */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gray-300) transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-radius: 999px;
+  }
+
+  /* ===== Admin form controls ===== */
+  .admin-label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.375rem;
+  }
+
+  .admin-input,
+  .admin-select,
+  .admin-textarea {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    color: #111827;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .admin-input::placeholder,
+  .admin-textarea::placeholder {
+    color: #9ca3af;
+  }
+  .admin-input:focus,
+  .admin-select:focus,
+  .admin-textarea:focus {
+    outline: none;
+    border-color: #1565c0;
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.14);
+  }
+  .admin-textarea {
+    resize: vertical;
+    min-height: 5.5rem;
+    line-height: 1.55;
+  }
+  .admin-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236b7280'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.19l3.71-3.96a.75.75 0 111.1 1.02l-4.25 4.54a.75.75 0 01-1.1 0L5.21 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.625rem center;
+    background-size: 1.15rem;
+    padding-right: 2.25rem;
+  }
+
+  /* ===== Admin buttons ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.125rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 9px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: #1a237e;
+    color: #ffffff;
+  }
+  .btn-primary:hover:not(:disabled) { background: #283593; }
+
+  .btn-success {
+    background: #2e7d32;
+    color: #ffffff;
+  }
+  .btn-success:hover:not(:disabled) { background: #276b2a; }
+
+  .btn-ghost {
+    background: #ffffff;
+    color: #374151;
+    border-color: #d1d5db;
+  }
+  .btn-ghost:hover:not(:disabled) { background: #f9fafb; }
+
+  .btn-danger-ghost {
+    background: #ffffff;
+    color: #b91c1c;
+    border-color: #fecaca;
+  }
+  .btn-danger-ghost:hover:not(:disabled) { background: #fef2f2; }
+
+  /* Segmented tab control */
+  .seg {
+    display: inline-flex;
+    gap: 0.25rem;
+    padding: 0.25rem;
+    background: #eef0f4;
+    border-radius: 11px;
+    flex-wrap: wrap;
+  }
+  .seg-item {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #4b5563;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .seg-item:hover { color: #1a237e; }
+  .seg-item[aria-selected='true'] {
+    background: #ffffff;
+    color: #1a237e;
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.12);
+  }
+
+  /* Custom Gradients */
+  .bg-dark-gradient {
+    background: linear-gradient(135deg, #1d2b4a 0%, #3e5f8a 100%);
+  }
+  .bg-header-gradient {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  }
+  .bg-palette-gradient {
+    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+  }
+  .bg-start-gradient {
+    background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray-500);
+  }
+
+  /* Timer animations */
+  .timer-warning {
+    color: #e74c3c !important;
+  }
+
+  /* Palette Buttons */
+  .palette-btn {
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.2s ease;
+    color: white;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .palette-btn.not-visited { background: var(--color-not-visited); }
+  .palette-btn.not-answered { background: var(--color-not-answered); }
+  .palette-btn.answered { background: var(--color-answered); }
+  .palette-btn.marked { background: var(--color-marked); }
+  .palette-btn.answered-marked { background: var(--color-answered-marked); }
+
+  .palette-btn.answered-marked::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    background: var(--color-answered);
+    border-radius: 50%;
+    border: 1px solid white;
+  }
+
+  /* Option Styles */
+  .option {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border: 2px solid var(--color-gray-200);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  .option:hover {
+    border-color: var(--color-primary-light);
+    background: var(--color-gray-100);
+  }
+  .option.selected {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+  }
+  .option-radio {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+  }
+  .check-icon {
+    position: absolute;
+    right: 15px;
+    opacity: 0;
+    color: white;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    transition: opacity 0.2s;
+  }
+  .option.selected .check-icon {
+    opacity: 1;
+  }
+
+  /* Nav Button Styles */
+  .nav-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+  }
+  .nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .exam-layout {
+      flex-direction: column;
+    }
+    .exam-sidebar {
+      width: 100% !important;
+      max-height: 40vh;
+      border-left: none !important;
+      border-top: 1px solid var(--color-border);
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.05) !important;
+      z-index: 40;
+    }
+  }
+}
