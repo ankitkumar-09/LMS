@@ -6,7 +6,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "JEE Mains Mock Test Platform",
-  description: "Practice JEE Mains with realistic mock tests. 30 questions, 60 minutes, +4/-1 marking scheme.",
+  description: "Practice JEE Mains with realistic mock tests. +4 / −1 / 0 marking scheme.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({

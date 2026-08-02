@@ -10,12 +10,26 @@ export default function AdminLoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  // NEXT_PUBLIC_* values are inlined at BUILD time. If the variable was added to
+  // Vercel after the last deploy, this is undefined and every password fails —
+  // which is indistinguishable from a wrong password unless we check separately.
+  const configuredPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
+  const isConfigured = Boolean(configuredPassword);
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
+    if (!isConfigured) {
+      setError(
+        'Admin password is not configured on this deployment. Add NEXT_PUBLIC_ADMIN_PASSWORD in your hosting environment variables, then redeploy.'
+      );
+      setLoading(false);
+      return;
+    }
+
+    if (password === configuredPassword) {
       sessionStorage.setItem('admin_authenticated', 'true');
       router.push('/admin/dashboard');
     } else {
@@ -53,6 +67,13 @@ export default function AdminLoginPage() {
               autoFocus
             />
           </div>
+
+          {!isConfigured && !error && (
+            <div className="bg-amber-50 border border-amber-200 text-amber-800 px-4 py-2.5 rounded-lg text-xs leading-relaxed">
+              Heads up: no admin password is set in this build, so login can&apos;t succeed.
+              Set <code className="font-mono">NEXT_PUBLIC_ADMIN_PASSWORD</code> and redeploy.
+            </div>
+          )}
 
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2.5 rounded-lg text-sm text-center font-medium">

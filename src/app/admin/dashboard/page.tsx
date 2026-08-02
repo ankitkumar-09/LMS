@@ -108,7 +108,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Action Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
           <button onClick={() => router.push('/admin/tests/create')} className="group text-left bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#1e3c72] transition-all relative overflow-hidden cursor-pointer">
             <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6 relative z-10 text-blue-600">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
@@ -131,6 +131,14 @@ export default function AdminDashboard() {
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-2 relative z-10">Question Bank</h3>
             <p className="text-sm text-gray-600 relative z-10">Manage your central library of questions for reusable tests.</p>
+          </button>
+
+          <button onClick={() => router.push('/admin/results')} className="group text-left bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#f59e0b] transition-all relative overflow-hidden cursor-pointer">
+            <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-6 relative z-10 text-amber-600">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2 relative z-10">Test Results</h3>
+            <p className="text-sm text-gray-600 relative z-10">Marks scored on every completed test, with the +4 / −1 / 0 breakdown.</p>
           </button>
         </div>
 

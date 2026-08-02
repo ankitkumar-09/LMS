@@ -1,0 +1,293 @@
+{
+  "title": "ALLEN AIOT — Physics (30 Questions)",
+  "subject": "physics",
+  "durationMinutes": 60,
+  "showScoreToStudent": true,
+  "questions": [
+    {
+      "questionText": "Which of the following is a CORRECT statement?",
+      "imageURL": null,
+      "options": {
+        "A": "2.3056 + 10.138 − 7.4671 = 4.9765",
+        "B": "2.38 × 1.0 = 2.38",
+        "C": "8.05 / 3.1 = 2.6",
+        "D": "(1.11 − 0.1) × 9.0 = 9.0"
+      },
+      "correctOption": "C",
+      "subject": "physics",
+      "difficulty": "easy"
+    },
+    {
+      "questionText": "A projectile travels at θ below the horizontal 1 second after projection, as shown in the figure (velocity components 4 m and 3 m). What is the value of θ?",
+      "imageURL": null,
+      "options": { "A": "tan⁻¹(2)", "B": "tan⁻¹(1/2)", "C": "37°", "D": "53°" },
+      "correctOption": "B",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "An electron in a research apparatus follows a circular path. On the electron's first circuit, its speed is v₀ and the radius of its circular path is R. Each time it makes one circuit it passes a short region where it receives a \"kick\" and gains an additional speed of v₀/100. The electron follows a circular path such that the magnitude of its acceleration is always the same. What is the radius of the circular path after the electron has received 10 kicks?",
+      "imageURL": null,
+      "options": { "A": "R / 1.1", "B": "1.1 R", "C": "1.21 R", "D": "R / 1.21" },
+      "correctOption": "C",
+      "subject": "physics",
+      "difficulty": "hard"
+    },
+    {
+      "questionText": "A square of mass m is made of thin wire with sides of length a. Calculate the rotational inertia about the z-axis shown in the figure.",
+      "imageURL": null,
+      "options": { "A": "7ma²/6", "B": "5ma²/6", "C": "7ma²/12", "D": "5ma²/12" },
+      "correctOption": "B",
+      "subject": "physics",
+      "difficulty": "hard"
+    },
+    {
+      "questionText": "If we want a simple pendulum to oscillate with the same time period in summer as it did in winter, what change should we make to the pendulum during summer?",
+      "imageURL": null,
+      "options": {
+        "A": "Increase the length",
+        "B": "Decrease the length",
+        "C": "Increase mass of bob",
+        "D": "Decrease mass of bob"
+      },
+      "correctOption": "B",
+      "subject": "physics",
+      "difficulty": "easy"
+    },
+    {
+      "questionText": "An igloo, a hemispherical enclosure built of ice (k = 1.67 J/m·s·°C), has an inner radius of 2.50 m. The thickness of the ice is 0.5 m. At what rate must thermal energy be generated to maintain the air inside the igloo at 5°C when the outside temperature is −40°C? Ignore all thermal energy losses through the ground or by air currents.",
+      "imageURL": null,
+      "options": { "A": "2.25 π kW", "B": "4.5 π kW", "C": "1.25 π kW", "D": "5 π kW" },
+      "correctOption": "A",
+      "subject": "physics",
+      "difficulty": "hard"
+    },
+    {
+      "questionText": "Assume a temperature of 27°C, p = 10⁵ Pa, n = 1 mole, and diameter of air molecules as 10⁻¹⁰ m. Which of the following is correct?",
+      "imageURL": null,
+      "options": {
+        "A": "Mean free path > interatomic spacing",
+        "B": "Mean free path = interatomic spacing",
+        "C": "Mean free path < interatomic spacing",
+        "D": "Data insufficient"
+      },
+      "correctOption": "A",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "A car is moving towards a stationary observer at a speed of 108 km/hr. The speed of sound is 330 m/s. If the observer hears the frequency of the horn as 550 Hz, what frequency will he hear after the car has passed?",
+      "imageURL": null,
+      "options": { "A": "550 Hz", "B": "500 Hz", "C": "458.33 Hz", "D": "421.6 Hz" },
+      "correctOption": "C",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "Two blocks of the same mass but different densities ρ₁ and ρ₂ are floating in water (see figure). Block 2 has a higher fraction of its volume submerged in water. If the buoyant forces on them are B₁ and B₂:",
+      "imageURL": null,
+      "options": {
+        "A": "B₁ > B₂, ρ₁ > ρ₂",
+        "B": "B₁ < B₂, ρ₁ < ρ₂",
+        "C": "B₁ = B₂, ρ₁ > ρ₂",
+        "D": "B₁ = B₂, ρ₁ < ρ₂"
+      },
+      "correctOption": "D",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "A plastic ball is rising in water with terminal speed v. If we use a different plastic whose density is double that of the original ball but still less than the density of water, keeping the radius the same, the terminal speed would be:",
+      "imageURL": null,
+      "options": {
+        "A": "Doubled",
+        "B": "Half",
+        "C": "More than original value",
+        "D": "Less than original value"
+      },
+      "correctOption": "D",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "The electric field line pattern for charges +2q and −q is shown. Select the most appropriate diagram. (Refer to the image for options A–D.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "B",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "In the half deflection method, the resistance of the resistance box in series with the galvanometer is 10,000 Ω. When the galvanometer is shunted with a 10 Ω resistance, its reading drops to half the initial value. The resistance of the galvanometer is:",
+      "imageURL": null,
+      "options": { "A": "5 Ω", "B": "10 Ω", "C": "20 Ω", "D": "25 Ω" },
+      "correctOption": "B",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "Two air-filled capacitors (2 µF and 4 µF) are connected across a 6 V battery as shown in the figure. The left capacitor is suddenly filled with a dielectric of constant K. The work done by the battery after that is 24 µJ. The dielectric constant K is:",
+      "imageURL": null,
+      "options": { "A": "2", "B": "3", "C": "4", "D": "6" },
+      "correctOption": "A",
+      "subject": "physics",
+      "difficulty": "hard"
+    },
+    {
+      "questionText": "An infinite cylindrical current-carrying wire carries a current that is uniformly distributed over its cross-section. The magnetic field as a function of distance from its axis is: (Refer to the image for graphs A–D.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "C",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "A metal sheet is being pulled out of a region of magnetic field (see figure). If the sheet is non-magnetic:",
+      "imageURL": null,
+      "options": {
+        "A": "No force is required and no heat is dissipated in the sheet.",
+        "B": "Force is required but no heat is dissipated in the sheet.",
+        "C": "No force is required but heat is dissipated in the sheet.",
+        "D": "Force is required and heat is dissipated in the sheet."
+      },
+      "correctOption": "D",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "A signal containing multiple frequencies is shown in figure A. It is passed through 2 different filters and the outputs are shown in figures B and C. (Refer to the image.)",
+      "imageURL": null,
+      "options": {
+        "A": "B corresponds to low pass filter and C to high pass filter.",
+        "B": "B corresponds to high pass filter and C to low pass filter.",
+        "C": "Both correspond to low pass filter.",
+        "D": "Both correspond to high pass filter."
+      },
+      "correctOption": "A",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "The sketch shown illustrates the apparatus and results for a famous experiment. The graph on the right is a polar plot of the number of electrons received in the detector. From the result, the experimenters were able to conclude that:",
+      "imageURL": null,
+      "options": {
+        "A": "The energy levels of atoms in a metal are quantized.",
+        "B": "Electrons in a beam can behave as a wave.",
+        "C": "Electrons have spin half.",
+        "D": "There are magnetic domains inside a nickel sample."
+      },
+      "correctOption": "B",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "Masses of Bromine, Selenium and Krypton are given as M(⁸⁰Br) = 79.918528 u, M(⁸⁰Kr) = 79.916376 u, M(⁸⁰Se) = 79.916521 u. Which of the following β decays are possible?  (i) ³⁵⁸⁰Br → ³⁶⁸⁰Kr + ₋₁⁰e + ν̄   (ii) ³⁵⁸⁰Br → ³⁴⁸⁰Se + ₊₁⁰e + ν   (iii) ³⁵⁸⁰Br + ₋₁⁰e → ³⁴⁸⁰Se + ν",
+      "imageURL": null,
+      "options": {
+        "A": "all 3",
+        "B": "(i) & (iii) only",
+        "C": "(ii) & (iii) only",
+        "D": "(i) & (ii) only"
+      },
+      "correctOption": "A",
+      "subject": "physics",
+      "difficulty": "hard"
+    },
+    {
+      "questionText": "Drawing power from a 12 V car battery, a 9 V stabilized DC voltage is required to power a car stereo system attached to terminals A and B, as shown in the figure. If a Zener diode with ratings Vz = 9 V and Pmax = 0.27 W is connected as shown, the minimum series resistance Rs must be:",
+      "imageURL": null,
+      "options": { "A": "111 Ω", "B": "103 Ω", "C": "100 Ω", "D": "97 Ω" },
+      "correctOption": "C",
+      "subject": "physics",
+      "difficulty": "hard"
+    },
+    {
+      "questionText": "When light of wavelength 540 nm passes through a single slit of unknown width, the diffraction pattern displays a second maximum where the first minimum of light of an unknown wavelength had been observed to fall. What is the unknown wavelength?",
+      "imageURL": null,
+      "options": { "A": "360 nm", "B": "270 nm", "C": "180 nm", "D": "810 nm" },
+      "correctOption": "D",
+      "subject": "physics",
+      "difficulty": "hard"
+    },
+    {
+      "questionText": "Two equal point charges are fixed at x = −a and x = +a on the x-axis. Another point charge Q is placed at the origin. The change in the electrical potential energy of Q, when it is displaced by a small distance x along the x-axis, is approximately proportional to (x << a):",
+      "imageURL": null,
+      "options": { "A": "x", "B": "x²", "C": "x³", "D": "1/x" },
+      "correctOption": "B",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "An α-particle of mass m suffers a one-dimensional elastic collision with a nucleus of unknown mass. After the collision the α-particle is scattered directly backward, losing 75% of its kinetic energy. Then the mass of the nucleus is:",
+      "imageURL": null,
+      "options": { "A": "m", "B": "2m", "C": "3m", "D": "5m" },
+      "correctOption": "C",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "70 cal of heat is required to raise the temperature of 2 moles of an ideal gas from 30°C to 35°C while the pressure of the gas is kept constant. The amount of heat required to raise the temperature of the same gas through the same temperature range at constant volume is (gas constant R = 2 cal mol⁻¹K⁻¹):",
+      "imageURL": null,
+      "options": { "A": "80 cal", "B": "70 cal", "C": "60 cal", "D": "50 cal" },
+      "correctOption": "D",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "In a Lloyd's mirror experiment, a light wave emitted directly by the source S interferes with reflected light from the mirror. The screen is 1 m away from the source S. The size of the fringe width is 0.25 mm. When the source is moved 0.6 mm above the initial position, the fringe width decreases by 1.5 times. The light used has wavelength:",
+      "imageURL": null,
+      "options": { "A": "0.6 µm", "B": "0.4 µm", "C": "0.2 µm", "D": "0.8 µm" },
+      "correctOption": "A",
+      "subject": "physics",
+      "difficulty": "hard"
+    },
+    {
+      "questionText": "There is a simple pendulum hanging from the ceiling of a lift. When the lift is standing still, the time period of the pendulum is T. If the lift moves upward with deceleration 3g/4, where g is the acceleration due to gravity, then the new time period of the pendulum is:",
+      "imageURL": null,
+      "options": { "A": "0.75 T", "B": "0.25 T", "C": "2T", "D": "4T" },
+      "correctOption": "C",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "A solid sphere of mass 1 kg and radius 10 cm rolls down an inclined plane of height 7 m. The velocity of its centre as it reaches the ground level is:",
+      "imageURL": null,
+      "options": { "A": "7 m/s", "B": "10 m/s", "C": "15 m/s", "D": "20 m/s" },
+      "correctOption": "B",
+      "subject": "physics",
+      "difficulty": "medium"
+    },
+    {
+      "questionText": "Two spheres made of the same material have radii in the ratio 2 : 1. If both spheres are at the same temperature, what is the ratio of heat radiation energy emitted per second by them?",
+      "imageURL": null,
+      "options": { "A": "1 : 4", "B": "4 : 1", "C": "3 : 4", "D": "4 : 3" },
+      "correctOption": "B",
+      "subject": "physics",
+      "difficulty": "easy"
+    },
+    {
+      "questionText": "A sound absorber attenuates the sound level by 20 dB. The intensity decreases by a factor of:",
+      "imageURL": null,
+      "options": { "A": "1000", "B": "10,000", "C": "10", "D": "100" },
+      "correctOption": "D",
+      "subject": "physics",
+      "difficulty": "easy"
+    },
+    {
+      "questionText": "Two soap bubbles A and B are kept in a closed chamber where the air is maintained at a pressure of 8 N/m². The radii of bubbles A and B are 2 cm and 4 cm respectively. The surface tension of the soap water used to make the bubbles is 0.04 N/m. Find the ratio nB/nA, where nA and nB are the number of moles of air in bubbles A and B respectively at the same temperature. Neglect the effect of gravity.",
+      "imageURL": null,
+      "options": { "A": "6", "B": "7", "C": "8", "D": "4" },
+      "correctOption": "A",
+      "subject": "physics",
+      "difficulty": "hard"
+    },
+    {
+      "questionText": "Lenses of power 3D and −5D are combined to form a compound lens. An object is placed at a distance of 50 cm from this lens. Its image will be formed at a distance from the lens of:",
+      "imageURL": null,
+      "options": { "A": "25 cm", "B": "20 cm", "C": "30 cm", "D": "40 cm" },
+      "correctOption": "A",
+      "subject": "physics",
+      "difficulty": "medium"
+    }
+  ]
+}

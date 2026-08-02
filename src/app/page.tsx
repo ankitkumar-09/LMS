@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getAllTests, getTestByPin } from "@/lib/firebase/firestore";
-import { Test } from "@/lib/types";
+import { getAllTests, getAllAttempts, getTestByPin } from "@/lib/firebase/firestore";
+import { Test, Attempt } from "@/lib/types";
 
 export default function LandingPage() {
   const router = useRouter();
   const [tests, setTests] = useState<Test[]>([]);
+  const [attempts, setAttempts] = useState<Record<string, Attempt>>({});
   const [loading, setLoading] = useState(true);
-  
+
   const [selectedTest, setSelectedTest] = useState<Test | null>(null);
   const [pin, setPin] = useState("");
   const [error, setError] = useState("");
@@ -18,8 +19,9 @@ export default function LandingPage() {
   useEffect(() => {
     const fetchTests = async () => {
       try {
-        const allTests = await getAllTests();
+        const [allTests, allAttempts] = await Promise.all([getAllTests(), getAllAttempts()]);
         setTests(allTests);
+        setAttempts(allAttempts);
       } catch (err) {
         console.error("Failed to load tests", err);
       } finally {
@@ -78,6 +80,16 @@ export default function LandingPage() {
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-200/50 blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-200/40 blur-[100px] pointer-events-none"></div>
 
+      {/* Watermark — decorative only, never intercepts clicks or gets read aloud */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none select-none"
+      >
+        <span className="font-extrabold tracking-tight text-slate-900/[0.045] -rotate-12 text-[24vw] leading-none whitespace-nowrap">
+          Ankit
+        </span>
+      </div>
+
       <div className="w-full max-w-5xl z-10 animate-slide-up">
         {/* Hero Section */}
         <div className="text-center mb-12">
@@ -112,14 +124,18 @@ export default function LandingPage() {
                 tests.map((test) => {
                   const isSubmitted = test.status === 'submitted';
                   const isSelected = selectedTest?.id === test.id;
-                  
+                  const attempt = attempts[test.id];
+                  const maxScore = test.totalQuestions * 4;
+                  // Only reveal marks if the admin enabled it for this test
+                  const showMarks = isSubmitted && attempt?.submittedAt != null && test.showScoreToStudent;
+
                   return (
-                    <div 
+                    <div
                       key={test.id}
                       onClick={() => handleTestSelect(test)}
                       className={`relative overflow-hidden rounded-2xl p-6 transition-all duration-300 ${
-                        isSubmitted 
-                          ? 'bg-slate-50 border border-slate-200 opacity-70 cursor-not-allowed grayscale-[0.5]'
+                        isSubmitted
+                          ? 'bg-emerald-50/40 border border-emerald-200 cursor-pointer hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-50'
                           : isSelected
                             ? 'bg-white border-2 border-indigo-500 shadow-xl shadow-indigo-100 transform -translate-y-1'
                             : 'bg-white border border-slate-200 hover:border-indigo-300 hover:shadow-lg hover:shadow-slate-100 cursor-pointer hover:-translate-y-1'
@@ -127,11 +143,18 @@ export default function LandingPage() {
                     >
                       {/* Status Indicator Bar */}
                       <div className={`absolute top-0 left-0 w-1 h-full ${
-                        isSubmitted ? 'bg-slate-400' : test.status === 'in_progress' ? 'bg-amber-400' : 'bg-emerald-400'
+                        isSubmitted ? 'bg-emerald-500' : test.status === 'in_progress' ? 'bg-amber-400' : 'bg-emerald-400'
                       }`}></div>
 
-                      <div className="flex justify-between items-start mb-4 pl-2">
-                        <h3 className={`font-bold text-xl ${isSubmitted ? 'text-slate-500' : 'text-slate-800'}`}>{test.title}</h3>
+                      {/* Completed stamp */}
+                      {isSubmitted && (
+                        <div className="absolute top-5 right-[-38px] rotate-45 bg-emerald-500 text-white text-[10px] font-black tracking-[0.2em] py-1.5 w-[150px] text-center shadow-sm pointer-events-none">
+                          COMPLETED
+                        </div>
+                      )}
+
+                      <div className="flex justify-between items-start mb-4 pl-2 gap-3">
+                        <h3 className={`font-bold text-xl ${isSubmitted ? 'text-slate-700' : 'text-slate-800'}`}>{test.title}</h3>
                         <span className={`text-xs px-3 py-1 rounded-full font-bold uppercase tracking-widest ${
                           test.subject === 'physics' ? 'bg-blue-50 text-blue-700' :
                           test.subject === 'chemistry' ? 'bg-violet-50 text-violet-700' :
@@ -141,7 +164,33 @@ export default function LandingPage() {
                           {test.subject}
                         </span>
                       </div>
-                      
+
+                      {/* Marks scored */}
+                      {showMarks && (
+                        <div className="ml-2 mb-4 rounded-xl bg-white border border-emerald-200 px-4 py-3">
+                          <div className="flex items-baseline justify-between gap-3">
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700">
+                              Marks scored
+                            </span>
+                            <span className="text-2xl font-black text-emerald-600 leading-none">
+                              {attempt.score}
+                              <span className="text-base font-bold text-slate-400"> / {maxScore}</span>
+                            </span>
+                          </div>
+                          <div className="mt-2.5 flex flex-wrap gap-x-3 gap-y-1 text-[11px] font-semibold">
+                            <span className="text-emerald-700">{attempt.correctCount} correct · +4</span>
+                            <span className="text-rose-600">{attempt.wrongCount} wrong · −1</span>
+                            <span className="text-slate-400">{attempt.unattemptedCount} skipped · 0</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {isSubmitted && !test.showScoreToStudent && (
+                        <div className="ml-2 mb-4 rounded-xl bg-white border border-slate-200 px-4 py-3 text-xs text-slate-500 font-medium">
+                          Your response is recorded. Marks will be published by your administrator.
+                        </div>
+                      )}
+
                       <div className="flex justify-between items-center mt-6 pl-2">
                         <div className="flex items-center gap-4 text-sm font-medium text-slate-500">
                           <span className="flex items-center gap-1">
@@ -155,8 +204,9 @@ export default function LandingPage() {
                         </div>
                         <div>
                           {isSubmitted ? (
-                            <span className="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-slate-400"></span> COMPLETED
+                            <span className="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
+                              SUBMITTED
                             </span>
                           ) : test.status === 'in_progress' ? (
                             <span className="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1.5 rounded-full flex items-center gap-1.5">

@@ -24,6 +24,10 @@ export default function ExamPage() {
   
   // Proctoring & Review States
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [pausedReason, setPausedReason] = useState("");
+  const [pauseCount, setPauseCount] = useState(0);
+  const [copyNotice, setCopyNotice] = useState("");
+  const [terminated, setTerminated] = useState<"screenshot" | null>(null);
   const [isReviewMode, setIsReviewMode] = useState(false);
   // Populated only after submission, so answers can never leak mid-test
   const [answerKey, setAnswerKey] = useState<Record<number, Question["correctOption"]>>({});
@@ -33,6 +37,7 @@ export default function ExamPage() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   // Holds the latest auto-submit closure so the timer effect never captures stale state
   const autoSubmitRef = useRef<() => void>(() => {});
+  const screenshotSubmitRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     const initTest = async () => {
@@ -131,15 +136,14 @@ export default function ExamPage() {
     initTest();
   }, [testId, router]);
 
-  useEffect(() => {
-    if (loading || isReviewMode) return;
+  // The exam is live only while fullscreen and unpaused. The timer interval is
+  // torn down the instant that stops being true, so no extra second can elapse.
+  const isPaused = !isFullscreen || violationWarning;
 
-    // Timer interval
+  useEffect(() => {
+    if (loading || isReviewMode || isPaused) return;
+
     timerRef.current = setInterval(() => {
-      if (document.hidden || !document.fullscreenElement) {
-        // Paused
-        return;
-      }
       setTimeRemaining(prev => {
         const newTime = prev - 1;
         if (newTime <= 0) {
@@ -153,51 +157,130 @@ export default function ExamPage() {
     }, 1000);
 
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [loading, isReviewMode, testId]);
+  }, [loading, isReviewMode, isPaused, testId]);
 
   useEffect(() => {
     if (loading || isReviewMode) return;
 
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
+    // Single source of truth for "is the exam window actually in front and fullscreen".
+    // Recomputed from the live DOM rather than trusted from any one event, because
+    // macOS window-fullscreen and some minimise paths don't fire fullscreenchange.
+    const sync = () => {
+      const inFullscreen = Boolean(document.fullscreenElement);
+      const focused = document.hasFocus() && !document.hidden;
+      setIsFullscreen(inFullscreen);
+      if (!inFullscreen || !focused) {
         setViolationWarning(true);
+        setPausedReason(
+          !inFullscreen
+            ? "You left fullscreen mode."
+            : document.hidden
+              ? "You switched to another tab or minimised the window."
+              : "You switched to another window."
+        );
       }
     };
 
-    const handleFullscreenChange = () => {
-      if (!document.fullscreenElement) {
-        setIsFullscreen(false);
-        setViolationWarning(true);
-      } else {
-        setIsFullscreen(true);
-      }
-    };
+    const handleVisibilityChange = sync;
+    const handleFullscreenChange = sync;
+    const handleBlur = sync;
+    const handleResize = sync;
+
+    window.addEventListener("blur", handleBlur);
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("pagehide", handleBlur);
+    // Events cover the normal paths instantly; this is only a fallback for window
+    // managers that change state silently. Kept short so worst case is imperceptible.
+    const poll = setInterval(sync, 150);
+    sync();
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
     document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
 
     return () => {
+      clearInterval(poll);
+      window.removeEventListener("blur", handleBlur);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("pagehide", handleBlur);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
+    };
+  }, [loading, isReviewMode]);
+
+  // Block copy / paste / cut / right-click and the usual shortcuts during the exam
+  useEffect(() => {
+    if (loading || isReviewMode) return;
+
+    const block = (e: Event) => { e.preventDefault(); return false; };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      const mod = e.ctrlKey || e.metaKey;
+      const k = e.key.toLowerCase();
+      // copy, paste, cut, select-all, save, print, view-source, find
+      if (mod && ["c", "v", "x", "a", "s", "p", "u", "f"].includes(k)) {
+        e.preventDefault();
+        setCopyNotice("Copying and pasting are disabled during the test.");
+        setTimeout(() => setCopyNotice(""), 2500);
+        return;
+      }
+      // devtools
+      if (e.key === "F12" || (mod && e.shiftKey && ["i", "j", "c"].includes(k))) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener("copy", block);
+    document.addEventListener("cut", block);
+    document.addEventListener("paste", block);
+    document.addEventListener("contextmenu", block);
+    document.addEventListener("dragstart", block);
+    document.addEventListener("keydown", onKeyDown);
+
+    // Belt and braces: also disable text selection visually
+    document.body.style.userSelect = "none";
+    document.body.style.webkitUserSelect = "none";
+
+    return () => {
+      document.removeEventListener("copy", block);
+      document.removeEventListener("cut", block);
+      document.removeEventListener("paste", block);
+      document.removeEventListener("contextmenu", block);
+      document.removeEventListener("dragstart", block);
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.userSelect = "";
+      document.body.style.webkitUserSelect = "";
     };
   }, [loading, isReviewMode]);
 
   const requestFullscreen = async () => {
     try {
-      if (document.documentElement.requestFullscreen) {
-        await document.documentElement.requestFullscreen();
+      const el = document.documentElement as HTMLElement & {
+        webkitRequestFullscreen?: () => Promise<void>;
+      };
+      if (el.requestFullscreen) {
+        await el.requestFullscreen();
+      } else if (el.webkitRequestFullscreen) {
+        await el.webkitRequestFullscreen();
       }
-      setIsFullscreen(true);
-      setViolationWarning(false);
+      // Only clear the pause once the browser confirms we're actually fullscreen
+      if (document.fullscreenElement) {
+        setIsFullscreen(true);
+        setViolationWarning(false);
+        setPausedReason("");
+        setPauseCount(c => c + 1);
+      }
     } catch (err) {
       console.error("Error attempting to enable full-screen mode:", err);
-      alert("Fullscreen is required to continue the test.");
+      setPausedReason("Your browser blocked fullscreen. Allow it and try again.");
     }
   };
 
-  const handleAutoSubmit = async () => {
+  const handleAutoSubmit = async (reason: "screenshot" | "time_up" | null = null) => {
     if (isSubmitting || isReviewMode) return;
     setIsSubmitting(true);
+    if (reason === "screenshot") setTerminated("screenshot");
     try {
       const attempt = await getAttempt(testId);
       if (!attempt) {
@@ -212,23 +295,58 @@ export default function ExamPage() {
         dbResponses[k] = v;
       });
 
-      await submitTest(testId, dbResponses, timeTaken);
+      await submitTest(testId, dbResponses, timeTaken, reason);
       localStorage.removeItem(`test_${testId}_time`);
       if (document.fullscreenElement) {
         await document.exitFullscreen().catch(() => {});
       }
-      router.push(`/test/${testId}/result`);
+      // For a screenshot termination, hold on the explanation screen instead of
+      // silently redirecting, so the student knows why the test ended.
+      if (reason !== "screenshot") {
+        router.push(`/test/${testId}/result`);
+      }
     } catch (err) {
       console.error("Failed to submit test", err);
       setIsSubmitting(false);
+      setTerminated(null);
       alert("Submission failed. Please check your connection and try again.");
     }
   };
 
   // Keep the ref pointing at the freshest closure for the timer's zero-callback
   useEffect(() => {
-    autoSubmitRef.current = () => { void handleAutoSubmit(); };
+    autoSubmitRef.current = () => { void handleAutoSubmit("time_up"); };
+    screenshotSubmitRef.current = () => { void handleAutoSubmit("screenshot"); };
   });
+
+  // Screenshot attempts end the test immediately.
+  useEffect(() => {
+    if (loading || isReviewMode || terminated) return;
+
+    const isScreenshotCombo = (e: KeyboardEvent) => {
+      // Windows / Linux: PrintScreen, and Win+Shift+S (Snip & Sketch)
+      if (e.key === "PrintScreen") return true;
+      if (e.shiftKey && e.metaKey && e.key.toLowerCase() === "s") return true;
+      // macOS: Cmd+Shift+3 / 4 / 5. The OS usually swallows these before the
+      // browser sees them, so this only catches the cases that do get through.
+      if (e.metaKey && e.shiftKey && ["3", "4", "5"].includes(e.key)) return true;
+      return false;
+    };
+
+    const onKey = (e: KeyboardEvent) => {
+      if (isScreenshotCombo(e)) {
+        e.preventDefault();
+        screenshotSubmitRef.current();
+      }
+    };
+
+    document.addEventListener("keydown", onKey, true);
+    document.addEventListener("keyup", onKey, true);
+    return () => {
+      document.removeEventListener("keydown", onKey, true);
+      document.removeEventListener("keyup", onKey, true);
+    };
+  }, [loading, isReviewMode, terminated]);
 
   const formatTime = (seconds: number) => {
     const h = Math.floor(seconds / 3600);
@@ -341,22 +459,76 @@ export default function ExamPage() {
     );
   }
 
-  if (!isReviewMode && (!isFullscreen || violationWarning)) {
+  // Screenshot termination outranks every other screen, including the pause overlay
+  if (terminated === "screenshot") {
     return (
-      <div className="fixed inset-0 z-50 bg-slate-900 flex flex-col items-center justify-center p-6 text-center text-white">
-        <div className="bg-slate-800 p-8 rounded-2xl max-w-md w-full shadow-2xl border border-slate-700">
-          <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6 text-red-500">
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+      <div className="fixed inset-0 z-[200] bg-slate-900 flex flex-col items-center justify-center p-6 text-center text-white">
+        <div className="bg-slate-800 p-8 rounded-2xl max-w-md w-full shadow-2xl border border-rose-900/60">
+          <div className="w-20 h-20 bg-rose-500/20 rounded-full flex items-center justify-center mx-auto mb-6 text-rose-400">
+            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3l18 18M10.5 10.677a2 2 0 002.823 2.823M7.362 7.561C5.68 8.74 4.279 10.42 3 12c1.889 2.991 5.282 6 9 6 1.55 0 3.043-.523 4.395-1.35M12 6c4.008 0 6.701 3.158 8.542 6a18.5 18.5 0 01-1.44 2.02" />
+            </svg>
           </div>
-          <h2 className="text-2xl font-bold mb-3">Test Paused</h2>
-          <p className="text-slate-300 mb-8 leading-relaxed">
-            Fullscreen mode is required for this assessment. If you minimize the window or exit fullscreen, the timer pauses and the test stops.
+
+          <h2 className="text-2xl font-bold mb-3">No screenshots allowed</h2>
+
+          <p className="text-rose-300 font-semibold mb-4">
+            That is why your test has been submitted.
           </p>
-          <button 
+
+          <p className="text-slate-300 text-sm leading-relaxed mb-8">
+            A screenshot attempt was detected during the assessment. Your answers up to
+            this point have been saved and the paper has been submitted automatically.
+          </p>
+
+          <button
+            onClick={() => router.push(`/test/${testId}/result`)}
+            className="w-full py-4 px-6 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl transition-colors"
+          >
+            View result
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isReviewMode && isPaused) {
+    return (
+      <div className="fixed inset-0 z-[100] bg-slate-900 flex flex-col items-center justify-center p-6 text-center text-white">
+        <div className="bg-slate-800 p-8 rounded-2xl max-w-md w-full shadow-2xl border border-slate-700">
+          <div className="w-20 h-20 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-6 text-amber-400">
+            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+
+          <h2 className="text-2xl font-bold mb-2">Test paused</h2>
+
+          <div className="inline-flex items-center gap-2 bg-slate-900/60 border border-slate-700 rounded-lg px-3 py-1.5 mb-5">
+            <span className="text-xs text-slate-400">Time frozen at</span>
+            <span className="font-mono font-bold tabular-nums text-white">{formatTime(timeRemaining)}</span>
+          </div>
+
+          {pausedReason && (
+            <p className="text-amber-300 font-semibold mb-3 text-sm">{pausedReason}</p>
+          )}
+
+          <p className="text-slate-300 mb-6 leading-relaxed text-sm">
+            Your timer stopped the moment you left the exam window and no time is being
+            lost. Return to fullscreen to continue — your answers are saved.
+          </p>
+
+          {pauseCount > 0 && (
+            <p className="text-xs text-slate-500 mb-5">
+              This test has been paused {pauseCount} time{pauseCount === 1 ? '' : 's'}.
+            </p>
+          )}
+
+          <button
             onClick={requestFullscreen}
             className="w-full py-4 px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors text-lg shadow-lg shadow-indigo-600/30"
           >
-            Resume in Fullscreen
+            Resume in fullscreen
           </button>
         </div>
       </div>
@@ -650,8 +822,8 @@ export default function ExamPage() {
               >
                 Go Back
               </button>
-              <button 
-                onClick={handleAutoSubmit} 
+              <button
+                onClick={() => handleAutoSubmit(null)}
                 disabled={isSubmitting}
                 className="flex-1 px-4 py-3 bg-[#1e3c72] text-white rounded-lg font-bold hover:bg-[#2a5298] transition-colors disabled:opacity-50 flex justify-center items-center"
               >
@@ -670,6 +842,13 @@ export default function ExamPage() {
         </div>
       )}
       
+      {/* Copy/paste blocked notice */}
+      {copyNotice && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-sm font-semibold px-4 py-2.5 rounded-lg shadow-xl animate-fade-in">
+          {copyNotice}
+        </div>
+      )}
+
       {/* Virtual Calculator */}
       {showCalc && <VirtualCalculator onClose={() => setShowCalc(false)} />}
     </div>

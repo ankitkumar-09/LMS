@@ -192,6 +192,16 @@ export async function getAttempt(testId: string): Promise<Attempt | null> {
   return { id: docSnap.id, ...docSnap.data() } as Attempt;
 }
 
+/** Every attempt on record, keyed by testId. */
+export async function getAllAttempts(): Promise<Record<string, Attempt>> {
+  const snapshot = await getDocs(collection(db, "attempts"));
+  const out: Record<string, Attempt> = {};
+  snapshot.docs.forEach((d) => {
+    out[d.id] = { id: d.id, ...d.data() } as Attempt;
+  });
+  return out;
+}
+
 export async function startAttempt(testId: string, pin: string): Promise<void> {
   const existing = await getAttempt(testId);
 
@@ -234,7 +244,8 @@ export async function saveProgress(
 export async function submitTest(
   testId: string,
   responses: Record<string, QuestionResponse>,
-  timeTaken: number
+  timeTaken: number,
+  terminationReason: Attempt["terminationReason"] = null
 ): Promise<{ score: number; correctCount: number; wrongCount: number; unattemptedCount: number }> {
   // Get questions with correct answers
   const questions = await getTestQuestions(testId);
@@ -251,6 +262,7 @@ export async function submitTest(
     wrongCount: result.wrongCount,
     unattemptedCount: result.unattemptedCount,
     timeTaken,
+    terminationReason,
   });
 
   // Lock the test PIN

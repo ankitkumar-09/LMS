@@ -66,6 +66,8 @@ export interface Attempt {
   wrongCount: number;
   unattemptedCount: number;
   timeTaken: number; // seconds
+  /** Set when the test was ended automatically rather than by the student. */
+  terminationReason?: "screenshot" | "time_up" | null;
 }
 
 export interface QuestionBankItem {

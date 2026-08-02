@@ -5,6 +5,10 @@ import { useParams, useRouter } from 'next/navigation';
 import { getTest, getTestQuestions, updateTest, saveQuestions } from '@/lib/firebase/firestore';
 import { Test, Question, Subject, Difficulty } from '@/lib/types';
 import ImageUpload from '@/components/ImageUpload';
+import { uploadImage, UploadError } from '@/lib/utils/cloudinary';
+
+const navigatorIsMac =
+  typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform || '');
 
 export default function EditTestPage() {
   const params = useParams();
@@ -18,6 +22,13 @@ export default function EditTestPage() {
   const [toast, setToast] = useState('');
   const [dirty, setDirty] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  // Bulk paste: arm a question, then Ctrl/Cmd+V anywhere drops the screenshot in
+  // and the target advances to the next question automatically.
+  const [pasteIndex, setPasteIndex] = useState<number | null>(null);
+  const [pasteBusy, setPasteBusy] = useState(false);
+  const [pasteNote, setPasteNote] = useState('');
+  const [autoAdvance, setAutoAdvance] = useState(true);
 
   // Test-level fields
   const [title, setTitle] = useState('');
@@ -52,6 +63,68 @@ export default function EditTestPage() {
     setToast(msg);
     setTimeout(() => setToast(''), 3000);
   };
+
+  // Document-level paste listener, active only while a question is armed.
+  useEffect(() => {
+    if (pasteIndex === null) return;
+
+    const onPaste = async (e: ClipboardEvent) => {
+      // Don't hijack normal text pasting into inputs
+      const el = e.target as HTMLElement | null;
+      if (el && ['INPUT', 'TEXTAREA'].includes(el.tagName)) return;
+
+      const item = Array.from(e.clipboardData?.items ?? []).find(i => i.type.startsWith('image/'));
+      if (!item) {
+        setPasteNote('No image in clipboard — take a screenshot first.');
+        return;
+      }
+      e.preventDefault();
+
+      const file = item.getAsFile();
+      if (!file) return;
+
+      const target = pasteIndex;
+      setPasteBusy(true);
+      setPasteNote(`Uploading image for question ${target + 1}…`);
+      try {
+        const url = await uploadImage(file, `question-${target + 1}.png`);
+        setQuestions(prev => prev.map((q, i) => (i === target ? { ...q, imageURL: url } : q)));
+        setDirty(true);
+
+        setQuestions(current => {
+          if (autoAdvance) {
+            const next = target + 1;
+            setPasteIndex(next < current.length ? next : null);
+            setPasteNote(
+              next < current.length
+                ? `Saved to question ${target + 1}. Now pasting into question ${next + 1}.`
+                : `Saved to question ${target + 1}. That was the last question.`
+            );
+          } else {
+            setPasteNote(`Saved to question ${target + 1}.`);
+          }
+          return current;
+        });
+      } catch (err) {
+        setPasteNote(err instanceof UploadError ? err.message : 'Upload failed. Try again.');
+      } finally {
+        setPasteBusy(false);
+      }
+    };
+
+    document.addEventListener('paste', onPaste);
+    return () => document.removeEventListener('paste', onPaste);
+  }, [pasteIndex, autoAdvance]);
+
+  // Esc leaves paste mode
+  useEffect(() => {
+    if (pasteIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { setPasteIndex(null); setPasteNote(''); }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [pasteIndex]);
 
   const patchQuestion = (index: number, patch: Partial<Question>) => {
     setQuestions(prev => prev.map((q, i) => (i === index ? { ...q, ...patch } : q)));
@@ -218,10 +291,27 @@ export default function EditTestPage() {
 
         {/* Questions */}
         <section className="space-y-3">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-3 flex-wrap">
             <h2 className="font-bold text-[#1a237e]">Questions ({questions.length})</h2>
-            <p className="text-xs text-gray-500">{questions.filter(q => q.imageURL).length} with an image</p>
+            <div className="flex items-center gap-3">
+              <p className="text-xs text-gray-500">{questions.filter(q => q.imageURL).length} with an image</p>
+              {pasteIndex === null && questions.length > 0 && (
+                <button
+                  onClick={() => { setPasteIndex(0); setPasteNote(''); }}
+                  className="btn btn-ghost text-xs py-1.5 px-3"
+                >
+                  Start pasting screenshots
+                </button>
+              )}
+            </div>
           </div>
+
+          {pasteIndex === null && (
+            <p className="text-xs text-gray-500 bg-white border border-gray-200 rounded-lg px-3.5 py-2.5">
+              Tip: hit <strong>Start pasting screenshots</strong> (or <strong>Paste</strong> on any question), then just
+              screenshot and press {navigatorIsMac ? '⌘V' : 'Ctrl+V'} — no need to save files first. It moves to the next question automatically.
+            </p>
+          )}
 
           {questions.map((q, idx) => {
             const isOpen = openIndex === idx;
@@ -248,6 +338,17 @@ export default function EditTestPage() {
                   </button>
 
                   <div className="flex items-center gap-1 shrink-0">
+                    <button
+                      onClick={() => { setPasteIndex(pasteIndex === idx ? null : idx); setPasteNote(''); }}
+                      title="Paste a screenshot into this question"
+                      className={`h-7 px-2.5 rounded-md text-[11px] font-bold transition-colors ${
+                        pasteIndex === idx
+                          ? 'bg-[#1a237e] text-white'
+                          : 'text-[#1a237e] bg-indigo-50 hover:bg-indigo-100'
+                      }`}
+                    >
+                      {pasteIndex === idx ? 'Pasting…' : 'Paste'}
+                    </button>
                     <button onClick={() => move(idx, -1)} disabled={idx === 0} title="Move up"
                       className="w-7 h-7 rounded-md text-gray-500 hover:bg-gray-100 disabled:opacity-30 disabled:hover:bg-transparent">↑</button>
                     <button onClick={() => move(idx, 1)} disabled={idx === questions.length - 1} title="Move down"
@@ -344,6 +445,53 @@ export default function EditTestPage() {
           </button>
         </section>
       </div>
+
+      {/* Paste mode bar */}
+      {pasteIndex !== null && (
+        <div className="fixed bottom-20 inset-x-0 z-40 px-5 pointer-events-none">
+          <div className="max-w-4xl mx-auto bg-[#1a237e] text-white rounded-xl shadow-2xl px-5 py-3.5 flex flex-wrap items-center gap-x-4 gap-y-2 pointer-events-auto">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${pasteBusy ? 'bg-amber-400 animate-pulse' : 'bg-emerald-400'}`} />
+              <span className="text-sm font-bold shrink-0">
+                Paste into Q{pasteIndex + 1}
+              </span>
+              <span className="text-xs text-white/70 truncate">
+                {pasteNote || `Take a screenshot, then press ${navigatorIsMac ? '⌘V' : 'Ctrl+V'}`}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 ml-auto shrink-0">
+              <label className="flex items-center gap-1.5 text-xs text-white/80 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={autoAdvance}
+                  onChange={e => setAutoAdvance(e.target.checked)}
+                  className="w-3.5 h-3.5 accent-emerald-400"
+                />
+                Auto-advance
+              </label>
+              <button
+                onClick={() => setPasteIndex(Math.max(0, pasteIndex - 1))}
+                disabled={pasteIndex === 0}
+                className="w-7 h-7 rounded-md bg-white/10 hover:bg-white/20 disabled:opacity-30 text-sm"
+                title="Previous question"
+              >↑</button>
+              <button
+                onClick={() => setPasteIndex(Math.min(questions.length - 1, pasteIndex + 1))}
+                disabled={pasteIndex >= questions.length - 1}
+                className="w-7 h-7 rounded-md bg-white/10 hover:bg-white/20 disabled:opacity-30 text-sm"
+                title="Next question"
+              >↓</button>
+              <button
+                onClick={() => { setPasteIndex(null); setPasteNote(''); }}
+                className="text-xs font-bold px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20"
+              >
+                Done (Esc)
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Sticky save bar */}
       <div className="fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur border-t border-gray-200 shadow-[0_-4px_20px_rgba(16,24,40,0.06)]">
