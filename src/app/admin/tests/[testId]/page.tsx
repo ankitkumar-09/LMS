@@ -15,9 +15,8 @@ export default function TestResultsPage() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [attempt, setAttempt] = useState<Attempt | null>(null);
   const [loading, setLoading] = useState(true);
-  // Bumping this re-runs the data effect; used after create/delete/seed actions.
+  // Bumping this re-runs the data effect after any mutation on this page.
   const [reloadKey, setReloadKey] = useState(0);
-  const loadData = () => setReloadKey(k => k + 1);
   const [showImageEditor, setShowImageEditor] = useState(false);
   const [savingImageFor, setSavingImageFor] = useState<string | null>(null);
   const [imageNotice, setImageNotice] = useState('');

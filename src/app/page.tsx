@@ -4,6 +4,43 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getAllTests, getAllAttempts, getTestByPin } from "@/lib/firebase/firestore";
 import { Test, Attempt } from "@/lib/types";
+import { formatMoment, formatElapsed } from "@/lib/utils/datetime";
+
+/**
+ * Repeating "Ankit" watermark, drawn as a tiled SVG rather than hundreds of DOM
+ * nodes. The two rows are offset so the tile reads as a brick pattern instead of
+ * an obvious grid.
+ */
+const WATERMARK_TILE =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+      <g fill="#0f172a" fill-opacity="0.06"
+         font-family="Inter, system-ui, -apple-system, sans-serif" font-size="17" font-weight="700">
+        <text x="6" y="32" transform="rotate(-24 6 32)">Ankit</text>
+        <text x="81" y="82" transform="rotate(-24 81 82)">Ankit</text>
+      </g>
+    </svg>`
+  );
+
+/** Flat stamp colours. Picked per test but stable, so it never flickers on re-render. */
+const STAMP_COLORS = ["#eab308", "#dc2626", "#2563eb", "#16a34a"] as const;
+
+const stampColor = (id: string) => {
+  // FNV-1a plus an avalanche mix. A plain *31 hash correlates with the last
+  // character, which made almost every id land on the same colour.
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < id.length; i++) {
+    h ^= id.charCodeAt(i);
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  h ^= h >>> 16;
+  h = Math.imul(h, 2246822507) >>> 0;
+  h ^= h >>> 13;
+  h = Math.imul(h, 3266489909) >>> 0;
+  h = (h ^ (h >>> 16)) >>> 0;
+  return STAMP_COLORS[h % STAMP_COLORS.length];
+};
 
 export default function LandingPage() {
   const router = useRouter();
@@ -32,6 +69,13 @@ export default function LandingPage() {
   }, []);
 
   const handleTestSelect = (test: Test) => {
+    // A submitted paper is read-only, so there's nothing left to protect with a PIN.
+    // Open it straight in review mode.
+    if (test.status === "submitted") {
+      router.push(`/test/${test.id}/exam`);
+      return;
+    }
+
     setSelectedTest(test);
     setPin("");
     setError("");
@@ -83,12 +127,13 @@ export default function LandingPage() {
       {/* Watermark — decorative only, never intercepts clicks or gets read aloud */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none select-none"
-      >
-        <span className="font-extrabold tracking-tight text-slate-900/[0.045] -rotate-12 text-[24vw] leading-none whitespace-nowrap">
-          Ankit
-        </span>
-      </div>
+        className="absolute inset-0 z-0 pointer-events-none select-none"
+        style={{
+          backgroundImage: `url("${WATERMARK_TILE}")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "220px 150px",
+        }}
+      />
 
       <div className="w-full max-w-5xl z-10 animate-slide-up">
         {/* Hero Section */}
@@ -146,9 +191,12 @@ export default function LandingPage() {
                         isSubmitted ? 'bg-emerald-500' : test.status === 'in_progress' ? 'bg-amber-400' : 'bg-emerald-400'
                       }`}></div>
 
-                      {/* Completed stamp */}
+                      {/* Completed stamp — one flat colour, no gradient */}
                       {isSubmitted && (
-                        <div className="absolute top-5 right-[-38px] rotate-45 bg-emerald-500 text-white text-[10px] font-black tracking-[0.2em] py-1.5 w-[150px] text-center shadow-sm pointer-events-none">
+                        <div
+                          className="absolute top-5 right-[-38px] rotate-45 text-white text-[10px] font-black tracking-[0.2em] py-1.5 w-[150px] text-center shadow-sm pointer-events-none"
+                          style={{ backgroundColor: stampColor(test.id) }}
+                        >
                           COMPLETED
                         </div>
                       )}
@@ -171,6 +219,11 @@ export default function LandingPage() {
                           <div className="flex items-baseline justify-between gap-3">
                             <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700">
                               Marks scored
+                              {(attempt.attemptNumber ?? 1) > 1 && (
+                                <span className="ml-1.5 text-amber-700">
+                                  · retest #{attempt.attemptNumber}
+                                </span>
+                              )}
                             </span>
                             <span className="text-2xl font-black text-emerald-600 leading-none">
                               {attempt.score}
@@ -182,6 +235,21 @@ export default function LandingPage() {
                             <span className="text-rose-600">{attempt.wrongCount} wrong · −1</span>
                             <span className="text-slate-400">{attempt.unattemptedCount} skipped · 0</span>
                           </div>
+
+                          {(() => {
+                            const taken = formatMoment(attempt.submittedAt);
+                            if (!taken) return null;
+                            return (
+                              <div className="mt-3 pt-3 border-t border-slate-100 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-slate-500">
+                                <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                <span className="font-semibold text-slate-600">{taken.day}, {taken.date}</span>
+                                <span className="text-slate-400">at {taken.time}</span>
+                                <span className="text-slate-400">· took {formatElapsed(attempt.timeTaken)}</span>
+                              </div>
+                            );
+                          })()}
                         </div>
                       )}
 
@@ -205,8 +273,8 @@ export default function LandingPage() {
                         <div>
                           {isSubmitted ? (
                             <span className="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
-                              SUBMITTED
+                              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                              REVIEW ANSWERS
                             </span>
                           ) : test.status === 'in_progress' ? (
                             <span className="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1.5 rounded-full flex items-center gap-1.5">

@@ -2,19 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getAllTests, getAllAttempts } from '@/lib/firebase/firestore';
+import { getAllTests, getAllAttempts, getAttemptHistory } from '@/lib/firebase/firestore';
 import { Test, Attempt } from '@/lib/types';
+import { formatMoment, formatElapsed } from '@/lib/utils/datetime';
 
-type Row = { test: Test; attempt: Attempt };
+type Row = { test: Test; attempt: Attempt; history: Attempt[] };
 
-const fmtDuration = (seconds: number) => {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${m}m ${s.toString().padStart(2, '0')}s`;
-};
-
-const fmtDate = (ms: number | null) =>
-  ms ? new Date(ms).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }) : '—';
+const fmtDuration = formatElapsed;
 
 export default function ResultsPage() {
   const router = useRouter();
@@ -29,10 +23,20 @@ export default function ResultsPage() {
     let cancelled = false;
     const run = async () => {
       const [tests, attempts] = await Promise.all([getAllTests(), getAllAttempts()]);
-      const submitted = tests
-        .map(test => ({ test, attempt: attempts[test.id] }))
-        .filter((r): r is Row => Boolean(r.attempt?.submittedAt))
-        .sort((a, b) => (b.attempt.submittedAt ?? 0) - (a.attempt.submittedAt ?? 0));
+
+      // Pull past sittings so retests can be labelled and compared
+      const withHistory = await Promise.all(
+        tests.map(async test => ({
+          test,
+          attempt: attempts[test.id],
+          history: await getAttemptHistory(test.id),
+        }))
+      );
+
+      const submitted = withHistory
+        .filter((r): r is Row => Boolean(r.attempt?.submittedAt) || r.history.length > 0)
+        .sort((a, b) => (b.attempt?.submittedAt ?? 0) - (a.attempt?.submittedAt ?? 0));
+
       if (cancelled) return;
       setRows(submitted);
       setLoading(false);
@@ -111,20 +115,51 @@ export default function ResultsPage() {
 
             {/* Per-test breakdown */}
             <section className="space-y-3">
-              {rows.map(({ test, attempt }) => {
+              {rows.map(({ test, attempt, history }) => {
                 const max = test.totalQuestions * 4;
                 const pct = max > 0 ? (attempt.score / max) * 100 : 0;
+                const sitting = attempt.attemptNumber ?? history.length + 1;
+                const isRetest = sitting > 1 || history.length > 0;
+                const previousBest = history.reduce(
+                  (best, h) => (h.score > best ? h.score : best),
+                  Number.NEGATIVE_INFINITY
+                );
+                const delta = history.length > 0 ? attempt.score - previousBest : null;
+
                 return (
                   <div key={test.id} className="admin-card">
                     <div className="flex flex-wrap items-start justify-between gap-4">
                       <div className="min-w-0">
-                        <h3 className="font-bold text-gray-900">{test.title}</h3>
+                        <div className="flex flex-wrap items-center gap-2 mb-1">
+                          <h3 className="font-bold text-gray-900">{test.title}</h3>
+                          {isRetest && (
+                            <span className="text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">
+                              Retest · attempt {sitting}
+                            </span>
+                          )}
+                        </div>
                         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5 text-xs text-gray-500">
                           <span className="uppercase font-bold text-[#1a237e] bg-indigo-50 px-2 py-0.5 rounded-full">{test.subject}</span>
                           <span>{test.totalQuestions} questions</span>
-                          <span>Time taken {fmtDuration(attempt.timeTaken)}</span>
-                          <span>Submitted {fmtDate(attempt.submittedAt)}</span>
+                          <span>Took {fmtDuration(attempt.timeTaken)}</span>
                         </div>
+
+                        {(() => {
+                          const started = formatMoment(attempt.startedAt);
+                          const ended = formatMoment(attempt.submittedAt);
+                          if (!ended) return null;
+                          return (
+                            <div className="mt-2.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+                              <svg className="w-3.5 h-3.5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                              </svg>
+                              <span className="font-semibold text-gray-700">{ended.day}, {ended.date}</span>
+                              <span className="text-gray-400">
+                                {started ? `${started.time} → ${ended.time}` : `at ${ended.time}`}
+                              </span>
+                            </div>
+                          );
+                        })()}
                       </div>
 
                       <div className="text-right shrink-0">
@@ -163,6 +198,55 @@ export default function ResultsPage() {
                         <div className="text-[11px] text-gray-500 mt-1 font-semibold">Unattempted · 0</div>
                       </div>
                     </div>
+
+                    {/* Previous sittings */}
+                    {history.length > 0 && (
+                      <div className="mt-4 pt-4 border-t border-gray-100">
+                        <div className="flex items-center gap-2 mb-2.5">
+                          <p className="text-xs font-bold text-gray-700">
+                            Previous attempt{history.length === 1 ? '' : 's'} ({history.length})
+                          </p>
+                          {delta !== null && Number.isFinite(delta) && (
+                            <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                              delta > 0 ? 'bg-emerald-50 text-emerald-700'
+                                : delta < 0 ? 'bg-rose-50 text-rose-700'
+                                : 'bg-gray-100 text-gray-600'
+                            }`}>
+                              {delta > 0 ? `+${delta} vs best` : delta < 0 ? `${delta} vs best` : 'same as best'}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="space-y-1.5">
+                          {history.map(h => {
+                            const when = formatMoment(h.submittedAt ?? h.archivedAt);
+                            return (
+                              <div
+                                key={h.id}
+                                className="flex flex-wrap items-center justify-between gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2"
+                              >
+                                <div className="text-xs text-gray-600">
+                                  <span className="font-bold text-gray-700">
+                                    Attempt {h.attemptNumber ?? '—'}
+                                  </span>
+                                  {when && (
+                                    <span className="text-gray-500">
+                                      {' '}· {when.day}, {when.date} at {when.time}
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="text-xs font-bold text-gray-700">
+                                  {h.score} / {test.totalQuestions * 4}
+                                  <span className="font-medium text-gray-400">
+                                    {' '}({h.correctCount}✓ {h.wrongCount}✗ {h.unattemptedCount}–)
+                                  </span>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
 
                     <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
                       <span className="text-xs text-gray-400 font-mono">PIN {test.pin}</span>

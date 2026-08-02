@@ -82,10 +82,14 @@ export async function updateTest(testId: string, data: Partial<Test>): Promise<v
 }
 
 export async function deleteTest(testId: string): Promise<void> {
-  // Delete questions subcollection first
-  const questionsSnapshot = await getDocs(collection(db, "tests", testId, "questions"));
+  // Delete both subcollections first, then the test document itself
+  const [questionsSnapshot, historySnapshot] = await Promise.all([
+    getDocs(collection(db, "tests", testId, "questions")),
+    getDocs(collection(db, "tests", testId, "attemptHistory")),
+  ]);
   const batch = writeBatch(db);
   questionsSnapshot.docs.forEach((d) => batch.delete(d.ref));
+  historySnapshot.docs.forEach((d) => batch.delete(d.ref));
   batch.delete(doc(db, "tests", testId));
   await batch.commit();
 
@@ -100,9 +104,9 @@ export async function deleteTest(testId: string): Promise<void> {
 export async function regeneratePin(testId: string): Promise<string> {
   const newPin = generatePIN();
 
-  // Clear the old attempt too. Leaving it behind meant the next student's
+  // Archive the old attempt. Leaving it live meant the next student's
   // startAttempt() saw an existing attempt and the test never left "not_attempted".
-  await deleteDoc(doc(db, "attempts", testId)).catch(() => {});
+  await archiveAttempt(testId);
 
   await updateDoc(doc(db, "tests", testId), {
     pin: newPin,
@@ -122,11 +126,42 @@ export async function getTestQuestions(testId: string): Promise<Question[]> {
 }
 
 /**
+ * Past sittings of a test, newest first. Kept in a subcollection so a retest
+ * never destroys the previous result.
+ */
+export async function getAttemptHistory(testId: string): Promise<Attempt[]> {
+  const snapshot = await getDocs(collection(db, "tests", testId, "attemptHistory"));
+  return snapshot.docs
+    .map((d) => ({ id: d.id, ...d.data() } as Attempt))
+    .sort((a, b) => (b.submittedAt ?? b.archivedAt ?? 0) - (a.submittedAt ?? a.archivedAt ?? 0));
+}
+
+/** Move the live attempt into history. Returns the number of sittings now archived. */
+export async function archiveAttempt(testId: string): Promise<number> {
+  const existing = await getAttempt(testId);
+  const history = await getAttemptHistory(testId);
+
+  if (existing) {
+    const archiveId = `attempt_${history.length + 1}_${Date.now()}`;
+    const data: Record<string, unknown> = { ...existing };
+    delete data.id; // the archive doc gets its own id
+    await setDoc(doc(db, "tests", testId, "attemptHistory", archiveId), {
+      ...data,
+      attemptNumber: existing.attemptNumber ?? history.length + 1,
+      archivedAt: Date.now(),
+    });
+    await deleteDoc(doc(db, "attempts", testId)).catch(() => {});
+    return history.length + 1;
+  }
+  return history.length;
+}
+
+/**
  * Reopen a test so it can be taken again, keeping the same PIN.
- * Clears the previous attempt and resets the status.
+ * The previous result is archived rather than deleted.
  */
 export async function resetTest(testId: string): Promise<void> {
-  await deleteDoc(doc(db, "attempts", testId)).catch(() => {});
+  await archiveAttempt(testId);
   await updateDoc(doc(db, "tests", testId), {
     pinUsed: false,
     status: "not_attempted",
@@ -216,6 +251,8 @@ export async function startAttempt(testId: string, pin: string): Promise<void> {
 
   // Seed the unattempted count from the test's real question count, not a fixed 30
   const test = await getTest(testId);
+  // Sitting number = archived sittings + 1, so retests are labelled correctly
+  const history = await getAttemptHistory(testId);
 
   const attemptData: Omit<Attempt, "id"> = {
     testId,
@@ -228,6 +265,7 @@ export async function startAttempt(testId: string, pin: string): Promise<void> {
     wrongCount: 0,
     unattemptedCount: test?.totalQuestions ?? 0,
     timeTaken: 0,
+    attemptNumber: history.length + 1,
   };
 
   await setDoc(doc(db, "attempts", testId), attemptData);

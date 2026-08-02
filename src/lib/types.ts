@@ -68,6 +68,10 @@ export interface Attempt {
   timeTaken: number; // seconds
   /** Set when the test was ended automatically rather than by the student. */
   terminationReason?: "screenshot" | "time_up" | null;
+  /** 1 for the first sitting, 2+ for retests. */
+  attemptNumber?: number;
+  /** Set on archived attempts, so history can be ordered. */
+  archivedAt?: number;
 }
 
 export interface QuestionBankItem {

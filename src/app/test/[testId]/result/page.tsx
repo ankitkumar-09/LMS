@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { getTest, getAttempt } from "@/lib/firebase/firestore";
 import { Test, Attempt } from "@/lib/types";
+import { formatMoment, formatElapsed } from "@/lib/utils/datetime";
 
 export default function ResultPage() {
   const params = useParams();
@@ -67,7 +68,27 @@ export default function ResultPage() {
         </div>
         
         <h1 className="text-3xl font-extrabold text-slate-800 mb-3 tracking-tight">Test Submitted!</h1>
-        <p className="text-slate-500 font-medium mb-10 leading-relaxed">Your assessment has been successfully recorded and saved to our secure database.</p>
+        <p className="text-slate-500 font-medium mb-6 leading-relaxed">Your assessment has been recorded and saved.</p>
+
+        {/* When the test was taken */}
+        {(() => {
+          const started = formatMoment(attempt.startedAt);
+          const ended = formatMoment(attempt.submittedAt);
+          if (!ended) return null;
+          return (
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 mb-8 text-left">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">
+                Test taken on
+              </div>
+              <div className="font-bold text-slate-800">{ended.day}, {ended.date}</div>
+              <div className="mt-2 space-y-1 text-xs text-slate-500 font-medium">
+                {started && <div>Started at {started.time}</div>}
+                <div>Submitted at {ended.time}</div>
+                <div>Duration {formatElapsed(attempt.timeTaken)}</div>
+              </div>
+            </div>
+          );
+        })()}
 
         {test.showScoreToStudent ? (
           <div className="bg-slate-50 rounded-2xl p-8 border border-slate-100 shadow-inner mb-8">
