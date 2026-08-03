@@ -179,7 +179,15 @@ export default function EditTestPage() {
   const problems = questions.flatMap((q, i) => {
     const issues: string[] = [];
     if (!q.questionText.trim() && !q.imageURL) issues.push(`Question ${i + 1}: needs text or an image`);
-    if (!['A', 'B', 'C', 'D'].every(l => q.options[l as 'A'].trim())) issues.push(`Question ${i + 1}: all four options are required`);
+
+    if ((q.questionType ?? 'mcq') === 'numerical') {
+      // Numerical questions carry no options — only a value
+      if (q.numericalAnswer === null || q.numericalAnswer === undefined || !Number.isFinite(q.numericalAnswer)) {
+        issues.push(`Question ${i + 1}: numerical question needs an answer value`);
+      }
+    } else if (!['A', 'B', 'C', 'D'].every(l => q.options[l as 'A'].trim())) {
+      issues.push(`Question ${i + 1}: all four options are required`);
+    }
     return issues;
   });
 
@@ -377,35 +385,87 @@ export default function EditTestPage() {
                     />
 
                     <div>
-                      <label className="admin-label">Options</label>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-                        {(['A', 'B', 'C', 'D'] as const).map(letter => (
-                          <div key={letter} className="relative">
-                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-gray-400 pointer-events-none">
-                              {letter}
-                            </span>
-                            <input
-                              value={q.options[letter]}
-                              onChange={e => patchOption(idx, letter, e.target.value)}
-                              placeholder={`Option ${letter}`}
-                              className={`admin-input pl-8 ${q.correctOption === letter ? '!border-emerald-500 bg-emerald-50/40' : ''}`}
-                            />
-                          </div>
+                      <label className="admin-label">Question type</label>
+                      <div className="seg" role="tablist">
+                        {([['mcq', 'Multiple choice'], ['numerical', 'Numerical answer']] as const).map(([t, lbl]) => (
+                          <button
+                            key={t}
+                            role="tab"
+                            aria-selected={(q.questionType ?? 'mcq') === t}
+                            onClick={() => patchQuestion(idx, { questionType: t })}
+                            className="seg-item"
+                          >
+                            {lbl}
+                          </button>
                         ))}
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                      <div>
-                        <label className="admin-label">Correct answer</label>
-                        <select
-                          value={q.correctOption}
-                          onChange={e => patchQuestion(idx, { correctOption: e.target.value as Question['correctOption'] })}
-                          className="admin-select"
-                        >
-                          {(['A', 'B', 'C', 'D'] as const).map(l => <option key={l} value={l}>{l}</option>)}
-                        </select>
+                    {(q.questionType ?? 'mcq') === 'numerical' ? (
+                      <div className="rounded-xl border border-indigo-100 bg-indigo-50/40 p-4">
+                        <label className="admin-label">Correct answer (value)</label>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <input
+                            type="text"
+                            inputMode="decimal"
+                            value={q.numericalAnswer ?? ''}
+                            onChange={e => patchQuestion(idx, {
+                              numericalAnswer: e.target.value === '' ? null : Number(e.target.value),
+                            })}
+                            placeholder="e.g. 30.00"
+                            className="admin-input font-mono max-w-[10rem]"
+                          />
+                          <span className="text-xs text-gray-500 font-semibold">to (optional)</span>
+                          <input
+                            type="text"
+                            inputMode="decimal"
+                            value={q.numericalAnswerMax ?? ''}
+                            onChange={e => patchQuestion(idx, {
+                              numericalAnswerMax: e.target.value === '' ? null : Number(e.target.value),
+                            })}
+                            placeholder="upper bound"
+                            className="admin-input font-mono max-w-[10rem]"
+                          />
+                        </div>
+                        <p className="text-[11px] text-gray-500 mt-2">
+                          No options for numerical questions — the student types the value.
+                          +4 if correct, 0 otherwise.
+                        </p>
                       </div>
+                    ) : (
+                      <div>
+                        <label className="admin-label">Options</label>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                          {(['A', 'B', 'C', 'D'] as const).map(letter => (
+                            <div key={letter} className="relative">
+                              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-gray-400 pointer-events-none">
+                                {letter}
+                              </span>
+                              <input
+                                value={q.options[letter]}
+                                onChange={e => patchOption(idx, letter, e.target.value)}
+                                placeholder={`Option ${letter}`}
+                                className={`admin-input pl-8 ${q.correctOption === letter ? '!border-emerald-500 bg-emerald-50/40' : ''}`}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                      {(q.questionType ?? 'mcq') !== 'numerical' && (
+                        <div>
+                          <label className="admin-label">Correct answer</label>
+                          <select
+                            value={q.correctOption}
+                            onChange={e => patchQuestion(idx, { correctOption: e.target.value as Question['correctOption'] })}
+                            className="admin-select"
+                          >
+                            {(['A', 'B', 'C', 'D'] as const).map(l => <option key={l} value={l}>{l}</option>)}
+                          </select>
+                        </div>
+                      )}
                       <div>
                         <label className="admin-label">Subject</label>
                         <select

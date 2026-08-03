@@ -110,15 +110,19 @@ export default function ExamPage() {
             setAnswerKey(key);
             setGradedQuestions(qData);
           } else {
-            // Persistent Timer via LocalStorage or calculated elapsed
-            const savedTime = localStorage.getItem(`test_${testId}_time`);
-            if (savedTime) {
-              setTimeRemaining(parseInt(savedTime, 10));
-            } else {
-              const elapsed = Math.floor((Date.now() - attempt.startedAt) / 1000);
-              const remaining = Math.max(0, (testData.durationMinutes * 60) - elapsed);
-              setTimeRemaining(remaining);
-            }
+            // Resume the timer, but never trust a cached value that exceeds the
+            // test's current duration — otherwise shortening the test in admin
+            // leaves students on the old, longer clock.
+            const fullDuration = testData.durationMinutes * 60;
+            const elapsed = Math.floor((Date.now() - attempt.startedAt) / 1000);
+            const byElapsed = Math.max(0, fullDuration - elapsed);
+
+            const savedRaw = localStorage.getItem(`test_${testId}_time`);
+            const saved = savedRaw !== null ? parseInt(savedRaw, 10) : NaN;
+
+            // The timer pauses, so wall-clock elapsed is only a fallback.
+            const remaining = Number.isFinite(saved) ? saved : byElapsed;
+            setTimeRemaining(Math.max(0, Math.min(remaining, fullDuration)));
           }
           
           // Parse responses (keyed by string in db, convert to number)

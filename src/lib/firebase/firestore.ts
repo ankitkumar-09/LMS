@@ -182,7 +182,17 @@ export async function saveQuestions(
   testId: string,
   questions: Question[]
 ): Promise<void> {
+  // Anything no longer in the list must be deleted, otherwise removing questions
+  // in the editor leaves them in Firestore and students still see them.
+  const existing = await getDocs(collection(db, "tests", testId, "questions"));
+  const keepIds = new Set(questions.map((q) => q.id));
+
   const batch = writeBatch(db);
+
+  existing.docs.forEach((d) => {
+    if (!keepIds.has(d.id)) batch.delete(d.ref);
+  });
+
   questions.forEach((q, index) => {
     const questionNumber = index + 1;
     batch.set(doc(db, "tests", testId, "questions", q.id), {
@@ -194,8 +204,13 @@ export async function saveQuestions(
       correctOption: q.correctOption,
       subject: q.subject,
       difficulty: q.difficulty,
+      // Without these a numerical question silently reverts to MCQ on save
+      questionType: q.questionType ?? "mcq",
+      numericalAnswer: q.numericalAnswer ?? null,
+      numericalAnswerMax: q.numericalAnswerMax ?? null,
     });
   });
+
   await batch.commit();
   await updateDoc(doc(db, "tests", testId), { totalQuestions: questions.length });
 }

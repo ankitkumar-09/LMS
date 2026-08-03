@@ -170,6 +170,22 @@ export default function CreateTestPage() {
 
     setCreating(true);
     try {
+      // The inputs hold strings; Firestore needs real numbers (or null)
+      const num = (v: unknown): number | null => {
+        if (v === null || v === undefined || v === '') return null;
+        const n = Number(v);
+        return Number.isFinite(n) ? n : null;
+      };
+
+      const missingValue = validQuestions.findIndex(
+        q => q.questionType === 'numerical' && num(q.numericalAnswer) === null
+      );
+      if (missingValue !== -1) {
+        showToast(`Question ${missingValue + 1} is numerical but has no answer value`);
+        setCreating(false);
+        return;
+      }
+
       const formattedQuestions = validQuestions.map((q, i) => ({
         questionNumber: i + 1,
         questionText: q.questionText,
@@ -179,8 +195,8 @@ export default function CreateTestPage() {
         subject: subject === 'combined' ? q.subject : subject,
         difficulty: q.difficulty,
         questionType: q.questionType ?? 'mcq',
-        numericalAnswer: q.numericalAnswer ?? null,
-        numericalAnswerMax: q.numericalAnswerMax ?? null,
+        numericalAnswer: num(q.numericalAnswer),
+        numericalAnswerMax: num(q.numericalAnswerMax),
       }));
 
       const test = await createTest(title, subject, formattedQuestions, showScore, durationMinutes);
@@ -476,6 +492,11 @@ export default function CreateTestPage() {
                       {idx + 1}
                     </span>
                     <h3 className="font-bold text-sm text-gray-800">Question {idx + 1}</h3>
+                    {q.questionType === 'numerical' && (
+                      <span className="text-[10px] font-bold uppercase tracking-wide bg-indigo-50 text-[#1a237e] px-2 py-0.5 rounded-full">
+                        Numerical
+                      </span>
+                    )}
                     {q.imageURL && (
                       <span className="text-[10px] font-bold uppercase tracking-wide bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full">
                         Image
@@ -505,35 +526,91 @@ export default function CreateTestPage() {
                     onChange={url => updateQuestion(idx, 'imageURL', url)}
                   />
 
+                  {/* Question type */}
                   <div>
-                    <label className="admin-label">Options</label>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-                      {(['A', 'B', 'C', 'D'] as const).map(letter => (
-                        <div key={letter} className="relative">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-gray-400 pointer-events-none">
-                            {letter}
-                          </span>
-                          <input
-                            value={q[`option${letter}` as 'optionA' | 'optionB' | 'optionC' | 'optionD']}
-                            onChange={e => updateQuestion(idx, `option${letter}` as keyof QuestionInput, e.target.value)}
-                            placeholder={`Option ${letter}`}
-                            className="admin-input pl-8"
-                          />
-                        </div>
+                    <label className="admin-label">Question type</label>
+                    <div className="seg" role="tablist">
+                      {([['mcq', 'Multiple choice'], ['numerical', 'Numerical answer']] as const).map(([t, lbl]) => (
+                        <button
+                          key={t}
+                          role="tab"
+                          aria-selected={(q.questionType ?? 'mcq') === t}
+                          onClick={() => updateQuestion(idx, 'questionType', t)}
+                          className="seg-item"
+                        >
+                          {lbl}
+                        </button>
                       ))}
                     </div>
+                    <p className="text-[11px] text-gray-400 mt-1.5">
+                      {(q.questionType ?? 'mcq') === 'numerical'
+                        ? 'Student types a value into a text box. +4 if correct, 0 otherwise — no negative marking.'
+                        : 'Student picks one of four options. +4 correct, −1 wrong, 0 unattempted.'}
+                    </p>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                    <div>
-                      <label className="admin-label">Correct answer</label>
-                      <select value={q.correctOption} onChange={e => updateQuestion(idx, 'correctOption', e.target.value)} className="admin-select">
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                      </select>
+                  {/* Numerical questions have no options — just the expected value */}
+                  {(q.questionType ?? 'mcq') === 'numerical' ? (
+                    <div className="rounded-xl border border-indigo-100 bg-indigo-50/40 p-4">
+                      <label className="admin-label">Correct answer (value)</label>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          value={q.numericalAnswer ?? ''}
+                          onChange={e => updateQuestion(idx, 'numericalAnswer', e.target.value)}
+                          placeholder="e.g. 30.00"
+                          className="admin-input font-mono max-w-[10rem]"
+                        />
+                        <span className="text-xs text-gray-500 font-semibold">to (optional)</span>
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          value={q.numericalAnswerMax ?? ''}
+                          onChange={e => updateQuestion(idx, 'numericalAnswerMax', e.target.value)}
+                          placeholder="upper bound"
+                          className="admin-input font-mono max-w-[10rem]"
+                        />
+                      </div>
+                      <p className="text-[11px] text-gray-500 mt-2">
+                        Leave the second box empty for an exact answer. Fill both for a range
+                        like <span className="font-mono">0.34 to 0.35</span>. Answers within
+                        0.005 are accepted, so two-decimal rounding always matches.
+                      </p>
                     </div>
+                  ) : (
+                    <div>
+                      <label className="admin-label">Options</label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                        {(['A', 'B', 'C', 'D'] as const).map(letter => (
+                          <div key={letter} className="relative">
+                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-gray-400 pointer-events-none">
+                              {letter}
+                            </span>
+                            <input
+                              value={q[`option${letter}` as 'optionA' | 'optionB' | 'optionC' | 'optionD']}
+                              onChange={e => updateQuestion(idx, `option${letter}` as keyof QuestionInput, e.target.value)}
+                              placeholder={`Option ${letter}`}
+                              className="admin-input pl-8"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                    {(q.questionType ?? 'mcq') !== 'numerical' && (
+                      <div>
+                        <label className="admin-label">Correct answer</label>
+                        <select value={q.correctOption} onChange={e => updateQuestion(idx, 'correctOption', e.target.value)} className="admin-select">
+                          <option value="A">A</option>
+                          <option value="B">B</option>
+                          <option value="C">C</option>
+                          <option value="D">D</option>
+                        </select>
+                      </div>
+                    )}
                     {subject === 'combined' && (
                       <div>
                         <label className="admin-label">Subject</label>
