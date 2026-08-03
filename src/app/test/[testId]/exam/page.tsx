@@ -6,6 +6,15 @@ import { getTestQuestions, getAttempt, getTest, saveProgress, submitTest } from 
 import { Test, StudentQuestion, Question, QuestionResponse, QuestionStatus } from "@/lib/types";
 import VirtualCalculator from '@/components/VirtualCalculator';
 
+/** Firestore keys must be strings; responses are keyed by number in local state. */
+export function toDbResponses(source: Record<number, QuestionResponse>) {
+  const dbResponses: Record<string, QuestionResponse> = {};
+  Object.entries(source).forEach(([k, v]) => {
+    dbResponses[k] = v;
+  });
+  return dbResponses;
+}
+
 export default function ExamPage() {
   const router = useRouter();
   const params = useParams();
@@ -14,6 +23,15 @@ export default function ExamPage() {
   const [test, setTest] = useState<Test | null>(null);
   const [questions, setQuestions] = useState<StudentQuestion[]>([]);
   const [responses, setResponses] = useState<Record<number, QuestionResponse>>({});
+  /**
+   * Synchronous mirror of `responses`.
+   *
+   * React state updates are async, so two handlers firing in the same tick (e.g.
+   * "Save & Next" -> navigateTo) would both read the pre-update value and the second
+   * write would clobber the first. Every read/write below goes through this ref so
+   * an answer can never be overwritten by a stale copy.
+   */
+  const responsesRef = useRef<Record<number, QuestionResponse>>({});
   const [currentQIndex, setCurrentQIndex] = useState(0);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -28,6 +46,7 @@ export default function ExamPage() {
   const [pauseCount, setPauseCount] = useState(0);
   const [copyNotice, setCopyNotice] = useState("");
   const [terminated, setTerminated] = useState<"screenshot" | null>(null);
+  const [saveError, setSaveError] = useState("");
   const [isReviewMode, setIsReviewMode] = useState(false);
   // Populated only after submission, so answers can never leak mid-test
   const [answerKey, setAnswerKey] = useState<Record<number, Question["correctOption"]>>({});
@@ -124,6 +143,7 @@ export default function ExamPage() {
         if (firstQNum !== undefined && initialResponses[firstQNum]?.status === "not_visited") {
           initialResponses[firstQNum].status = "not_answered";
         }
+        responsesRef.current = { ...initialResponses };
         setResponses({ ...initialResponses });
 
         setLoading(false);
@@ -289,11 +309,9 @@ export default function ExamPage() {
       }
 
       const timeTaken = Math.floor((Date.now() - attempt.startedAt) / 1000);
-      // stringify keys for firestore
-      const dbResponses: Record<string, QuestionResponse> = {};
-      Object.entries(responses).forEach(([k, v]) => {
-        dbResponses[k] = v;
-      });
+      // Read from the ref, not the render closure, so a selection made moments
+      // before hitting submit is always included.
+      const dbResponses = toDbResponses(responsesRef.current);
 
       await submitTest(testId, dbResponses, timeTaken, reason);
       localStorage.removeItem(`test_${testId}_time`);
@@ -357,13 +375,24 @@ export default function ExamPage() {
 
   const currentQ = questions[currentQIndex];
 
-  // Firestore keys must be strings; responses are keyed by number in local state
-  const toDbResponses = (source: Record<number, QuestionResponse>) => {
-    const dbResponses: Record<string, QuestionResponse> = {};
-    Object.entries(source).forEach(([k, v]) => {
-      dbResponses[k] = v;
-    });
-    return dbResponses;
+  /** Apply an update against the freshest responses and persist it. */
+  const applyResponses = (
+    updater: (prev: Record<number, QuestionResponse>) => Record<number, QuestionResponse>
+  ) => {
+    const next = updater(responsesRef.current);
+    responsesRef.current = next; // synchronous, so the next call sees this update
+    setResponses(next);
+    return next;
+  };
+
+  const persist = async (snapshot: Record<number, QuestionResponse>) => {
+    try {
+      await saveProgress(testId, toDbResponses(snapshot));
+    } catch (err) {
+      console.error("Failed to save progress", err);
+      setSaveError("Your last answer could not be saved. Check your connection.");
+      setTimeout(() => setSaveError(""), 4000);
+    }
   };
 
   const navigateTo = async (index: number) => {
@@ -374,62 +403,63 @@ export default function ExamPage() {
 
     if (isReviewMode) return;
 
-    if (responses[q.questionNumber]?.status === "not_visited") {
-      const newResponses: Record<number, QuestionResponse> = {
-        ...responses,
-        [q.questionNumber]: { ...responses[q.questionNumber], status: "not_answered" },
-      };
-      setResponses(newResponses);
-      try {
-        await saveProgress(testId, toDbResponses(newResponses));
-      } catch (err) {
-        console.error("Failed to save progress", err);
-      }
+    if (responsesRef.current[q.questionNumber]?.status === "not_visited") {
+      const next = applyResponses(prev => ({
+        ...prev,
+        [q.questionNumber]: { ...prev[q.questionNumber], status: "not_answered" },
+      }));
+      await persist(next);
     }
   };
 
-  const handleOptionSelect = (option: string) => {
+  const handleOptionSelect = async (option: string) => {
     if (!currentQ || isReviewMode) return;
-    setResponses(prev => ({
-      ...prev,
-      [currentQ.questionNumber]: {
-        ...prev[currentQ.questionNumber],
-        selected: option,
-        // Status remains same until they click an action button
-      }
-    }));
+    const qNum = currentQ.questionNumber;
+
+    // Record the answer immediately rather than waiting for "Save & Next".
+    // Previously a selection that wasn't explicitly saved scored zero, so students
+    // who picked an option and navigated away silently lost the marks.
+    const next = applyResponses(prev => {
+      const current = prev[qNum] ?? { selected: null, status: "not_answered" as QuestionStatus };
+      const keepsMark = current.status === "marked_for_review" || current.status === "answered_and_marked";
+      return {
+        ...prev,
+        [qNum]: {
+          selected: option,
+          status: keepsMark ? "answered_and_marked" : "answered",
+        },
+      };
+    });
+
+    await persist(next);
   };
 
   const handleAction = async (action: "save_next" | "save_mark" | "clear" | "mark_next") => {
     if (!currentQ || isReviewMode) return;
     const qNum = currentQ.questionNumber;
-    const current = responses[qNum] ?? { selected: null, status: "not_answered" as QuestionStatus };
-    const updated: QuestionResponse = { ...current };
 
-    switch (action) {
-      case "save_next":
-        updated.status = updated.selected ? "answered" : "not_answered";
-        break;
-      case "save_mark":
-        updated.status = updated.selected ? "answered_and_marked" : "marked_for_review";
-        break;
-      case "clear":
-        updated.selected = null;
-        updated.status = "not_answered";
-        break;
-      case "mark_next":
-        updated.status = updated.selected ? "answered_and_marked" : "marked_for_review";
-        break;
-    }
+    const next = applyResponses(prev => {
+      const current = prev[qNum] ?? { selected: null, status: "not_answered" as QuestionStatus };
+      const updated: QuestionResponse = { ...current };
 
-    const newResponses: Record<number, QuestionResponse> = { ...responses, [qNum]: updated };
-    setResponses(newResponses);
+      switch (action) {
+        case "save_next":
+          updated.status = updated.selected ? "answered" : "not_answered";
+          break;
+        case "save_mark":
+        case "mark_next":
+          updated.status = updated.selected ? "answered_and_marked" : "marked_for_review";
+          break;
+        case "clear":
+          updated.selected = null;
+          updated.status = "not_answered";
+          break;
+      }
 
-    try {
-      await saveProgress(testId, toDbResponses(newResponses));
-    } catch (err) {
-      console.error("Failed to save progress", err);
-    }
+      return { ...prev, [qNum]: updated };
+    });
+
+    await persist(next);
 
     // Navigate to next if not clear
     if (action !== "clear" && currentQIndex < questions.length - 1) {
@@ -842,6 +872,13 @@ export default function ExamPage() {
         </div>
       )}
       
+      {/* Save failure warning — the student must know if an answer didn't persist */}
+      {saveError && (
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-rose-600 text-white text-sm font-bold px-4 py-2.5 rounded-lg shadow-xl">
+          {saveError}
+        </div>
+      )}
+
       {/* Copy/paste blocked notice */}
       {copyNotice && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-sm font-semibold px-4 py-2.5 rounded-lg shadow-xl animate-fade-in">
