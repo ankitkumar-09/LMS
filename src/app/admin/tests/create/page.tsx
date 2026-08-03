@@ -52,6 +52,10 @@ export default function CreateTestPage() {
   const [importIssues, setImportIssues] = useState<string[]>([]);
   const [importError, setImportError] = useState('');
   const jsonInputRef = useRef<HTMLInputElement>(null);
+  // "one" shows a single question at a time — far quicker for pasting screenshots
+  // across a 30-question paper than scrolling one long list.
+  const [entryView, setEntryView] = useState<'one' | 'all'>('one');
+  const [focusIndex, setFocusIndex] = useState(0);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && sessionStorage.getItem('admin_authenticated') !== 'true') {
@@ -397,7 +401,74 @@ export default function CreateTestPage() {
         {/* Manual Questions */}
         {activeTab === 'manual' && (
           <div className="space-y-4">
+            {/* View switch + one-at-a-time navigator */}
+            <div className="admin-card !py-3 flex flex-wrap items-center gap-3">
+              <div className="seg" role="tablist">
+                {([['one', 'One at a time'], ['all', 'Show all']] as const).map(([id, lbl]) => (
+                  <button
+                    key={id}
+                    role="tab"
+                    aria-selected={entryView === id}
+                    onClick={() => setEntryView(id)}
+                    className="seg-item"
+                  >
+                    {lbl}
+                  </button>
+                ))}
+              </div>
+
+              {entryView === 'one' && questions.length > 0 && (
+                <div className="flex items-center gap-2 ml-auto">
+                  <button
+                    onClick={() => setFocusIndex(i => Math.max(0, i - 1))}
+                    disabled={focusIndex === 0}
+                    className="btn btn-ghost text-xs py-1.5 px-3"
+                  >
+                    ← Prev
+                  </button>
+                  <span className="text-sm font-bold text-gray-700 tabular-nums min-w-[5.5rem] text-center">
+                    {focusIndex + 1} of {questions.length}
+                  </span>
+                  <button
+                    onClick={() => setFocusIndex(i => Math.min(questions.length - 1, i + 1))}
+                    disabled={focusIndex >= questions.length - 1}
+                    className="btn btn-primary text-xs py-1.5 px-3"
+                  >
+                    Next →
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Jump grid — green means an image is already attached */}
+            {entryView === 'one' && questions.length > 1 && (
+              <div className="admin-card !py-3">
+                <div className="flex flex-wrap gap-1.5">
+                  {questions.map((q, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setFocusIndex(i)}
+                      title={q.imageURL ? 'Image attached' : 'No image yet'}
+                      className={`w-8 h-8 rounded-md text-xs font-bold border transition-colors ${
+                        i === focusIndex
+                          ? 'bg-[#1a237e] text-white border-[#1a237e]'
+                          : q.imageURL
+                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
+                            : 'bg-white text-gray-500 border-gray-200 hover:border-[#1565c0]'
+                      }`}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-[11px] text-gray-400 mt-2">
+                  {questions.filter(q => q.imageURL).length} of {questions.length} have an image
+                </p>
+              </div>
+            )}
+
             {questions.map((q, idx) => (
+              entryView === 'one' && idx !== focusIndex ? null : (
               <div key={idx} className="admin-card">
                 <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
                   <div className="flex items-center gap-2.5">
@@ -482,8 +553,28 @@ export default function CreateTestPage() {
                       </select>
                     </div>
                   </div>
+
+                  {entryView === 'one' && (
+                    <div className="flex items-center justify-between gap-3 pt-4 mt-4 border-t border-gray-100">
+                      <button
+                        onClick={() => setFocusIndex(i => Math.max(0, i - 1))}
+                        disabled={focusIndex === 0}
+                        className="btn btn-ghost"
+                      >
+                        ← Previous
+                      </button>
+                      <button
+                        onClick={() => setFocusIndex(i => Math.min(questions.length - 1, i + 1))}
+                        disabled={focusIndex >= questions.length - 1}
+                        className="btn btn-primary px-6"
+                      >
+                        Next question →
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
+              )
             ))}
 
             <button
