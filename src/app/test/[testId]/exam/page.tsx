@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import { getTestQuestions, getAttempt, getTest, saveProgress, submitTest } from "@/lib/firebase/firestore";
 import { Test, StudentQuestion, Question, QuestionResponse, QuestionStatus } from "@/lib/types";
 import VirtualCalculator from '@/components/VirtualCalculator';
+import { isNumericalCorrect } from "@/lib/utils/scoring";
 
 /** Firestore keys must be strings; responses are keyed by number in local state. */
 export function toDbResponses(source: Record<number, QuestionResponse>) {
@@ -48,8 +49,11 @@ export default function ExamPage() {
   const [terminated, setTerminated] = useState<"screenshot" | null>(null);
   const [saveError, setSaveError] = useState("");
   const [isReviewMode, setIsReviewMode] = useState(false);
-  // Populated only after submission, so answers can never leak mid-test
-  const [answerKey, setAnswerKey] = useState<Record<number, Question["correctOption"]>>({});
+  // Populated only after submission, so answers can never leak mid-test.
+  // Holds the display form: "B" for MCQs, "0.34 to 0.35" for numerical.
+  const [answerKey, setAnswerKey] = useState<Record<number, string>>({});
+  // Full question records (with answers) kept for review-mode grading
+  const [gradedQuestions, setGradedQuestions] = useState<Question[]>([]);
   const [violationWarning, setViolationWarning] = useState(false);
 
   // Timer interval ref
@@ -91,9 +95,20 @@ export default function ExamPage() {
             setIsReviewMode(true);
             setTimeRemaining(0);
             // Only once the test is submitted is it safe to reveal the answer key
-            const key: Record<number, Question["correctOption"]> = {};
-            qData.forEach((q) => { key[q.questionNumber] = q.correctOption; });
+            const key: Record<number, string> = {};
+            qData.forEach((q) => {
+              if (q.questionType === "numerical") {
+                const lo = q.numericalAnswer;
+                const hi = q.numericalAnswerMax;
+                if (lo === null || lo === undefined) return;
+                key[q.questionNumber] =
+                  hi !== null && hi !== undefined && hi !== lo ? `${lo} to ${hi}` : `${lo}`;
+              } else {
+                key[q.questionNumber] = q.correctOption;
+              }
+            });
             setAnswerKey(key);
+            setGradedQuestions(qData);
           } else {
             // Persistent Timer via LocalStorage or calculated elapsed
             const savedTime = localStorage.getItem(`test_${testId}_time`);
@@ -617,6 +632,35 @@ export default function ExamPage() {
                 </div>
               )}
 
+              {currentQ.questionType === 'numerical' ? (
+                <div>
+                  <label className="block text-sm font-semibold text-slate-600 mb-2">
+                    Enter your answer
+                  </label>
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    value={responses[currentQ.questionNumber]?.selected ?? ''}
+                    onChange={(e) => {
+                      // digits, one optional leading minus, one optional decimal point
+                      const v = e.target.value;
+                      if (v === '' || /^-?\d*\.?\d*$/.test(v)) handleOptionSelect(v);
+                    }}
+                    disabled={isReviewMode}
+                    placeholder="e.g. 30.00"
+                    className="w-full max-w-xs px-4 py-3 text-2xl font-mono tabular-nums text-slate-800 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-indigo-500 focus:outline-none disabled:opacity-70"
+                  />
+                  <p className="mt-2 text-xs text-slate-400">
+                    Round or truncate to two decimal places. No negative marking on this question.
+                  </p>
+
+                  {isReviewMode && answerKey[currentQ.questionNumber] && (
+                    <p className="mt-3 text-sm font-bold text-emerald-700">
+                      Correct answer: {answerKey[currentQ.questionNumber]}
+                    </p>
+                  )}
+                </div>
+              ) : (
               <div className="flex flex-col gap-3">
                 {['A', 'B', 'C', 'D'].map((opt) => {
                   const isSelected = responses[currentQ.questionNumber]?.selected === opt;
@@ -668,6 +712,7 @@ export default function ExamPage() {
                   );
                 })}
               </div>
+              )}
 
               {/* Per-question verdict in review mode */}
               {isReviewMode && answerKey[currentQ.questionNumber] && (
@@ -677,6 +722,7 @@ export default function ExamPage() {
                     const correct = answerKey[currentQ.questionNumber];
                     const counted = responses[currentQ.questionNumber]?.status === 'answered'
                       || responses[currentQ.questionNumber]?.status === 'answered_and_marked';
+                    const isNumerical = currentQ.questionType === 'numerical';
 
                     if (!picked || !counted) {
                       return (
@@ -686,11 +732,19 @@ export default function ExamPage() {
                         </p>
                       );
                     }
-                    return picked === correct ? (
-                      <p className="text-sm font-bold text-emerald-700">Correct · +4 marks</p>
-                    ) : (
+
+                    const graded = gradedQuestions.find(q => q.questionNumber === currentQ.questionNumber);
+                    const isRight = isNumerical && graded
+                      ? isNumericalCorrect(picked, graded)
+                      : picked === correct;
+
+                    if (isRight) {
+                      return <p className="text-sm font-bold text-emerald-700">Correct · +4 marks</p>;
+                    }
+                    return (
                       <p className="text-sm font-bold text-rose-700">
-                        Incorrect · −1 mark — the correct answer was{' '}
+                        Incorrect · {isNumerical ? '0 marks' : '−1 mark'} — you answered{' '}
+                        <span className="font-mono">{picked}</span>, the correct answer was{' '}
                         <span className="text-emerald-700">{correct}</span>
                       </p>
                     );
@@ -759,8 +813,12 @@ export default function ExamPage() {
                   const correct = answerKey[q.questionNumber];
                   const picked = responses[q.questionNumber]?.selected;
                   const counted = status === "answered" || status === "answered_and_marked";
+                  const graded = gradedQuestions.find(g => g.questionNumber === q.questionNumber);
+                  const isRight = graded?.questionType === "numerical"
+                    ? isNumericalCorrect(picked ?? null, graded)
+                    : picked === correct;
                   if (!counted || !picked) bgColor = "bg-slate-200 border-slate-300 text-slate-600";
-                  else if (picked === correct) bgColor = "bg-emerald-500 border-emerald-600 text-white shadow-sm shadow-emerald-500/20";
+                  else if (isRight) bgColor = "bg-emerald-500 border-emerald-600 text-white shadow-sm shadow-emerald-500/20";
                   else bgColor = "bg-rose-500 border-rose-600 text-white shadow-sm shadow-rose-500/20";
                 }
                 else if (status === "answered") bgColor = "bg-emerald-500 border-emerald-600 text-white shadow-sm shadow-emerald-500/20";

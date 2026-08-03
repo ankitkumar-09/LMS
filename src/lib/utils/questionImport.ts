@@ -1,4 +1,4 @@
-import { Subject, Difficulty } from "@/lib/types";
+import { Subject, Difficulty, QuestionType } from "@/lib/types";
 
 /**
  * Parser for the admin "Upload JSON" button.
@@ -23,6 +23,33 @@ export interface ImportedQuestion {
   correctOption: "A" | "B" | "C" | "D";
   subject: Subject;
   difficulty: Difficulty;
+  questionType: QuestionType;
+  numericalAnswer: number | null;
+  numericalAnswerMax: number | null;
+}
+
+/**
+ * Accepts a number, "30.00", or a range like "0.34 to 0.35" / "3.21-3.24".
+ * Returns [low, high]; high is null when it's a single value.
+ */
+export function parseNumericalAnswer(raw: unknown): [number, number | null] | null {
+  if (typeof raw === "number" && Number.isFinite(raw)) return [raw, null];
+  if (typeof raw !== "string") return null;
+
+  const s = raw.trim();
+  if (!s) return null;
+
+  const range = s.match(/^(-?\d*\.?\d+)\s*(?:to|-|–|—|…|\.\.\.)\s*(-?\d*\.?\d+)$/i);
+  if (range) {
+    const lo = Number(range[1]);
+    const hi = Number(range[2]);
+    if (Number.isFinite(lo) && Number.isFinite(hi)) {
+      return [Math.min(lo, hi), Math.max(lo, hi)];
+    }
+  }
+
+  const single = Number(s);
+  return Number.isFinite(single) ? [single, null] : null;
 }
 
 export interface ImportResult {
@@ -97,20 +124,47 @@ export function parseQuestionsJSON(raw: string): ImportResult {
       return;
     }
 
-    const optionA = readOption(q, "A");
-    const optionB = readOption(q, "B");
-    const optionC = readOption(q, "C");
-    const optionD = readOption(q, "D");
+    // Numerical questions are flagged explicitly, or inferred from a numericalAnswer field
+    const declaredType = str(q.questionType ?? q.type).toLowerCase();
+    const rawNumerical = q.numericalAnswer ?? q.numerical ?? q.valueAnswer;
+    const isNumerical =
+      declaredType === "numerical" ||
+      declaredType === "numeric" ||
+      declaredType === "integer" ||
+      (declaredType === "" && rawNumerical !== undefined && rawNumerical !== null);
 
-    if (![optionA, optionB, optionC, optionD].every(Boolean)) {
-      warnings.push(`${label}: skipped — all four options (A–D) are required.`);
-      return;
-    }
+    let optionA = readOption(q, "A");
+    let optionB = readOption(q, "B");
+    let optionC = readOption(q, "C");
+    let optionD = readOption(q, "D");
+    let answer = str(q.correctOption ?? q.answer ?? q.ans ?? q.correct).toUpperCase();
+    let numericalAnswer: number | null = null;
+    let numericalAnswerMax: number | null = null;
 
-    const answer = str(q.correctOption ?? q.answer ?? q.ans ?? q.correct).toUpperCase();
-    if (!["A", "B", "C", "D"].includes(answer)) {
-      warnings.push(`${label}: skipped — correctOption must be A, B, C or D (got "${answer}").`);
-      return;
+    if (isNumerical) {
+      const parsed = parseNumericalAnswer(rawNumerical ?? q.answer ?? q.ans ?? q.correct);
+      if (!parsed) {
+        warnings.push(
+          `${label}: skipped — numerical question needs a numericalAnswer (a number, or a range like "0.34 to 0.35").`
+        );
+        return;
+      }
+      [numericalAnswer, numericalAnswerMax] = parsed;
+      // Options are unused for numerical questions but the schema expects strings
+      optionA = optionA || "—";
+      optionB = optionB || "—";
+      optionC = optionC || "—";
+      optionD = optionD || "—";
+      answer = "A";
+    } else {
+      if (![optionA, optionB, optionC, optionD].every(Boolean)) {
+        warnings.push(`${label}: skipped — all four options (A–D) are required.`);
+        return;
+      }
+      if (!["A", "B", "C", "D"].includes(answer)) {
+        warnings.push(`${label}: skipped — correctOption must be A, B, C or D (got "${answer}").`);
+        return;
+      }
     }
 
     const rawSubject = str(q.subject).toLowerCase();
@@ -143,6 +197,9 @@ export function parseQuestionsJSON(raw: string): ImportResult {
       correctOption: answer as "A" | "B" | "C" | "D",
       subject,
       difficulty,
+      questionType: isNumerical ? "numerical" : "mcq",
+      numericalAnswer,
+      numericalAnswerMax,
     });
   });
 

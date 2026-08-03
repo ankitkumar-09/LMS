@@ -5,6 +5,12 @@ export type Difficulty = "easy" | "medium" | "hard";
 export type TestStatus = "not_attempted" | "in_progress" | "submitted";
 export type QuestionStatus = "not_visited" | "not_answered" | "answered" | "marked_for_review" | "answered_and_marked";
 
+/**
+ * "mcq"       — single correct option, +4 / −1 / 0
+ * "numerical" — student types a value, +4 / 0 (no negative marking)
+ */
+export type QuestionType = "mcq" | "numerical";
+
 export interface Question {
   id: string;
   questionNumber: number;
@@ -19,6 +25,12 @@ export interface Question {
   correctOption: "A" | "B" | "C" | "D";
   subject: Subject;
   difficulty: Difficulty;
+  /** Defaults to "mcq" when absent, so existing papers keep working. */
+  questionType?: QuestionType;
+  /** Numerical only: accepted answer, or the low end of an accepted range. */
+  numericalAnswer?: number | null;
+  /** Numerical only: high end of an accepted range (e.g. "0.34 to 0.35"). */
+  numericalAnswerMax?: number | null;
 }
 
 // Question without correct answer (sent to student)
@@ -34,6 +46,7 @@ export interface StudentQuestion {
     D: string;
   };
   subject: Subject;
+  questionType?: QuestionType;
 }
 
 export interface Test {

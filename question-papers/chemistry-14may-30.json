@@ -1,0 +1,234 @@
+{
+  "title": "ALLEN Score-II — Chemistry (14 May)",
+  "subject": "chemistry",
+  "durationMinutes": 60,
+  "showScoreToStudent": true,
+  "questions": [
+    {
+      "questionText": "Which of the following is an example of a liquid aerosol?",
+      "imageURL": null,
+      "options": { "A": "Mist", "B": "Smoke", "C": "Dust", "D": "Curd" },
+      "correctOption": "A", "subject": "chemistry", "difficulty": "easy"
+    },
+    {
+      "questionText": "Which of the following is the most stable carbocation? (Refer to the image for the structures.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Select the INCORRECT statement:",
+      "imageURL": null,
+      "options": {
+        "A": "Maximum possible number of elements in the 4th period is 18",
+        "B": "Number of electrons in a Cu atom having (n + l + m) = 4 is 5",
+        "C": "Zn²⁺, Cu⁺ and Cu have the same number of d-electrons",
+        "D": "The penetrating power of the orbitals for a particular quantum number runs as s > p > d > f"
+      },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "For the reaction 2H₂ + 2NO → N₂ + 2H₂O the following mechanism has been suggested: 2NO ⇌ N₂O₂ [equilibrium constant K₁, fast]; N₂O₂ + H₂ → N₂O + H₂O (slow); N₂O + H₂ → N₂ + H₂O (fast). According to this mechanism, which rate law is correctly matched? (Refer to the image for the full expressions.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Which of the following orders of leaving group ability is INCORRECT? (Refer to the image for the structures.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Which of the following options is CORRECT?",
+      "imageURL": null,
+      "options": {
+        "A": "3p–3p > 3p–3d > 3d–3d (bond strength)",
+        "B": "Ethanol < Glycerol < Ethylene glycol (viscosity)",
+        "C": "XeO₃F₂ > XeF₄ = XeF₂ (dipole moment)",
+        "D": "Number of P–O–P bonds in cyclic trimetaphosphoric acid is 3"
+      },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "If V mL of 0.2 M acetic acid is added to 100 mL of 0.2 M sodium acetate to prepare a buffer of pH = 6, calculate the pH of the new solution prepared by adding 5.49 mL of 0.1 M NaOH to the same V mL of 0.2 M CH₃COOH, diluted 5 times. [Given pKb of CH₃COO⁻ is 9.26, log 2 = 0.3 and 10^1.26 = 18.2]",
+      "imageURL": null,
+      "options": { "A": "5.04", "B": "4.44", "C": "4.74", "D": "3.26" },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "The major product of the following elimination reaction is: (Refer to the image for the reaction and structures.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "[Co(NH₃)₄(NO₂)₂]Cl₂ exhibits:",
+      "imageURL": null,
+      "options": {
+        "A": "Linkage isomerism, ionisation isomerism and optical isomerism",
+        "B": "Linkage isomerism, geometrical isomerism and optical isomerism",
+        "C": "Linkage isomerism, ionisation isomerism and geometrical isomerism",
+        "D": "Ionisation isomerism, geometrical isomerism and optical isomerism"
+      },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "One litre of a sample of hard water contains 5.55 mg of CaCl₂ and 9.5 mg of MgCl₂. What is the degree of hardness in terms of ppm of CaCO₃?",
+      "imageURL": null,
+      "options": { "A": "15 ppm", "B": "5.55 ppm", "C": "9.5 ppm", "D": "150.5 ppm" },
+      "correctOption": "A", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "In which of the following reactions will the product be an aldehyde? (Refer to the image for the reactions.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Which of the following statements is CORRECT?",
+      "imageURL": null,
+      "options": {
+        "A": "Pig iron is the purest form of iron",
+        "B": "Tin stone consists of wolframite as a non-magnetic impurity",
+        "C": "During the extraction of aluminium by the Hall–Héroult process a graphite-lined steel tank serves as cathode and a graphite rod acts as anode",
+        "D": "Lead and tin are extracted from their chief ores by carbon reduction and self reduction respectively"
+      },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Which of the following is INCORRECTLY matched? (Refer to the image for the expressions.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Product (B) is: (Refer to the image for the reaction scheme and structures.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Select the correct statement:",
+      "imageURL": null,
+      "options": {
+        "A": "NO₃⁻ gives the brown ring test in the presence of dilute H₂SO₄",
+        "B": "During the chromyl chloride test a change in oxidation state of chromium takes place",
+        "C": "On passing H₂S gas into an aqueous solution of SO₂ a clear solution is produced",
+        "D": "Alkaline solution of K₂HgI₄ is known as Nessler's reagent"
+      },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Which of the following curves correctly represents the titration of CH₃COOH with NaOH solution? (Refer to the image for the curves.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "A", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "What is X? (Refer to the image for the reaction scheme.)",
+      "imageURL": null,
+      "options": { "A": "CH₃COOH", "B": "BrCH₂–COOH", "C": "(CH₃CO)₂O", "D": "CHO–COOH" },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Which of the following statements is CORRECT?",
+      "imageURL": null,
+      "options": {
+        "A": "The bleaching property of chlorine water is due to formation of nascent oxygen",
+        "B": "O₃ is estimated by KI in the presence of borate buffer followed by titration with hypo solution",
+        "C": "Black phosphorus is a conductor of electricity",
+        "D": "All the above statements are correct"
+      },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Which of the following is correct for a monoclinic structure? (Refer to the image for the structures.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "In which of the following reactions is ethyl chloride NOT formed?",
+      "imageURL": null,
+      "options": {
+        "A": "C₂H₅–O–C₂H₅ + PCl₅",
+        "B": "C₂H₅OC₂H₅ + CH₃COCl",
+        "C": "C₂H₅OC₂H₅ + Cl₂",
+        "D": "C₂H₅OH + PCl₃"
+      },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "medium"
+    },
+
+    {
+      "questionText": "Find the number of t2g and eg electrons in [NiF₆]²⁻. [If the answer is 4 and 0, represent it as 40]",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "60.00",
+      "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "The efficiency of a Carnot cycle is 1/6. On reducing the temperature of the sink, the efficiency becomes 1/3. Find the temperature (in K) referred to in the question. (Refer to the image for the complete question.)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "117.00",
+      "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "How many of the following compounds will evolve methane gas on treatment with CH₃MgBr?  (A) H₂O  (B) CH₃–OH  (C) CH₃COCH₃  (D) CH₃COOH  (E) CH₃CONH₂  (F) CH₃COCl  (G) CH₃COOCH₃  (H) CH₃Cl  (I) Ph–OH",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "5.00",
+      "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "How many statements are correct?  (i) The mobilities of alkali metal ions in aqueous solution are Li⁺ > Na⁺ > K⁺ > Rb⁺.  (ii) The order of ionic character of the chlorides is BeCl₂ < MgCl₂ < CaCl₂ < SrCl₂ < BaCl₂.  (iii) The reducing nature of alkaline earth metals increases as Be < Mg < Ca < Sr < Ba.  (iv) Beryllium is not readily attacked by acid because of an oxide film on its surface.  (v) BeCl₂ has a dimeric structure in the solid state but a polymeric structure in the vapour state.  (vi) BeCO₃ is kept in an atmosphere of CO₂ since it is least thermally stable.  (vii) Sodium hydroxide is produced on a large scale by electrolysis of aqueous NaCl using Hg as cathode.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "5.00",
+      "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "A 1.5 g mixture of SiO₂ and Fe₂O₃ on very strong heating leaves a residue weighing 1.46 g. The reaction responsible for the loss of weight is 6Fe₂O₃(s) → 4Fe₃O₄(s) + O₂(g). What is the percentage by mass of Fe in the original sample?",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "56.00",
+      "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "How many of the following substrates show the Perkin reaction? (Refer to the image for the substrates.)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "4.00",
+      "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "How many statements are CORRECT?  (i) The catalyst used in the Bosch process for manufacture of H₂ is iron oxide with a small amount of K₂O + Al₂O₃.  (ii) Internal energy of ortho-hydrogen is more than that of para-hydrogen due to parallel nuclear spin.  (iii) At 0 K, 100% para-hydrogen exists, whereas at 25 °C there is 75% ortho- and 25% para-hydrogen.  (iv) Water softening by Clark's process uses calcium hydroxide.  (v) Dielectric constant of D₂O is higher than that of water.  (vi) Very pure H₂ is obtained by electrolysing warm aqueous Ba(OH)₂ solution between Ni electrodes.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "4.00",
+      "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "From the given data at 25 °C, calculate the enthalpy of the reaction (in kJ/mol). (Refer to the image for the enthalpy of formation data.)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "-1656.51",
+      "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "How many of the following molecules are chiral? (Refer to the image for the structures.)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "4.00",
+      "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Find the total number of changes for which an acidic medium is required. (Refer to the image for the list of conversions.)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "6.00",
+      "subject": "chemistry", "difficulty": "medium"
+    }
+  ]
+}

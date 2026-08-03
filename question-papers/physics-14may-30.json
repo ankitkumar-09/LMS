@@ -1,0 +1,204 @@
+{
+  "title": "ALLEN Score-II — Physics (14 May)",
+  "subject": "physics",
+  "durationMinutes": 60,
+  "showScoreToStudent": true,
+  "questions": [
+    {
+      "questionText": "A ball is thrown with speed 10 m/s from some height at an angle 60° with the horizontal. The ball strikes the inclined plane perpendicularly at a horizontal distance x from the point of projection, as shown in the diagram. The value of x is:",
+      "imageURL": null,
+      "options": { "A": "(5/2)(√3 + 1) m", "B": "2(√3 + 1) m", "C": "(5/2)(√3 − 1) m", "D": "2(√3 − 1) m" },
+      "correctOption": "A", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A circular rope of weight W and radius r = 3R/5 is resting on a smooth sphere of radius R. The tension in the rope is:",
+      "imageURL": null,
+      "options": { "A": "W/2", "B": "W/(2π)", "C": "3W/(8π)", "D": "W/π" },
+      "correctOption": "C", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A block of mass m is placed on a wedge of mass 2m which rests on a rough horizontal surface. There is no friction between the block and the wedge. The minimum friction coefficient between the wedge and the ground so that the wedge does not move is:",
+      "imageURL": null,
+      "options": { "A": "0.167", "B": "0.20", "C": "0.23", "D": "0.33" },
+      "correctOption": "B", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A particle moves on the inner surface of a smooth hemispherical shell with −π/2 ≤ θ ≤ π/2. At which point will the acceleration of the particle be along the horizontal?",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "Between A and B", "D": "Nowhere" },
+      "correctOption": "C", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A ball of mass m is released from height h on a smooth curved track. The height attained by the ball on the other half of the smooth curved track, where the velocity of the ball is half of its maximum velocity, is:",
+      "imageURL": null,
+      "options": { "A": "h/2", "B": "h/4", "C": "h", "D": "3h/4" },
+      "correctOption": "D", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A pendulum bob of mass m is suspended at rest. A constant force F = mg starts acting on it. The angular deflection of the string at which the centripetal acceleration is maximum is:",
+      "imageURL": null,
+      "options": { "A": "π/2", "B": "π/4", "C": "π/6", "D": "π/3" },
+      "correctOption": "B", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "Ram and Shyam are standing on a boat of mass M floating on a non-viscous fluid. Both start walking on the boat and interchange their positions. The boat moves by a distance L/4 in this process, where L is the length of the boat, and the mass of Ram is twice that of Shyam. The ratio of the mass of the boat to the mass of Shyam is:",
+      "imageURL": null,
+      "options": { "A": "1", "B": "2", "C": "3", "D": "4" },
+      "correctOption": "A", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A parallel beam of monochromatic light of wavelength 450 nm passes through a long slit of width 0.2 mm. The angular divergence in which most of the light is diffracted is:",
+      "imageURL": null,
+      "options": { "A": "4.5 × 10⁻³ rad", "B": "2 × 10⁻³ rad", "C": "3 × 10⁻³ rad", "D": "2.25 × 10⁻³ rad" },
+      "correctOption": "A", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "Two spheres are moving towards each other. Both have the same radius but their masses are 2 kg and 4 kg. If their velocities are 4 m/s and 2 m/s respectively and the coefficient of restitution is e = 1/3, then the magnitude of the impulse of the normal force is:",
+      "imageURL": null,
+      "options": { "A": "2/√3 N·s", "B": "4/√3 N·s", "C": "8/√3 N·s", "D": "16/√3 N·s" },
+      "correctOption": "D", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "Four small discs of radius R/4 are cut from a uniform disc of mass M and radius R in such a way that the distance between the centre of the disc and the centre of each hole is 3R/4, as shown in the diagram. Find the moment of inertia of the remaining part of the disc about the axis AB, which lies in the plane of the disc.",
+      "imageURL": null,
+      "options": { "A": "(109/256) MR²", "B": "(45/256) MR²", "C": "(297/256) MR²", "D": "(73/256) MR²" },
+      "correctOption": "B", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "Two discs A and B touch each other as shown in the figure. A rope tightly wound on A is pulled down at 2 m/s². The friction force between A and B, if slipping is absent, is:",
+      "imageURL": null,
+      "options": { "A": "2 N", "B": "4 N", "C": "8 N", "D": "None of these" },
+      "correctOption": "A", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A U-shaped bar of mass 3m, with each segment of length L, is pivoted at one of its ends so that it can rotate freely in a vertical plane, as shown in the figure. Find the value of θ at equilibrium.",
+      "imageURL": null,
+      "options": { "A": "30°", "B": "45°", "C": "37°", "D": "53°" },
+      "correctOption": "C", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "The electric field of a plane polarized electromagnetic wave in free space at time t = 0 is given by E(x, z) = 5ĵ cos(3x + 4z). The magnetic field B(x, z, t) is given by (where c is the speed of light):",
+      "imageURL": null,
+      "options": {
+        "A": "(1/c)(3k̂ − 4î) cos[3x + 4z + 5ct]",
+        "B": "(1/c)(3k̂ − 4î) cos[3x + 4z − 5ct]",
+        "C": "(1/c)(3k̂ + 4î) cos[3x − 4z + 5ct]",
+        "D": "(1/c)(3k̂ + 4î) cos[3x + 4z − 5ct]"
+      },
+      "correctOption": "B", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A body of mass m and radius R is rolling without sliding on an inclined plane. If the velocity of the body at the bottom of the incline is 10 m/s and the kinetic energy of the body at the top of the incline is half of the kinetic energy at the bottom, then the moment of inertia of the body is (given height of incline = 15/4 m):",
+      "imageURL": null,
+      "options": { "A": "mR²", "B": "mR²/2", "C": "(2/5) mR²", "D": "(2/3) mR²" },
+      "correctOption": "B", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A uniform circular disc of radius r undergoes small oscillations about a horizontal axis which lies in its own plane. The distance of the axis from the centre for the period to be minimum is:",
+      "imageURL": null,
+      "options": { "A": "r/2", "B": "r/4", "C": "3r/4", "D": "3r/8" },
+      "correctOption": "A", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "In a standing wave experiment, a 1.2 kg horizontal rope is fixed at its two ends (x = 0 and x = 2 m) and made to oscillate up and down in the fundamental mode at frequency 5 kHz. At t = 0, the point at x = 1 m has zero displacement and is moving upward in the positive y direction with a transverse velocity of 3.14 m/s. The amplitude of motion of the particle at x = 1 m is:",
+      "imageURL": null,
+      "options": { "A": "0.16 m", "B": "0.1 m", "C": "0.08 m", "D": "0.0001 m" },
+      "correctOption": "D", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A sound source of frequency f₀ = 130 Hz is dropped from a height slightly greater than 250 m above the ground. At the same time a detector is thrown upwards with velocity u = 50 m/s along the same line. If the speed of sound is v = 300 m/s, then the frequency (in Hz) detected by the observer after t = 5 s is:",
+      "imageURL": null,
+      "options": { "A": "156 Hz", "B": "312 Hz", "C": "78 Hz", "D": "624 Hz" },
+      "correctOption": "A", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A student is performing the Resonance Column experiment. The diameter of the column tube is 20/3 cm. The frequency of the tuning fork is 1050 Hz. The air temperature is 38 °C, at which the speed of sound is 336 m/s. The zero of the metre scale coincides with the top end of the resonance column tube. When the first resonance occurs, the reading of the water level in the column is:",
+      "imageURL": null,
+      "options": { "A": "8 cm", "B": "10 cm", "C": "6 cm", "D": "12 cm" },
+      "correctOption": "C", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A thin equiconvex lens having power P is cut into three parts A, B and C as shown. Which option is INCORRECT for the power?",
+      "imageURL": null,
+      "options": { "A": "A is twice of B", "B": "B is equal to A", "C": "C is equal to B", "D": "A is equal to C" },
+      "correctOption": "A", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "For the circuit shown below, the current through the Zener diode is:",
+      "imageURL": null,
+      "options": { "A": "14 mA", "B": "zero", "C": "9 mA", "D": "5 mA" },
+      "correctOption": "B", "subject": "physics", "difficulty": "medium"
+    },
+
+    {
+      "questionText": "The adjacent figure shows charged concentric spherical shells A, B and C having charge densities σ, −σ, σ and radii a, b, c respectively. If V_A = V_C, find the value of c (in cm). (a = 10 cm, b = 20 cm)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "30.00",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A body of mass m is projected horizontally just above the earth's surface with velocity v₀ = √(4gR/3). The maximum height attained by the body is 2R/(3n). Find n.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "0.67",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A uniform ring of mass m and radius R can rotate freely about an axis passing through its centre C and perpendicular to the plane of the paper. Half of the ring is positively charged and the other half negatively charged. A uniform electric field E₀ is switched on along the negative x-axis. If the ring is slightly disturbed, the angular speed of the ring when it rotates by π/2 is n√(λE₀/m), where λ is the magnitude of the linear charge density. Find n.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "2.82",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A 10 m long nichrome wire having 80 Ω resistance has a current carrying capacity of 5 A. This wire can be cut into two equal parts and the equal parts can be connected in series or parallel. The maximum power which can be obtained as heat from the wire on a 200 V mains supply, in kW, is:",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "2.00",
+      "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "In the circuit shown, the switch is placed in position 1 until the capacitor is charged to half of the maximum possible charge in this situation. Now the switch S is placed in position 2. The maximum energy lost by the circuit after S is placed in position 2 is xCE². Find x.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "1.12",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A square loop of side a is placed near an infinite wire as shown in the figure. The mutual inductance of the system is n·μ₀a/π. Find n.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "0.34 to 0.35",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "In the figure shown, i₁ = 10e^(−2t) A, i₂ = 4 A and V_C = 3e^(−2t) V. If V_L = a·e^(−bt), then find |a/b|.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "8.00",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "Consider the reaction ₁¹H + ₆¹³C → ₇¹³N + ₀¹n. The atomic masses of the nuclei are M(₁¹H) = 1.007825 u, M(₀¹n) = 1.008665 u, M(₆¹³C) = 13.00336 u, M(₇¹³N) = 13.00574 u, and 1 u = 931 MeV. Find the minimum kinetic energy (in MeV) of the proton (₁¹H) required to initiate the reaction.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "3.21 to 3.24",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "Radiations of two photons of energies twice and five times the work function of a metal are incident successively on the metal surface. Find the ratio of the maximum velocities of the photoelectrons in the two cases.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "0.50",
+      "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A plate of thickness t made of material of refractive index μ = 2 is placed in front of one of the slits in a double slit experiment. What should be the minimum thickness t (in mm) which will make the intensity at the centre of the fringe pattern zero? (λ = 4 mm)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "2.00",
+      "subject": "physics", "difficulty": "medium"
+    }
+  ]
+}

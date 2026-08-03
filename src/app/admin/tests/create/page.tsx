@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { createTest } from '@/lib/firebase/firestore';
-import { Subject, Difficulty } from '@/lib/types';
+import { Subject, Difficulty, QuestionType } from '@/lib/types';
 import ImageUpload from '@/components/ImageUpload';
 import { parseQuestionsJSON, ImportError, SAMPLE_JSON } from '@/lib/utils/questionImport';
 
@@ -17,6 +17,9 @@ interface QuestionInput {
   correctOption: 'A' | 'B' | 'C' | 'D';
   subject: Subject;
   difficulty: Difficulty;
+  questionType: QuestionType;
+  numericalAnswer: number | null;
+  numericalAnswerMax: number | null;
 }
 
 const emptyQuestion = (): QuestionInput => ({
@@ -29,6 +32,9 @@ const emptyQuestion = (): QuestionInput => ({
   correctOption: 'A',
   subject: 'maths',
   difficulty: 'medium',
+  questionType: 'mcq',
+  numericalAnswer: null,
+  numericalAnswerMax: null,
 });
 
 export default function CreateTestPage() {
@@ -168,6 +174,9 @@ export default function CreateTestPage() {
         correctOption: q.correctOption,
         subject: subject === 'combined' ? q.subject : subject,
         difficulty: q.difficulty,
+        questionType: q.questionType ?? 'mcq',
+        numericalAnswer: q.numericalAnswer ?? null,
+        numericalAnswerMax: q.numericalAnswerMax ?? null,
       }));
 
       const test = await createTest(title, subject, formattedQuestions, showScore, durationMinutes);

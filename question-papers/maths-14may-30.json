@@ -1,0 +1,219 @@
+{
+  "title": "ALLEN Score-II — Mathematics (14 May)",
+  "subject": "maths",
+  "durationMinutes": 60,
+  "showScoreToStudent": true,
+  "questions": [
+    {
+      "questionText": "The number of solutions of the trigonometric equation sec²x + cosec²x − sin²x − 3 = 0 in [0, 4π] is:",
+      "imageURL": null,
+      "options": { "A": "2", "B": "4", "C": "6", "D": "8" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The value of Σ (r = 1 to ∞) tan⁻¹[ 6r / (2^(2r+1) + 3^(2r+1)) ] is equal to:",
+      "imageURL": null,
+      "options": { "A": "π/2", "B": "cot⁻¹(3/2)", "C": "tan⁻¹(3/2)", "D": "tan⁻¹(3)" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "In a triangle ABC, ∠A = 55°, ∠B = 15°, ∠C = 110°. Then c² − a² is equal to (where symbols have their usual meaning):",
+      "imageURL": null,
+      "options": { "A": "ab", "B": "2ab", "C": "−ab", "D": "3ab" },
+      "correctOption": "A", "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "(Refer to the image for the complete question and its options.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Σ(i=1 to ∞) Σ(j=1 to ∞) Σ(k=1 to ∞) 1 / a^(i+j+k) is equal to (where |a| > 1):",
+      "imageURL": null,
+      "options": { "A": "(a − 1)⁻³", "B": "3/(a − 1)", "C": "3/(a³ − 1)", "D": "1/(a − 1)" },
+      "correctOption": "A", "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "The shortest distance between the ellipse x² + 2y² = 2 and the circle x² + y² − 3x − 2√2·y + 4 = 0 is:",
+      "imageURL": null,
+      "options": { "A": "(√3 + 1)/2", "B": "(√3 − 1)/2", "C": "√3 − 1", "D": "(√5 − 1)/2" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The number of ways of partitioning the set {a, b, c, d} into one or more non-empty subsets is:",
+      "imageURL": null,
+      "options": { "A": "14", "B": "15", "C": "16", "D": "17" },
+      "correctOption": "B", "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "If the system of linear equations x + 2ay + az = 0, x + 3by + bz = 0, x + 4cy + cz = 0 has a non-zero solution, then a, b, c are in:",
+      "imageURL": null,
+      "options": { "A": "AP", "B": "GP", "C": "HP", "D": "Satisfies a + 2b + 3c = 0" },
+      "correctOption": "C", "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "If f(x) = [x]^{x} + {x}^{[x]} + sin(πx), where [·] and {·} represent the greatest integer function and the fractional part function respectively, then f′(7/2) is equal to:",
+      "imageURL": null,
+      "options": { "A": "√3·ln3 + 1/4", "B": "√3·ln3 + 3/2", "C": "√3·ln3 + π + 3/4", "D": "√3·ln3 + 3/4" },
+      "correctOption": "D", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The locus of the foot of the perpendicular from the centre of the hyperbola xy = c² on a variable tangent is:",
+      "imageURL": null,
+      "options": {
+        "A": "(x² − y²)² = 4c²xy",
+        "B": "(x² + y²)² = 2c²xy",
+        "C": "(x² − y²)² = 2c²xy",
+        "D": "(x² + y²)² = 4c²xy"
+      },
+      "correctOption": "D", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If f(x) = (x − 1)⁴(x − 2)³(x − 3)², then the value of f‴(1) + 2f″(2) + 3f′(3) is:",
+      "imageURL": null,
+      "options": { "A": "0", "B": "1", "C": "2", "D": "6" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The area enclosed between the curves y = sin²x and y = cos²x in the interval 0 ≤ x ≤ π is:",
+      "imageURL": null,
+      "options": { "A": "2 sq. unit", "B": "1/2 sq. unit", "C": "1 sq. unit", "D": "4 sq. unit" },
+      "correctOption": "C", "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "The lengths of the major and minor axes of the ellipse 4(x − 2y + 1)² + 9(2x + y + 2)² = 180 are:",
+      "imageURL": null,
+      "options": { "A": "3, 2", "B": "9, 8", "C": "6, 4", "D": "10, 5" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The sum of all the coefficients of the terms in the expansion of (a + b + c + d)⁶ which contain a but not b is:",
+      "imageURL": null,
+      "options": { "A": "3⁶", "B": "2⁶", "C": "3⁶ − 2⁶", "D": "0" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let f : R → R be such that f(a) = 1 and f′(a) = 2. Then lim (x→0) [ f²(a + x) / f(a) ]^(1/x) is:",
+      "imageURL": null,
+      "options": { "A": "e²", "B": "e⁴", "C": "e⁻⁴", "D": "1/e" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If |f″(x)| ≤ 1 for all x ∈ R and f(0) = 0 = f′(0), then which of the following can be true?",
+      "imageURL": null,
+      "options": { "A": "f(1/3) = 1/5", "B": "f(−1/3) = 1/4", "C": "f(−3) = 1/3", "D": "f(1) = 7" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "∫ (3x² + 2x) dx / (x⁶ + 2x⁵ + x⁴ + 2x³ + 2x² + 5) is (where c is the constant of integration):",
+      "imageURL": null,
+      "options": {
+        "A": "tan⁻¹[(x² + x + 1)/2] + c",
+        "B": "(1/2) cot⁻¹[2/(x² + x + 1)] + c",
+        "C": "(1/2) tan⁻¹[(x³ + x² + 1)/2] + c",
+        "D": "cot⁻¹[(x² + x + 1)/2] + c"
+      },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The variable plane (2λ + 1)x + (3 − λ)y + z = 4 always passes through the line:",
+      "imageURL": null,
+      "options": {
+        "A": "x/0 = y/0 = (z − 4)/1",
+        "B": "x/1 = y/2 = (z − 4)/(−3)",
+        "C": "x/1 = y/1 = (z − 4)/(−7)",
+        "D": "x/1 = y/2 = (z − 4)/(−7)"
+      },
+      "correctOption": "D", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let R = {(1,3), (4,2), (2,4), (2,3), (3,1)} be a relation on the set A = {1, 2, 3, 4}. Then the relation R is:",
+      "imageURL": null,
+      "options": { "A": "A function", "B": "Not symmetric", "C": "Reflexive", "D": "Transitive" },
+      "correctOption": "B", "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "The statement (p → q) ∨ (q → p) is:",
+      "imageURL": null,
+      "options": {
+        "A": "Tautology",
+        "B": "Contradiction",
+        "C": "Neither tautology nor contradiction",
+        "D": "None of these"
+      },
+      "correctOption": "A", "subject": "maths", "difficulty": "medium"
+    },
+
+    {
+      "questionText": "The locus of the orthocentre of the triangle formed by three tangents of the parabola (4x − 3)² = −64(2y + 1) is y = λ. Then the value of |λ| is:",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "1.50",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If |z − 3| + |z + 3| = 10, then find the difference between the maximum and minimum values of |z|. (Refer to the image for the complete question.)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "1.00",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If f(x) = Π(i=1 to 3)(x − aᵢ) + Σ(i=1 to 3)(aᵢ − x), where aᵢ < aᵢ₊₁, then the number of distinct real roots of the equation f(x) = 0 is:",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "3.00",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "For two events A and B, P(A) = 0.30, P(B) = 0.25 and P(A ∩ B) = 0.20. If P(A′/B′) is λ, then the value of 300λ is:",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "40.00",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let matrix A be as shown in the image, where x, y, z ∈ N. If |adj(adj(adj(adj A)))| = 4⁸ × 5¹⁶, then the number of such (x, y, z) is:",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "36.00",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The number of points where f(x) = x² − |x² − 1| + 2||x| − 1| + 2|x| − 7 is non-differentiable is:",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "0.00",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let f(x) = 1 − x − x³. The number of negative integers which satisfy the inequality 1 − f(x) − f³(x) > f(1 − 5x) is:",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "1.00",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If the given expression equals (1/4) log λ, then the value of 50 + λ is: (Refer to the image for the expression.)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "51.80",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If a⃗, b⃗, c⃗, d⃗ are unit vectors such that a⃗·b⃗ = 1/2, c⃗·d⃗ = 1/2, and the angle between a⃗×b⃗ and c⃗×d⃗ is π/6, and the value of |[a⃗ b⃗ d⃗]c⃗ − [a⃗ b⃗ c⃗]d⃗| is k, then the value of 100k is:",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "37.50",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Suppose a solution of the differential equation (xy³ + x²y⁷) dy/dx = 1 satisfies the initial condition y(1/4) = 1. Then the value of |dy/dx| when y = −1 is:",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "3.20",
+      "subject": "maths", "difficulty": "hard"
+    }
+  ]
+}
