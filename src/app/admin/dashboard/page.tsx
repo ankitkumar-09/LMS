@@ -63,7 +63,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col relative overflow-hidden text-gray-900">
+    <div className="min-h-screen bg-gray-100 flex flex-col relative text-gray-900">
       {/* Modern Nav Bar */}
       <div className="relative z-10 px-8 py-4 flex items-center justify-between border-b border-gray-200 bg-header-gradient shadow-md">
         <div className="flex items-center gap-3">

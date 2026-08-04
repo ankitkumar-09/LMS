@@ -53,10 +53,12 @@ export default function ResultPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 relative overflow-hidden flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-50 relative flex flex-col items-center justify-center p-4">
       {/* Decorative Background Elements */}
-      <div className="absolute top-[10%] left-[10%] w-[40%] h-[40%] rounded-full bg-emerald-200/30 blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[10%] right-[10%] w-[30%] h-[30%] rounded-full bg-indigo-200/30 blur-[100px] pointer-events-none"></div>
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+        <div className="absolute top-[10%] left-[10%] w-[40%] h-[40%] rounded-full bg-emerald-200/30 blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-[10%] right-[10%] w-[30%] h-[30%] rounded-full bg-indigo-200/30 blur-[100px] pointer-events-none"></div>
+      </div>
 
       <div className="max-w-md w-full bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-10 text-center relative z-10 border border-slate-100 animate-slide-up">
         {/* Success Icon */}

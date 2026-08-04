@@ -1,0 +1,184 @@
+{
+  "title": "JEE Main 2025 — 28 Jan Evening — Physics",
+  "subject": "physics",
+  "durationMinutes": 60,
+  "showScoreToStudent": true,
+  "questions": [
+    {
+      "questionText": "A uniform magnetic field of 0.4 T acts perpendicular to a circular copper disc of radius 20 cm. The disc has a uniform angular velocity of 10π rad s⁻¹ about an axis through its centre and perpendicular to the disc. What is the potential difference developed between the axis of the disc and the rim? (π = 3.14)",
+      "imageURL": null,
+      "options": { "A": "0.0628 V", "B": "0.5024 V", "C": "0.2512 V", "D": "0.1256 V" },
+      "correctOption": "C", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A parallel plate capacitor of capacitance 1 µF is charged to a potential difference of 20 V. The distance between the plates is 1 mm. The energy density between the plates of the capacitor is:",
+      "imageURL": null,
+      "options": { "A": "1.8 × 10³ J/m³", "B": "2 × 10⁻⁴ J/m³", "C": "2 × 10² J/m³", "D": "1.8 × 10⁵ J/m³" },
+      "correctOption": "A", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "Match List-I with List-II.  List-I: (A) Angular Impulse, (B) Latent Heat, (C) Electrical resistivity, (D) Electromotive force.  List-II: (I) [M⁰L²T⁻²], (II) [ML²T⁻³A⁻¹], (III) [ML²T⁻¹], (IV) [ML³T⁻³A⁻²].  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(A)-(III), (B)-(I), (C)-(IV), (D)-(II)",
+        "B": "(A)-(I), (B)-(III), (C)-(IV), (D)-(II)",
+        "C": "(A)-(III), (B)-(I), (C)-(II), (D)-(IV)",
+        "D": "(A)-(II), (B)-(I), (C)-(IV), (D)-(III)"
+      },
+      "correctOption": "A", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "The ratio of vapour densities of two gases at the same temperature is 4/25. The ratio of their r.m.s. velocities will be:",
+      "imageURL": null,
+      "options": { "A": "25/4", "B": "2/5", "C": "5/2", "D": "4/25" },
+      "correctOption": "C", "subject": "physics", "difficulty": "easy"
+    },
+    {
+      "questionText": "The kinetic energy of translation of the molecules in 50 g of CO₂ gas at 17 °C is:",
+      "imageURL": null,
+      "options": { "A": "3986.3 J", "B": "4102.8 J", "C": "4205.5 J", "D": "3582.7 J" },
+      "correctOption": "B", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "In a long glass tube, a mixture of two liquids A and B with refractive indices 1.3 and 1.4 respectively forms a convex refracting meniscus towards A. If an object placed 13 cm from the vertex of the meniscus in A forms an image with magnification −2, then the radius of curvature of the meniscus is:",
+      "imageURL": null,
+      "options": { "A": "1 cm", "B": "1/3 cm", "C": "2/3 cm", "D": "4/3 cm" },
+      "correctOption": "C", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "The frequency of revolution of the electron in Bohr's orbit varies with n, the principal quantum number, as:",
+      "imageURL": null,
+      "options": { "A": "1/n", "B": "1/n³", "C": "1/n⁴", "D": "1/n²" },
+      "correctOption": "B", "subject": "physics", "difficulty": "easy"
+    },
+    {
+      "questionText": "Which of the following phenomena canNOT be explained by the wave theory of light?",
+      "imageURL": null,
+      "options": { "A": "Reflection of light", "B": "Diffraction of light", "C": "Refraction of light", "D": "Compton effect" },
+      "correctOption": "D", "subject": "physics", "difficulty": "easy"
+    },
+    {
+      "questionText": "The velocity–time graph of an object moving along a straight line is shown in the figure. What is the distance covered by the object between t = 0 and t = 4 s?",
+      "imageURL": null,
+      "options": { "A": "30 m", "B": "10 m", "C": "13 m", "D": "11 m" },
+      "correctOption": "A", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A bar magnet has total length 2l = 20 units and the field point P is at a distance d = 10 units from the centre of the magnet (see figure). If the relative uncertainty of the length measurement is 1%, then the uncertainty of the magnetic field at point P is:",
+      "imageURL": null,
+      "options": { "A": "10%", "B": "4%", "C": "3%", "D": "5%" },
+      "correctOption": "B", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "Earth has mass 8 times and radius 2 times that of a planet. If the escape velocity from the earth is 11.2 km/s, the escape velocity from the planet, in km/s, will be:",
+      "imageURL": null,
+      "options": { "A": "11.2", "B": "5.6", "C": "2.8", "D": "8.4" },
+      "correctOption": "B", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "Assertion (A): Knowing the initial position x₀ and initial momentum p₀ is enough to determine the position and momentum at any time t for simple harmonic motion with a given angular frequency ω.  Reason (R): The amplitude and phase can be expressed in terms of x₀ and p₀.  In the light of the above statements, choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "Both (A) and (R) are true but (R) is NOT the correct explanation of (A)",
+        "B": "(A) is false but (R) is true",
+        "C": "(A) is true but (R) is false",
+        "D": "Both (A) and (R) are true and (R) is the correct explanation of (A)"
+      },
+      "correctOption": "D", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A concave mirror produces an image of an object such that the distance between the object and the image is 20 cm. If the magnification of the image is −3, then the magnitude of the radius of curvature of the mirror is:",
+      "imageURL": null,
+      "options": { "A": "3.75 cm", "B": "30 cm", "C": "7.5 cm", "D": "15 cm" },
+      "correctOption": "D", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A body of mass 4 kg is placed on a plane at a point P having coordinates (3, 4) m. Under the action of force F = (2î + 3ĵ) N it moves to a new point Q having coordinates (6, 10) m in 4 s. The average power and instantaneous power at the end of 4 s are in the ratio of:",
+      "imageURL": null,
+      "options": { "A": "13 : 6", "B": "6 : 13", "C": "1 : 2", "D": "4 : 3" },
+      "correctOption": "B", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "In the circuit shown, assuming the threshold voltage of the diode is negligibly small, the voltage V_AB is correctly represented by: (Refer to the image for the circuit and the four waveform options.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "D", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "An infinite wire has a circular bend of radius a and carries a current I as shown in the figure. The magnitude of the magnetic field at the origin O of the arc is given by:",
+      "imageURL": null,
+      "options": {
+        "A": "(μ₀I / 4πa)(π/2 + 1)",
+        "B": "(μ₀I / 4πa)(3π/2 + 1)",
+        "C": "(μ₀I / 2πa)(π/2 + 2)",
+        "D": "(μ₀I / 4πa)(3π/2 + 2)"
+      },
+      "correctOption": "B", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A uniform rod of mass 250 g and length 100 cm is balanced on a sharp edge at the 40 cm mark. A mass of 400 g is suspended at the 10 cm mark. To maintain the balance of the rod, the mass to be suspended at the 90 cm mark is:",
+      "imageURL": null,
+      "options": { "A": "300 g", "B": "190 g", "C": "200 g", "D": "290 g" },
+      "correctOption": "B", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A 400 g solid cube having an edge of length 10 cm floats in water. How much volume of the cube is outside the water? (Given: density of water = 1000 kg m⁻³)",
+      "imageURL": null,
+      "options": { "A": "1400 cm³", "B": "4000 cm³", "C": "400 cm³", "D": "600 cm³" },
+      "correctOption": "D", "subject": "physics", "difficulty": "easy"
+    },
+    {
+      "questionText": "The magnetic field of an E.M. wave is given by B = [(√3/2)î + (1/2)ĵ] · 30 sin[ω(t − z/c)] (S.I. units). The corresponding electric field in S.I. units is:",
+      "imageURL": null,
+      "options": {
+        "A": "E = [(1/2)î − (√3/2)ĵ] · 30c sin[ω(t − z/c)]",
+        "B": "E = [(√3/4)î + (1/4)ĵ] · 30c cos[ω(t − z/c)]",
+        "C": "E = [(1/2)î + (√3/2)ĵ] · 30c sin[ω(t + z/c)]",
+        "D": "E = [(√3/2)î − (1/2)ĵ] · 30c sin[ω(t + z/c)]"
+      },
+      "correctOption": "A", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A balloon and its contents having mass M are moving up with an acceleration a. The mass that must be released from the contents so that the balloon starts moving up with acceleration 3a will be (take g as acceleration due to gravity):",
+      "imageURL": null,
+      "options": { "A": "3Ma/(2a − g)", "B": "3Ma/(2a + g)", "C": "2Ma/(3a + g)", "D": "2Ma/(3a − g)" },
+      "correctOption": "C", "subject": "physics", "difficulty": "hard"
+    },
+
+    {
+      "questionText": "A conducting bar moves on two conducting rails as shown in the figure. A constant magnetic field B exists into the page. The bar starts to move from the vertex at time t = 0 with a constant velocity. If the induced EMF is E ∝ tⁿ, then the value of n is ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "1",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "An electric dipole of dipole moment 6 × 10⁻⁶ C·m is placed in a uniform electric field of magnitude 10⁶ V/m. Initially the dipole moment is parallel to the electric field. The work that needs to be done on the dipole to make its dipole moment opposite to the field will be ____ J.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "12",
+      "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "The volume contraction of a solid copper cube of edge length 10 cm, when subjected to a hydraulic pressure of 7 × 10⁶ Pa, would be ____ mm³. (Given bulk modulus of copper = 1.4 × 10¹¹ N m⁻²)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "50",
+      "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "The value of current I in the electrical circuit given below, when the potential at A is equal to the potential at B, will be ____ A. (Refer to the image for the circuit.)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "2",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A thin transparent film with refractive index 1.4 is held on a circular ring of radius 1.8 cm. The fluid in the film evaporates such that transmission through the film at wavelength 560 nm goes to a minimum every 12 seconds. Assuming the film is flat on its two sides, the rate of evaporation is ____ × 10⁻¹³ π m³/s.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "54",
+      "subject": "physics", "difficulty": "hard"
+    }
+  ]
+}

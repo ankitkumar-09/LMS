@@ -72,9 +72,12 @@ export default function TestManagerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col relative overflow-hidden">
-      {/* Decorative Background */}
-      <div className="absolute top-0 left-0 w-full h-64 bg-slate-900 -skew-y-2 origin-top-left z-0 shadow-lg"></div>
+    <div className="min-h-screen bg-slate-50 flex flex-col relative">
+      {/* Decorative banner. No overflow-hidden on the page root — that clips the
+          page and makes it unscrollable; the skew is clipped by this wrapper. */}
+      <div className="absolute top-0 left-0 w-full h-64 overflow-hidden pointer-events-none z-0">
+        <div className="w-full h-64 bg-slate-900 -skew-y-2 origin-top-left shadow-lg"></div>
+      </div>
 
       {/* Nav */}
       <div className="relative z-10 px-8 py-5 flex items-center justify-between border-b border-white/10 bg-slate-900/50 backdrop-blur-md">

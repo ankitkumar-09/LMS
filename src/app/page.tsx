@@ -23,6 +23,14 @@ const WATERMARK_TILE =
     </svg>`
   );
 
+/** One column per subject, so papers are grouped rather than mixed together. */
+const SUBJECT_COLUMNS = [
+  { key: 'physics',   label: 'Physics',     accent: 'bg-blue-50 text-blue-800',     dot: 'bg-blue-500' },
+  { key: 'chemistry', label: 'Chemistry',   accent: 'bg-violet-50 text-violet-800', dot: 'bg-violet-500' },
+  { key: 'maths',     label: 'Mathematics', accent: 'bg-amber-50 text-amber-800',   dot: 'bg-amber-500' },
+  { key: 'other',     label: 'Combined',    accent: 'bg-emerald-50 text-emerald-800', dot: 'bg-emerald-500' },
+] as const;
+
 /** Flat stamp colours. Picked per test but stable, so it never flickers on re-render. */
 const STAMP_COLORS = ["#eab308", "#dc2626", "#2563eb", "#16a34a"] as const;
 
@@ -119,15 +127,18 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 relative overflow-hidden flex flex-col items-center justify-center p-4 sm:p-8">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-200/50 blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-200/40 blur-[100px] pointer-events-none"></div>
+    <div className="min-h-screen bg-slate-50 relative flex flex-col items-center justify-center p-4 sm:p-8">
+      {/* Decoration sits in a fixed, clipped layer so it never affects page scrolling.
+          Putting overflow-hidden on the page root instead would make it unscrollable. */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-200/50 blur-[100px]"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-200/40 blur-[100px]"></div>
+      </div>
 
       {/* Watermark — decorative only, never intercepts clicks or gets read aloud */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-0 pointer-events-none select-none"
+        className="fixed inset-0 z-0 pointer-events-none select-none"
         style={{
           backgroundImage: `url("${WATERMARK_TILE}")`,
           backgroundRepeat: "repeat",
@@ -135,7 +146,7 @@ export default function LandingPage() {
         }}
       />
 
-      <div className="w-full max-w-5xl z-10 animate-slide-up">
+      <div className="w-full max-w-7xl z-10 animate-slide-up">
         {/* Hero Section */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white shadow-xl shadow-indigo-100 mb-6 text-indigo-600">
@@ -159,14 +170,37 @@ export default function LandingPage() {
               <p className="text-slate-500 font-medium">Loading available tests...</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {tests.length === 0 ? (
-                <div className="col-span-full text-center py-12 bg-slate-50/50 rounded-2xl border-2 border-dashed border-slate-200">
-                  <span className="text-4xl mb-3 block">📭</span>
-                  <p className="text-slate-500 font-medium">No tests are currently available.</p>
-                </div>
-              ) : (
-                tests.map((test) => {
+            tests.length === 0 ? (
+              <div className="text-center py-12 bg-slate-50/50 rounded-2xl border-2 border-dashed border-slate-200">
+                <span className="text-4xl mb-3 block">📭</span>
+                <p className="text-slate-500 font-medium">No tests are currently available.</p>
+              </div>
+            ) : (
+            /* One column per subject so papers are visually segregated */
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+              {SUBJECT_COLUMNS.map(({ key, label, accent, dot }) => {
+                const columnTests = tests.filter(t =>
+                  key === 'other' ? !['physics', 'chemistry', 'maths'].includes(t.subject) : t.subject === key
+                );
+                if (key === 'other' && columnTests.length === 0) return null;
+
+                return (
+                  <div key={key} className="flex flex-col gap-4">
+                    {/* Column heading */}
+                    <div className={`flex items-center justify-between rounded-xl px-4 py-2.5 ${accent}`}>
+                      <div className="flex items-center gap-2">
+                        <span className={`w-2 h-2 rounded-full ${dot}`}></span>
+                        <h3 className="font-extrabold text-sm uppercase tracking-widest">{label}</h3>
+                      </div>
+                      <span className="text-xs font-bold opacity-70">{columnTests.length}</span>
+                    </div>
+
+                    {columnTests.length === 0 ? (
+                      <div className="rounded-2xl border-2 border-dashed border-slate-200 py-10 text-center">
+                        <p className="text-xs text-slate-400 font-medium">No {label.toLowerCase()} papers yet</p>
+                      </div>
+                    ) : (
+                      columnTests.map((test) => {
                   const isSubmitted = test.status === 'submitted';
                   const isSelected = selectedTest?.id === test.id;
                   const attempt = attempts[test.id];
@@ -289,9 +323,13 @@ export default function LandingPage() {
                       </div>
                     </div>
                   );
-                })
-              )}
+                      })
+                    )}
+                  </div>
+                );
+              })}
             </div>
+            )
           )}
         </div>
       </div>

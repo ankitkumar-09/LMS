@@ -39,9 +39,11 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f4f5f7] relative overflow-hidden flex items-center justify-center p-4">
-      <div className="absolute -top-32 -left-24 w-[38rem] h-[38rem] rounded-full bg-indigo-200/40 blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-32 -right-24 w-[32rem] h-[32rem] rounded-full bg-sky-200/40 blur-[120px] pointer-events-none" />
+    <div className="min-h-screen bg-[#f4f5f7] relative flex items-center justify-center p-4">
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+        <div className="absolute -top-32 -left-24 w-[38rem] h-[38rem] rounded-full bg-indigo-200/40 blur-[120px] pointer-events-none" />
+        <div className="absolute -bottom-32 -right-24 w-[32rem] h-[32rem] rounded-full bg-sky-200/40 blur-[120px] pointer-events-none" />
+      </div>
 
       <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 w-full max-w-sm relative z-10 animate-slide-up">
         <div className="text-center mb-7">

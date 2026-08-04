@@ -1,0 +1,174 @@
+{
+  "title": "JEE Main 2025 — 28 Jan Evening — Mathematics",
+  "subject": "maths",
+  "durationMinutes": 60,
+  "showScoreToStudent": true,
+  "questions": [
+    {
+      "questionText": "Bag B₁ contains 6 white and 4 blue balls, Bag B₂ contains 4 white and 6 blue balls, and Bag B₃ contains 5 white and 5 blue balls. One of the bags is selected at random and a ball is drawn from it. If the ball is white, then the probability that the ball was drawn from Bag B₂ is:",
+      "imageURL": null,
+      "options": { "A": "1/3", "B": "4/15", "C": "2/3", "D": "2/5" },
+      "correctOption": "B", "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "Let A, B, C be three points in the xy-plane whose position vectors are √3î + ĵ, î + √3ĵ and aî + (1 − a)ĵ respectively with respect to the origin O. If the distance of point C from the line bisecting the angle between vectors OA and OB is 9/√2, then the sum of all possible values of a is:",
+      "imageURL": null,
+      "options": { "A": "1", "B": "9/2", "C": "0", "D": "2" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If the components of a⃗ = αî + βĵ + γk̂ along and perpendicular to b⃗ = 3î + ĵ − k̂ are respectively (16/11)(3î + ĵ − k̂) and (1/11)(−4î − 5ĵ − 17k̂), then α² + β² + γ² is equal to:",
+      "imageURL": null,
+      "options": { "A": "23", "B": "18", "C": "16", "D": "26" },
+      "correctOption": "D", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If α + iβ and γ + iδ are the roots of x² − (3 − 2i)x − (2i − 2) = 0, where i = √(−1), then αγ + βδ is equal to:",
+      "imageURL": null,
+      "options": { "A": "6", "B": "2", "C": "−2", "D": "−6" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If the midpoint of a chord of the ellipse x²/9 + y²/4 = 1 is (√2, 4/3), and the length of the chord is (2/3)√α, then α is:",
+      "imageURL": null,
+      "options": { "A": "18", "B": "22", "C": "26", "D": "20" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let S be the set of all the words that can be formed by arranging all the letters of the word GARDEN. From the set S, one word is selected at random. The probability that the selected word will NOT have vowels in alphabetical order is:",
+      "imageURL": null,
+      "options": { "A": "1/4", "B": "2/3", "C": "1/3", "D": "1/2" },
+      "correctOption": "D", "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "Let f be a real-valued continuous function defined on the positive real axis such that g(x) = ∫₀ˣ t·f(t) dt. If g(x³) = x⁶ + x⁷, then the value of Σ(r = 1 to 15) f(r³) is:",
+      "imageURL": null,
+      "options": { "A": "320", "B": "340", "C": "270", "D": "310" },
+      "correctOption": "D", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The square of the distance of the point (15/7, 32/7, 7) from the line (x + 1)/3 = (y + 3)/5 = (z + 5)/7 in the direction of the vector î + 4ĵ + 7k̂ is:",
+      "imageURL": null,
+      "options": { "A": "54", "B": "41", "C": "66", "D": "44" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The area of the region bounded by the curves x(1 + y²) = 1 and y² = 2x is:",
+      "imageURL": null,
+      "options": { "A": "2(π/2 − 1/3)", "B": "π/4 − 1/3", "C": "π/2 − 1/3", "D": "(1/2)(π/2 − 1/3)" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let A = [[1, −2], [−2, 1]] scaled as given, and P = [[cos θ, −sin θ], [sin θ, cos θ]], θ > 0. If B = PAPᵀ, C = PᵀB¹⁰P and the sum of the diagonal elements of C is m/n, where gcd(m, n) = 1, then m + n is: (Refer to the image for the exact matrices.)",
+      "imageURL": null,
+      "options": { "A": "65", "B": "127", "C": "258", "D": "2049" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If f(x) = ∫ dx / [x^(1/4)(1 + x^(1/4))] and f(0) = −6, then f(1) is equal to:",
+      "imageURL": null,
+      "options": { "A": "logₑ2 + 2", "B": "4(logₑ2 − 2)", "C": "2 − logₑ2", "D": "4(logₑ2 + 2)" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let f : R → R be a twice differentiable function such that f(2) = 1. If F(x) = x·f(x) for all x ∈ R, ∫₀² x·F′(x) dx = 6 and ∫₀² x²·F″(x) dx = 40, then F′(2) + ∫₀² F(x) dx is equal to:",
+      "imageURL": null,
+      "options": { "A": "11", "B": "15", "C": "9", "D": "13" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "For positive integers n, if 4aₙ = (n² + 5n + 6) and Sₙ = Σ(k = 1 to n) 1/aₖ, then the value of 507·S₂₀₂₅ is:",
+      "imageURL": null,
+      "options": { "A": "540", "B": "1350", "C": "675", "D": "135" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let f : [0, 3] → A be defined by f(x) = 2x³ − 15x² + 36x + 7 and g : [0, ∞) → B be defined by g(x) = x²⁰²⁵/(x²⁰²⁵ + 1). If both functions are onto and S = {x ∈ Z : x ∈ A or x ∈ B}, then n(S) is equal to:",
+      "imageURL": null,
+      "options": { "A": "30", "B": "36", "C": "29", "D": "31" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let [x] denote the greatest integer less than or equal to x. Then the domain of f(x) = sec⁻¹(2[x] + 1) is:",
+      "imageURL": null,
+      "options": {
+        "A": "(−∞, −1] ∪ [0, ∞)",
+        "B": "(−∞, ∞)",
+        "C": "(−∞, −1] ∪ [1, ∞)",
+        "D": "(−∞, ∞) − {0}"
+      },
+      "correctOption": "B", "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "If Σ(r = 1 to 13) 1 / [sin(π/4 + (r − 1)π/6) · sin(π/4 + rπ/6)] = a√3 + b, where a, b ∈ Z, then a² + b² is equal to:",
+      "imageURL": null,
+      "options": { "A": "10", "B": "2", "C": "8", "D": "4" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Two equal sides of an isosceles triangle are along −x + 2y = 4 and x + y = 4. If m is the slope of its third side, then the sum of all possible distinct values of m is:",
+      "imageURL": null,
+      "options": { "A": "−6", "B": "12", "C": "6", "D": "−2√10" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let the coefficients of three consecutive terms Tᵣ, Tᵣ₊₁ and Tᵣ₊₂ in the binomial expansion of (a + b)¹² be in a G.P., and let p be the number of all possible values of r. Let q be the sum of all rational terms in the binomial expansion of (⁴√3 + ³√4)¹². Then p + q is equal to:",
+      "imageURL": null,
+      "options": { "A": "283", "B": "295", "C": "287", "D": "299" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If A and B are the points of intersection of the circle x² + y² − 8x = 0 and the hyperbola x²/9 − y²/4 = 1, and a point P moves on the line 2x − 3y + 4 = 0, then the centroid of ΔPAB lies on the line:",
+      "imageURL": null,
+      "options": {
+        "A": "4x − 9y = 12",
+        "B": "x + 9y = 36",
+        "C": "9x − 9y = 32",
+        "D": "6x − 9y = 20"
+      },
+      "correctOption": "D", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let f : R − {0} → (−∞, 1) be a polynomial of degree 2 satisfying f(x)·f(1/x) = f(x) + f(1/x). If f(K) = −2K, then the sum of squares of all possible values of K is:",
+      "imageURL": null,
+      "options": { "A": "1", "B": "6", "C": "7", "D": "9" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+
+    {
+      "questionText": "The number of natural numbers between 212 and 999 such that the sum of their digits is 15, is ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "64",
+      "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "Let f(x) = lim(n→∞) Σ(r = 0 to n) [ (tan(x/2^(r+1)) + tan³(x/2^(r+1))) / (1 − tan²(x/2^(r+1))) ]. Then lim(x→0) (eˣ − e^f(x)) / (x − f(x)) is equal to ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "1",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The interior angles of a polygon with n sides are in an A.P. with common difference 6°. If the largest interior angle of the polygon is 219°, then n is equal to ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "20",
+      "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "Let A and B be the two points of intersection of the line y + 5 = 0 and the mirror image of the parabola y² = 4x with respect to the line x + y + 4 = 0. If d denotes the distance between A and B, and a denotes the area of ΔSAB where S is the focus of the parabola y² = 4x, then the value of (a + d) is ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "14",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If y = y(x) is the solution of the differential equation √(4 − x²) · dy/dx = [sin⁻¹(x/2)]² − y·sin⁻¹(x/2), −2 ≤ x ≤ 2, with y(2) = (π² − 8)/4, then y²(0) is equal to ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "4",
+      "subject": "maths", "difficulty": "hard"
+    }
+  ]
+}

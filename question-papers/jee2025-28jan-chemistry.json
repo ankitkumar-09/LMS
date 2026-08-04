@@ -1,0 +1,229 @@
+{
+  "title": "JEE Main 2025 — 28 Jan Evening — Chemistry",
+  "subject": "chemistry",
+  "durationMinutes": 60,
+  "showScoreToStudent": true,
+  "questions": [
+    {
+      "questionText": "Consider the elementary reaction A(g) + B(g) → C(g) + D(g). If the volume of the reaction mixture is suddenly reduced to 1/3 of its initial volume, the reaction rate will become x times the original reaction rate. The value of x is:",
+      "imageURL": null,
+      "options": { "A": "1/9", "B": "9", "C": "1/3", "D": "3" },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "The amphoteric oxide among V₂O₃, V₂O₄ and V₂O₅ upon reaction with alkali leads to the formation of an oxide anion. The oxidation state of V in the oxide anion is:",
+      "imageURL": null,
+      "options": { "A": "+3", "B": "+7", "C": "+5", "D": "+4" },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Match List-I with List-II.  List-I (Saccharides): (A) Sucrose, (B) Maltose, (C) Lactose, (D) Amylopectin.  List-II (Glycosidic linkages found): (I) α1–4, (II) α1–4 and α1–6, (III) α1–β2, (IV) β1–4.  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(A)-(III), (B)-(I), (C)-(IV), (D)-(II)",
+        "B": "(A)-(IV), (B)-(II), (C)-(I), (D)-(III)",
+        "C": "(A)-(II), (B)-(IV), (C)-(III), (D)-(I)",
+        "D": "(A)-(I), (B)-(II), (C)-(III), (D)-(IV)"
+      },
+      "correctOption": "A", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Identify products [A], [B] and [C] in the following reaction sequence: CH₃–C≡CH --Pd/C, H₂--> [A] --(i) O₃; (ii) Zn, H₂O--> [B] + [C]",
+      "imageURL": null,
+      "options": {
+        "A": "[A]: CH₃–CH=CH₂, [B]: CH₃CHO, [C]: HCHO",
+        "B": "[A]: CH₂=CH₂, [B]: CH₃–CO–CH₃, [C]: HCHO",
+        "C": "[A]: CH₃–CH=CH₂, [B]: CH₃CHO, [C]: CH₃CH₂OH",
+        "D": "[A]: CH₃CH₂CH₃, [B]: CH₃CHO, [C]: HCHO"
+      },
+      "correctOption": "A", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Arrange the following in increasing order of solubility product: Ca(OH)₂, AgBr, PbS, HgS.",
+      "imageURL": null,
+      "options": {
+        "A": "PbS < HgS < Ca(OH)₂ < AgBr",
+        "B": "HgS < PbS < AgBr < Ca(OH)₂",
+        "C": "Ca(OH)₂ < AgBr < HgS < PbS",
+        "D": "HgS < AgBr < PbS < Ca(OH)₂"
+      },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "The purification method based on the following physical transformation is:  Solid (X) --Heat--> Vapour (X) --Cool--> Solid (X)",
+      "imageURL": null,
+      "options": { "A": "Sublimation", "B": "Distillation", "C": "Crystallization", "D": "Extraction" },
+      "correctOption": "A", "subject": "chemistry", "difficulty": "easy"
+    },
+    {
+      "questionText": "Identify the correct conversions during acidic hydrolysis:  (A) starch gives galactose.  (B) cane sugar gives equal amounts of glucose and fructose.  (C) milk sugar gives glucose and galactose.  (D) amylopectin gives glucose and fructose.  (E) amylose gives only glucose.  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(C), (D) and (E) only",
+        "B": "(A), (B) and (C) only",
+        "C": "(B), (C) and (E) only",
+        "D": "(B), (C) and (D) only"
+      },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "An ideal gas undergoes a cyclic transformation starting from point A and returning to the same point by tracing the path A → B → C → D → A, as shown in the three p–V cases in the figure. Choose the correct option regarding ΔU.",
+      "imageURL": null,
+      "options": {
+        "A": "ΔU(Case-III) > ΔU(Case-II) > ΔU(Case-I)",
+        "B": "ΔU(Case-I) > ΔU(Case-II) > ΔU(Case-III)",
+        "C": "ΔU(Case-I) > ΔU(Case-III) > ΔU(Case-II)",
+        "D": "ΔU(Case-I) = ΔU(Case-II) = ΔU(Case-III)"
+      },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "The product B formed in the following reaction sequence is: (Refer to the image for the reaction scheme and the four structural options.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Concentrated nitric acid is labelled as 75% by mass. The volume in mL of the solution which contains 30 g of nitric acid is ____. (Given: density of the nitric acid solution is 1.25 g/mL)",
+      "imageURL": null,
+      "options": { "A": "45", "B": "55", "C": "32", "D": "40" },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Match List-I with List-II.  List-I (Complex): (A) [CoF₆]³⁻, (B) [NiCl₄]²⁻, (C) [Co(NH₃)₆]³⁺, (D) [Ni(CN)₄]²⁻.  List-II (Hybridisation of central metal ion): (I) d²sp³, (II) sp³, (III) sp³d², (IV) dsp².  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(A)-(I), (B)-(IV), (C)-(III), (D)-(II)",
+        "B": "(A)-(III), (B)-(II), (C)-(I), (D)-(IV)",
+        "C": "(A)-(I), (B)-(II), (C)-(III), (D)-(IV)",
+        "D": "(A)-(III), (B)-(IV), (C)-(I), (D)-(II)"
+      },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "The total number of compounds from the set below which, when treated with hot KMnO₄, give benzoic acid is: (Refer to the image for the seven structures.)",
+      "imageURL": null,
+      "options": { "A": "3", "B": "4", "C": "6", "D": "5" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "The major product of the following reaction is: (a dibromide treated with excess KOH/EtOH under heat — refer to the image for the structure.)",
+      "imageURL": null,
+      "options": {
+        "A": "6-Phenylhepta-2,4-diene",
+        "B": "2-Phenylhepta-2,5-diene",
+        "C": "6-Phenylhepta-3,5-diene",
+        "D": "2-Phenylhepta-2,4-diene"
+      },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Statement (I): According to the Law of Octaves, the elements were arranged in increasing order of their atomic number.  Statement (II): Meyer observed a periodically repeated pattern upon plotting physical properties of certain elements against their respective atomic numbers.  In the light of the above statements, choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "Statement I is false but Statement II is true",
+        "B": "Both Statement I and Statement II are true",
+        "C": "Statement I is true but Statement II is false",
+        "D": "Both Statement I and Statement II are false"
+      },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "For bacterial growth in a cell culture, the growth law is very similar to the law of radioactive decay. Which of the following graphs is most suitable to represent bacterial colony growth? (Refer to the image for the four graphs.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Which of the following is/are NOT correct with respect to the energy of atomic orbitals of the hydrogen atom?  (A) 1s < 2p < 3d < 4s  (B) 1s < 2s = 2p < 3s = 3p  (C) 1s < 2s < 2p < 3s < 3p  (D) 1s < 2s < 4s < 3d  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(B) and (D) only",
+        "B": "(A) and (C) only",
+        "C": "(C) and (D) only",
+        "D": "(A) and (B) only"
+      },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "[BONUS — NTA awarded marks to all candidates] Assume a living cell with 0.9% (w/w) glucose solution (aqueous). This cell is immersed in another solution having equal mole fraction of glucose and water. (Consider the data up to the first decimal place only.) The cell will:",
+      "imageURL": null,
+      "options": {
+        "A": "Shrink since solution is 0.5% (w/w)",
+        "B": "Shrink since solution is 0.45% (w/w) as a result of association of glucose molecules (due to hydrogen bonding)",
+        "C": "Swell up since solution is 1% (w/w)",
+        "D": "Show no change in volume since solution is 0.9% (w/w)"
+      },
+      "correctOption": "A", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Identify the correct statements:  (A) Primary amines do not give diazonium salts when treated with NaNO₂ in acidic condition.  (B) Aliphatic and aromatic primary amines on heating with CHCl₃ and ethanolic KOH form carbylamines.  (C) Secondary and tertiary amines also give the carbylamine test.  (D) Benzenesulfonyl chloride is known as Hinsberg's reagent.  (E) Tertiary amines react with benzenesulfonyl chloride very easily.  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(B) and (D) only",
+        "B": "(A) and (B) only",
+        "C": "(D) and (E) only",
+        "D": "(B) and (C) only"
+      },
+      "correctOption": "A", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Statement (I): The two given structures are isomeric compounds.  Statement (II): The two given amines are functional group isomers.  In the light of the above statements, choose the correct answer. (Refer to the image for the structures.)",
+      "imageURL": null,
+      "options": {
+        "A": "Both Statement I and Statement II are false",
+        "B": "Both Statement I and Statement II are true",
+        "C": "Statement I is true but Statement II is false",
+        "D": "Statement I is false but Statement II is true"
+      },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Identify the inorganic sulphides that are yellow in colour:  (A) (NH₄)₂S  (B) PbS  (C) CuS  (D) As₂S₃  (E) As₂S₅.  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(A) and (C) only",
+        "B": "(A), (D) and (E) only",
+        "C": "(A) and (B) only",
+        "D": "(D) and (E) only"
+      },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "medium"
+    },
+
+    {
+      "questionText": "The spin-only magnetic moment (µ) value in B.M. of the compound with the strongest oxidising power among Mn₂O₃, TiO₂ and VO is ____ B.M. (Nearest integer)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "5",
+      "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Consider the following data:  Heat of formation of CO₂(g) = −393.5 kJ mol⁻¹;  Heat of formation of H₂O(l) = −286.0 kJ mol⁻¹;  Heat of combustion of benzene = −3267.0 kJ mol⁻¹.  The heat of formation of benzene is ____ kJ mol⁻¹. (Nearest integer)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "48",
+      "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Electrolysis of 600 mL of aqueous NaCl solution for 5 minutes changes the pH of the solution to 12. The current in amperes used for the given electrolysis is ____. (Nearest integer)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "2",
+      "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "A group 15 element forms a dπ–dπ bond with transition metals. It also forms a hydride which is the strongest base among the hydrides of other group members that form dπ–dπ bonds. The atomic number of the element is ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "15",
+      "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "The total number of molecules/species from the following which will be paramagnetic is ____:  O₂, O₂⁺, O₂⁻, NO, NO₂, CO, K₂[NiCl₄], [Co(NH₃)₆]Cl₃, K₂[Ni(CN)₄]",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "6",
+      "subject": "chemistry", "difficulty": "hard"
+    }
+  ]
+}
