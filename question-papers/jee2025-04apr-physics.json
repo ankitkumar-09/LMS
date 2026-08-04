@@ -1,0 +1,184 @@
+{
+  "title": "JEE Main 2025 — 4 April Evening — Physics",
+  "subject": "physics",
+  "durationMinutes": 60,
+  "showScoreToStudent": true,
+  "questions": [
+    {
+      "questionText": "A radioactive material P first decays into Q, and then Q decays into non-radioactive material R. Which of the following figures represents the time-dependent mass of P, Q and R? (Refer to the image for the four graphs.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "B", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "There are n identical electric bulbs, each designed to draw a power p independently from the mains supply. They are now joined in series across the mains supply. The total power drawn by the combination is:",
+      "imageURL": null,
+      "options": { "A": "np", "B": "p/n²", "C": "p/n", "D": "p" },
+      "correctOption": "C", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "Consider a rectangular sheet of solid material of length ℓ = 9 cm and width d = 4 cm. The coefficient of linear expansion is α = 3.1 × 10⁻⁵ K⁻¹ at room temperature and one atmospheric pressure. The mass of the sheet is m = 0.1 kg and the specific heat capacity Cᵥ = 900 J kg⁻¹K⁻¹. If the amount of heat supplied to the material is 8.1 × 10² J, then the change in area of the rectangular sheet is:",
+      "imageURL": null,
+      "options": { "A": "2.0 × 10⁻⁶ m²", "B": "3.0 × 10⁻⁷ m²", "C": "6.0 × 10⁻⁷ m²", "D": "4.0 × 10⁻⁷ m²" },
+      "correctOption": "A", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "Statement (I): The dimensions of Planck's constant and angular momentum are the same.  Statement (II): In Bohr's model, electrons revolve around the nucleus only in those orbits for which angular momentum is an integral multiple of Planck's constant.  In the light of the above statements, choose the most appropriate answer:",
+      "imageURL": null,
+      "options": {
+        "A": "Both Statement I and Statement II are correct",
+        "B": "Statement I is incorrect but Statement II is correct",
+        "C": "Statement I is correct but Statement II is incorrect",
+        "D": "Both Statement I and Statement II are incorrect"
+      },
+      "correctOption": "C", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A cylindrical rod of length 1 m and radius 4 cm is mounted vertically. It is subjected to a shear force of 10⁵ N at the top. Considering infinitesimally small displacement in the upper edge, the angular displacement θ of the rod axis from its original position would be: (shear modulus G = 10¹⁰ N/m²)",
+      "imageURL": null,
+      "options": { "A": "1/160π", "B": "1/4π", "C": "1/40π", "D": "1/2π" },
+      "correctOption": "A", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "From the combination of resistors with resistance values R₁ = R₂ = R₃ = 5 Ω and R₄ = 10 Ω, which of the following combinations is the best circuit to get an equivalent resistance of 6 Ω? (Refer to the image for the four circuits.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "A", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A metallic ring is uniformly charged as shown in the figure. AC and BD are two mutually perpendicular diameters. The electric field at O due to arc AB has magnitude E. What would be the magnitude of the electric field at O due to arc ABC?",
+      "imageURL": null,
+      "options": { "A": "2E", "B": "√2 E", "C": "E/2", "D": "Zero" },
+      "correctOption": "B", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "There are two vessels filled with an ideal gas, where the volume of one is double that of the other. The larger vessel contains gas at 8 kPa at 1000 K while the smaller vessel contains gas at 7 kPa at 500 K. If the vessels are connected by a thin tube allowing the gas to flow, and the temperature of both vessels is maintained at 600 K, then at steady state the pressure in the vessels will be (in kPa):",
+      "imageURL": null,
+      "options": { "A": "4.4", "B": "6", "C": "24", "D": "18" },
+      "correctOption": "B", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "An object is kept at rest at a distance of 3R above the earth's surface, where R is the earth's radius. The minimum speed with which it must be projected so that it does not return to earth is: (M = mass of earth, G = universal gravitational constant)",
+      "imageURL": null,
+      "options": { "A": "√(GM/2R)", "B": "√(GM/R)", "C": "√(3GM/R)", "D": "√(2GM/R)" },
+      "correctOption": "A", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "Three parallel plate capacitors C₁, C₂ and C₃, each of capacitance 5 µF, are connected as shown in the figure. The effective capacitance between points A and B, when the space between the parallel plates of capacitor C₁ is filled with a dielectric medium of dielectric constant 4, is:",
+      "imageURL": null,
+      "options": { "A": "22.5 µF", "B": "7.5 µF", "C": "9 µF", "D": "30 µF" },
+      "correctOption": "C", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "The displacement x versus time graph is shown in the figure.  (A) The average velocity during 0 to 3 s is 10 m/s.  (B) The average velocity during 3 to 5 s is 0 m/s.  (C) The instantaneous velocity at t = 2 s is 5 m/s.  (D) The average velocity during 5 to 7 s and the instantaneous velocity at t = 6.5 s are equal.  (E) The average velocity from t = 0 to t = 9 s is zero.  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(A), (D), (E) only",
+        "B": "(B), (C), (D) only",
+        "C": "(B), (D), (E) only",
+        "D": "(B), (C), (E) only"
+      },
+      "correctOption": "D", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "A wheel is rolling on a plane surface. The speed of a particle at the highest point of the rim is 8 m/s. The speed of the particle on the rim of the wheel at the same level as the centre of the wheel will be:",
+      "imageURL": null,
+      "options": { "A": "4√2 m/s", "B": "8 m/s", "C": "4 m/s", "D": "8√2 m/s" },
+      "correctOption": "A", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "For the determination of the refractive index of a glass slab, a travelling microscope is used whose main scale contains 300 equal divisions equal to 15 cm. The vernier scale attached to the microscope has 25 divisions equal to 24 divisions of the main scale. The least count (LC) of the travelling microscope, in cm, is:",
+      "imageURL": null,
+      "options": { "A": "0.001", "B": "0.002", "C": "0.0005", "D": "0.0025" },
+      "correctOption": "B", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A block of mass 25 kg is pulled along a horizontal surface by a force at an angle 45° with the horizontal. The friction coefficient between the block and the surface is 0.25. The work done for a displacement of 5 m of the block is:",
+      "imageURL": null,
+      "options": { "A": "970 J", "B": "735 J", "C": "245 J", "D": "490 J" },
+      "correctOption": "C", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "Two polarisers P₁ and P₂ are placed such that the intensity of the transmitted light is zero. A third polariser P₃ is inserted between P₁ and P₂ at a particular angle, and the transmitted intensity of light passing through all three polarisers is maximum. The angle between polarisers P₂ and P₃ is:",
+      "imageURL": null,
+      "options": { "A": "π/4", "B": "π/6", "C": "π/8", "D": "π/3" },
+      "correctOption": "A", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "Consider an n-type semiconductor in which nₑ and n_h are the numbers of electrons and holes respectively.  (A) Holes are minority carriers.  (B) The dopant is a pentavalent atom.  (C) nₑ·n_h ≠ nᵢ².  (D) nₑ·n_h ≥ nᵢ².  (E) The holes are not generated due to the donors.  (where nᵢ is the number of electrons or holes in the semiconductor in its intrinsic form.)  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(A), (C), (D) only",
+        "B": "(A), (C), (E) only",
+        "C": "(A), (B), (E) only",
+        "D": "(A), (B), (C) only"
+      },
+      "correctOption": "C", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "Match List-I with List-II.  List-I: (A) Isobaric, (B) Isochoric, (C) Adiabatic, (D) Isothermal.  List-II: (I) ΔQ = ΔW, (II) ΔQ = ΔU, (III) ΔQ = zero, (IV) ΔQ = ΔU + PΔV.  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(A)-(IV), (B)-(III), (C)-(II), (D)-(I)",
+        "B": "(A)-(IV), (B)-(I), (C)-(III), (D)-(II)",
+        "C": "(A)-(IV), (B)-(II), (C)-(III), (D)-(I)",
+        "D": "(A)-(II), (B)-(IV), (C)-(III), (D)-(I)"
+      },
+      "correctOption": "C", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "The displacement of a wave is expressed as x(t) = 5 cos(628t + π/2) m. The wavelength of the wave when its velocity is 300 m/s is:",
+      "imageURL": null,
+      "options": { "A": "5 m", "B": "3 m", "C": "0.5 m", "D": "0.33 m" },
+      "correctOption": "B", "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A finite-size object is placed normal to the principal axis at a distance of 30 cm from a convex mirror of focal length 30 cm. A plane mirror is now placed in such a way that the images produced by both mirrors coincide with each other. The distance between the two mirrors is:",
+      "imageURL": null,
+      "options": { "A": "45 cm", "B": "7.5 cm", "C": "22.5 cm", "D": "15 cm" },
+      "correctOption": "B", "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "In an electromagnetic system, a quantity defined as the ratio of electric dipole moment to magnetic dipole moment has dimensions [Mᴾ Lᴼ Tᴿ Aˢ]. The values of P and Q are:",
+      "imageURL": null,
+      "options": { "A": "−1, 0", "B": "−1, 1", "C": "1, −1", "D": "0, −1" },
+      "correctOption": "D", "subject": "physics", "difficulty": "hard"
+    },
+
+    {
+      "questionText": "A particle of charge 1.6 µC and mass 16 µg is present in a strong magnetic field of 6.28 T. The particle is then fired perpendicular to the magnetic field. The time required for the particle to return to its original location for the first time is ____ s. (π = 3.14)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "0",
+      "subject": "physics", "difficulty": "medium"
+    },
+    {
+      "questionText": "A solid sphere of uniform density and radius R is rotating initially with constant angular velocity ω₁ about its diameter. After some time it starts losing mass at a uniform rate, with no change in its shape. The angular velocity of the sphere when its radius becomes R/2 is xω₁. The value of x is ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "32",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "If an optical medium possesses a relative permeability of 10/π and relative permittivity of 1/0.0885, then the velocity of light is greater in vacuum than in this medium by ____ times.  (µ₀ = 4π × 10⁻⁷ H/m, ε₀ = 8.85 × 10⁻¹² F/m, c = 3 × 10⁸ m/s)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "6",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "In a Young's double slit experiment, two slits are located 1.5 mm apart. The distance of the screen from the slits is 2 m and the wavelength of the source is 400 nm. If 20 maxima of the double slit pattern are contained within the central maximum of the single slit diffraction pattern, then the width of each slit is x × 10⁻³ cm, where x is ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "15",
+      "subject": "physics", "difficulty": "hard"
+    },
+    {
+      "questionText": "An inductor of self-inductance 1 H is connected in series with a resistor of 100π Ω and an AC supply of 100π volt, 50 Hz. The maximum current flowing in the circuit is ____ A.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "1",
+      "subject": "physics", "difficulty": "medium"
+    }
+  ]
+}

@@ -31,24 +31,13 @@ const SUBJECT_COLUMNS = [
   { key: 'other',     label: 'Combined',    accent: 'bg-emerald-50 text-emerald-800', dot: 'bg-emerald-500' },
 ] as const;
 
-/** Flat stamp colours. Picked per test but stable, so it never flickers on re-render. */
-const STAMP_COLORS = ["#eab308", "#dc2626", "#2563eb", "#16a34a"] as const;
-
-const stampColor = (id: string) => {
-  // FNV-1a plus an avalanche mix. A plain *31 hash correlates with the last
-  // character, which made almost every id land on the same colour.
-  let h = 2166136261 >>> 0;
-  for (let i = 0; i < id.length; i++) {
-    h ^= id.charCodeAt(i);
-    h = Math.imul(h, 16777619) >>> 0;
-  }
-  h ^= h >>> 16;
-  h = Math.imul(h, 2246822507) >>> 0;
-  h ^= h >>> 13;
-  h = Math.imul(h, 3266489909) >>> 0;
-  h = (h ^ (h >>> 16)) >>> 0;
-  return STAMP_COLORS[h % STAMP_COLORS.length];
-};
+/**
+ * One colour for "completed", always. Random per-test colours made the same state
+ * look like three different things, and green clashed with the green AVAILABLE
+ * badge. Slate reads as "done / no longer actionable" and leaves green to mean
+ * "you can take this now".
+ */
+const COMPLETED_STAMP = "#475569";
 
 export default function LandingPage() {
   const router = useRouter();
@@ -214,7 +203,7 @@ export default function LandingPage() {
                       onClick={() => handleTestSelect(test)}
                       className={`relative overflow-hidden rounded-2xl p-6 transition-all duration-300 ${
                         isSubmitted
-                          ? 'bg-emerald-50/40 border border-emerald-200 cursor-pointer hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-50'
+                          ? 'bg-slate-50 border border-slate-200 cursor-pointer hover:border-slate-300 hover:shadow-lg hover:shadow-slate-100'
                           : isSelected
                             ? 'bg-white border-2 border-indigo-500 shadow-xl shadow-indigo-100 transform -translate-y-1'
                             : 'bg-white border border-slate-200 hover:border-indigo-300 hover:shadow-lg hover:shadow-slate-100 cursor-pointer hover:-translate-y-1'
@@ -222,65 +211,87 @@ export default function LandingPage() {
                     >
                       {/* Status Indicator Bar */}
                       <div className={`absolute top-0 left-0 w-1 h-full ${
-                        isSubmitted ? 'bg-emerald-500' : test.status === 'in_progress' ? 'bg-amber-400' : 'bg-emerald-400'
+                        isSubmitted ? 'bg-slate-400' : test.status === 'in_progress' ? 'bg-amber-400' : 'bg-emerald-400'
                       }`}></div>
 
-                      {/* Completed stamp — one flat colour, no gradient */}
-                      {isSubmitted && (
-                        <div
-                          className="absolute top-5 right-[-38px] rotate-45 text-white text-[10px] font-black tracking-[0.2em] py-1.5 w-[150px] text-center shadow-sm pointer-events-none"
-                          style={{ backgroundColor: stampColor(test.id) }}
-                        >
-                          COMPLETED
-                        </div>
-                      )}
-
                       <div className="flex justify-between items-start mb-4 pl-2 gap-3">
-                        <h3 className={`font-bold text-xl ${isSubmitted ? 'text-slate-700' : 'text-slate-800'}`}>{test.title}</h3>
-                        <span className={`text-xs px-3 py-1 rounded-full font-bold uppercase tracking-widest ${
-                          test.subject === 'physics' ? 'bg-blue-50 text-blue-700' :
-                          test.subject === 'chemistry' ? 'bg-violet-50 text-violet-700' :
-                          test.subject === 'maths' ? 'bg-amber-50 text-amber-700' :
-                          'bg-emerald-50 text-emerald-700'
-                        }`}>
-                          {test.subject}
-                        </span>
+                        <h3 className={`font-bold text-xl ${isSubmitted ? 'text-slate-600' : 'text-slate-800'}`}>{test.title}</h3>
+
+                        {/* A completed card shows a single COMPLETED chip instead of the
+                            subject tag — the old diagonal ribbon sat on top of it. */}
+                        {isSubmitted ? (
+                          <span
+                            className="shrink-0 text-[10px] px-2.5 py-1 rounded-full font-black uppercase tracking-widest text-white flex items-center gap-1.5"
+                            style={{ backgroundColor: COMPLETED_STAMP }}
+                          >
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
+                            Completed
+                          </span>
+                        ) : (
+                          <span className={`shrink-0 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-widest ${
+                            test.subject === 'physics' ? 'bg-blue-50 text-blue-700' :
+                            test.subject === 'chemistry' ? 'bg-violet-50 text-violet-700' :
+                            test.subject === 'maths' ? 'bg-amber-50 text-amber-700' :
+                            'bg-emerald-50 text-emerald-700'
+                          }`}>
+                            {test.subject}
+                          </span>
+                        )}
                       </div>
 
                       {/* Marks scored */}
                       {showMarks && (
-                        <div className="ml-2 mb-4 rounded-xl bg-white border border-emerald-200 px-4 py-3">
-                          <div className="flex items-baseline justify-between gap-3">
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700">
-                              Marks scored
-                              {(attempt.attemptNumber ?? 1) > 1 && (
-                                <span className="ml-1.5 text-amber-700">
-                                  · retest #{attempt.attemptNumber}
-                                </span>
-                              )}
-                            </span>
-                            <span className="text-2xl font-black text-emerald-600 leading-none">
-                              {attempt.score}
-                              <span className="text-base font-bold text-slate-400"> / {maxScore}</span>
-                            </span>
-                          </div>
-                          <div className="mt-2.5 flex flex-wrap gap-x-3 gap-y-1 text-[11px] font-semibold">
-                            <span className="text-emerald-700">{attempt.correctCount} correct · +4</span>
-                            <span className="text-rose-600">{attempt.wrongCount} wrong · −1</span>
-                            <span className="text-slate-400">{attempt.unattemptedCount} skipped · 0</span>
+                        <div className="ml-2 mb-4 rounded-xl bg-white border border-slate-200 overflow-hidden">
+                          {/* Score — the one thing worth reading at a glance */}
+                          <div className="px-4 pt-3.5 pb-3">
+                            <div className="flex items-end justify-between gap-3">
+                              <div>
+                                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                                  Your score
+                                </div>
+                                {(attempt.attemptNumber ?? 1) > 1 && (
+                                  <div className="mt-1 inline-block text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
+                                    Retest #{attempt.attemptNumber}
+                                  </div>
+                                )}
+                              </div>
+                              <div className="text-3xl font-black text-slate-800 leading-none tabular-nums">
+                                {attempt.score}
+                                <span className="text-base font-bold text-slate-300"> / {maxScore}</span>
+                              </div>
+                            </div>
+
+                            {/* Proportion of correct / wrong / skipped */}
+                            <div className="mt-3 flex h-1.5 rounded-full overflow-hidden bg-slate-100">
+                              <div className="bg-emerald-500" style={{ width: `${(attempt.correctCount / test.totalQuestions) * 100}%` }} />
+                              <div className="bg-rose-400" style={{ width: `${(attempt.wrongCount / test.totalQuestions) * 100}%` }} />
+                              <div className="bg-slate-200" style={{ width: `${(attempt.unattemptedCount / test.totalQuestions) * 100}%` }} />
+                            </div>
+
+                            <div className="mt-2.5 grid grid-cols-3 gap-2 text-center">
+                              <div>
+                                <div className="text-sm font-black text-emerald-600 leading-none">{attempt.correctCount}</div>
+                                <div className="text-[10px] text-slate-400 font-semibold mt-0.5">Correct</div>
+                              </div>
+                              <div>
+                                <div className="text-sm font-black text-rose-500 leading-none">{attempt.wrongCount}</div>
+                                <div className="text-[10px] text-slate-400 font-semibold mt-0.5">Wrong</div>
+                              </div>
+                              <div>
+                                <div className="text-sm font-black text-slate-400 leading-none">{attempt.unattemptedCount}</div>
+                                <div className="text-[10px] text-slate-400 font-semibold mt-0.5">Skipped</div>
+                              </div>
+                            </div>
                           </div>
 
                           {(() => {
                             const taken = formatMoment(attempt.submittedAt);
                             if (!taken) return null;
                             return (
-                              <div className="mt-3 pt-3 border-t border-slate-100 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-slate-500">
-                                <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
+                              <div className="bg-slate-50 border-t border-slate-100 px-4 py-2 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[11px] text-slate-500">
                                 <span className="font-semibold text-slate-600">{taken.day}, {taken.date}</span>
-                                <span className="text-slate-400">at {taken.time}</span>
-                                <span className="text-slate-400">· took {formatElapsed(attempt.timeTaken)}</span>
+                                <span>· {taken.time}</span>
+                                <span>· {formatElapsed(attempt.timeTaken)}</span>
                               </div>
                             );
                           })()}
@@ -306,7 +317,7 @@ export default function LandingPage() {
                         </div>
                         <div>
                           {isSubmitted ? (
-                            <span className="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                            <span className="text-xs font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 px-3 py-1.5 rounded-full flex items-center gap-1.5">
                               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                               REVIEW ANSWERS
                             </span>

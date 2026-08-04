@@ -1,0 +1,174 @@
+{
+  "title": "JEE Main 2025 — 4 April Evening — Mathematics",
+  "subject": "maths",
+  "durationMinutes": 60,
+  "showScoreToStudent": true,
+  "questions": [
+    {
+      "questionText": "Let a > 0. If the function f(x) = 6x³ − 45ax² + 108a²x + 1 attains its local maximum and minimum values at the points x₁ and x₂ respectively such that x₁x₂ = 54, then a + x₁ + x₂ is equal to:",
+      "imageURL": null,
+      "options": { "A": "15", "B": "18", "C": "24", "D": "13" },
+      "correctOption": "B", "subject": "maths", "difficulty": "medium"
+    },
+    {
+      "questionText": "Let f be a differentiable function on R such that f(2) = 1 and f′(2) = 4. Let lim(x→0) (f(2 + x))^(3/x) = e^α. Then the number of times the curve y = 4x³ − 4x² − 4(α − 7)x − α meets the x-axis is:",
+      "imageURL": null,
+      "options": { "A": "2", "B": "1", "C": "0", "D": "3" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The sum of the infinite series cot⁻¹(7/4) + cot⁻¹(19/4) + cot⁻¹(39/4) + cot⁻¹(67/4) + … is:",
+      "imageURL": null,
+      "options": {
+        "A": "π/2 + tan⁻¹(1/2)",
+        "B": "π/2 − cot⁻¹(1/2)",
+        "C": "π/2 + cot⁻¹(1/2)",
+        "D": "π/2 − tan⁻¹(1/2)"
+      },
+      "correctOption": "D", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let A = {−3, −2, −1, 0, 1, 2, 3} and R be a relation on A defined by xRy if and only if 2x − y ∈ {0, 1}. Let l be the number of elements in R. Let m and n be the minimum number of elements required to be added to R to make it reflexive and symmetric respectively. Then l + m + n is equal to:",
+      "imageURL": null,
+      "options": { "A": "18", "B": "17", "C": "15", "D": "16" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let the product of ω₁ = (8 + i)sin θ + (7 + 4i)cos θ and ω₂ = (1 + 8i)sin θ + (4 + 7i)cos θ be α + iβ, where i = √(−1). Let p and q be the maximum and minimum values of α + β respectively. Then p + q is equal to:",
+      "imageURL": null,
+      "options": { "A": "140", "B": "130", "C": "160", "D": "150" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let the values of p, for which the shortest distance between the lines (x + 1)/3 = y/4 = z/5 and r⃗ = (pî + 2ĵ + k̂) + λ(2î + 3ĵ + 4k̂) is 1/√6, be a and b (a < b). Then the length of the latus rectum of the ellipse x²/a² + y²/b² = 1 is:",
+      "imageURL": null,
+      "options": { "A": "9", "B": "3/2", "C": "2/3", "D": "18" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The axis of a parabola is the line y = x, and its vertex and focus are in the first quadrant at distances 2 and 2√2 units from the origin respectively. If the point (1, k) lies on the parabola, then a possible value of k is:",
+      "imageURL": null,
+      "options": { "A": "4", "B": "9", "C": "3", "D": "8" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let the domains of the functions f(x) = log₄ log₃ log₇ (8 − log₂(x² + 4x + 5)) and g(x) = sin⁻¹[(7x + 10)/(x − 2)] be (α, β) and [γ, δ] respectively. Then α² + β² + γ² + δ² is equal to:",
+      "imageURL": null,
+      "options": { "A": "15", "B": "13", "C": "16", "D": "14" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "A line passing through the point A(−2, 0) touches the parabola P : y² = x − 2 at the point B in the first quadrant. The area of the region bounded by the line AB, the parabola P and the x-axis is:",
+      "imageURL": null,
+      "options": { "A": "7/3", "B": "2", "C": "8/3", "D": "3" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let the sum of the focal distances of the point P(4, 3) on the hyperbola H : x²/a² − y²/b² = 1 be 8√(5/3). If for H the length of the latus rectum is l and the product of the focal distances of the point P is m, then 9l² + 6m is equal to:",
+      "imageURL": null,
+      "options": { "A": "184", "B": "186", "C": "185", "D": "187" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let the matrix A = [[1,0,0],[1,0,1],[0,1,0]] satisfy Aⁿ = Aⁿ⁻² + A² − I for n ≥ 3. Then the sum of all the elements of A⁵⁰ is:",
+      "imageURL": null,
+      "options": { "A": "53", "B": "52", "C": "39", "D": "44" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If the sum of the first 20 terms of the series 4·1/(4 + 3·1² + 1⁴) + 4·2/(4 + 3·2² + 2⁴) + 4·3/(4 + 3·3² + 3⁴) + 4·4/(4 + 3·4² + 4⁴) + … is m/n, where m and n are coprime, then m + n is equal to:",
+      "imageURL": null,
+      "options": { "A": "423", "B": "420", "C": "421", "D": "422" },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If 1²·(¹⁵C₁) + 2²·(¹⁵C₂) + 3²·(¹⁵C₃) + … + 15²·(¹⁵C₁₅) = 2^m · 3^n · 5^k, where m, n, k ∈ N, then m + n + k is equal to:",
+      "imageURL": null,
+      "options": { "A": "19", "B": "21", "C": "18", "D": "20" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let, for two distinct values of p, the lines y = x + p touch the ellipse E : x²/4² + y²/3² = 1 at the points A and B. Let the line y = x intersect E at the points C and D. Then the area of the quadrilateral ABCD is equal to:",
+      "imageURL": null,
+      "options": { "A": "36", "B": "24", "C": "48", "D": "20" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Consider two sets A and B, each containing three numbers in A.P. Let the sum and product of the elements of A be 36 and p respectively, and the sum and product of the elements of B be 36 and q respectively. Let d and D be the common differences of the APs in A and B respectively such that D = d + 3, d > 0. If (p + q)/(p − q) = 19/5, then p − q is equal to:",
+      "imageURL": null,
+      "options": { "A": "600", "B": "450", "C": "630", "D": "540" },
+      "correctOption": "D", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If a curve y = y(x) passes through the point (1, π/2) and satisfies the differential equation (7x⁴ cot y − eˣ cosec y) dx/dy = x⁵, x ≥ 1, then at x = 2 the value of cos y is:",
+      "imageURL": null,
+      "options": {
+        "A": "(2e² − e)/64",
+        "B": "(2e² + e)/64",
+        "C": "(2e² − e)/128",
+        "D": "(2e² + e)/128"
+      },
+      "correctOption": "C", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "The centre of a circle C is at the centre of the ellipse E : x²/a² + y²/b² = 1, a > b. Let C pass through the foci F₁ and F₂ of E such that the circle C and the ellipse E intersect at four points. Let P be one of these four points. If the area of the triangle PF₁F₂ is 30 and the length of the major axis of E is 17, then the distance between the foci of E is:",
+      "imageURL": null,
+      "options": { "A": "26", "B": "13", "C": "12", "D": "13/2" },
+      "correctOption": "B", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let f(x) + 2f(1/x) = x² + 5 and 2g(x) − 3g(1/x) = x, x > 0. If α = ∫₁² f(x) dx and β = ∫₁² g(x) dx, then the value of 9α + β is:",
+      "imageURL": null,
+      "options": { "A": "1", "B": "0", "C": "10", "D": "11" },
+      "correctOption": "D", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let A be the point of intersection of the lines L₁ : (x − 7)/1 = (y − 5)/0 = (z − 3)/(−1) and L₂ : (x − 1)/3 = (y + 3)/4 = (z + 7)/5. Let B and C be points on the lines L₁ and L₂ respectively such that AB = AC = √15. Then the square of the area of the triangle ABC is:",
+      "imageURL": null,
+      "options": { "A": "54", "B": "63", "C": "57", "D": "60" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let the mean and the standard deviation of the observations 2, 3, 3, 4, 5, 7, a, b be 4 and 2 respectively. Then the mean deviation about the mode of these observations is:",
+      "imageURL": null,
+      "options": { "A": "1", "B": "3/4", "C": "2", "D": "1/2" },
+      "correctOption": "A", "subject": "maths", "difficulty": "hard"
+    },
+
+    {
+      "questionText": "If α is a root of the equation x² + x + 1 = 0 and Σ(k = 1 to n) (α^k + 1/α^k)² = 20, then n is equal to ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "11",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "If ∫ (1 + x² + x)¹⁰ / (1 + x² − x)⁹ dx = (1/m)[(1 + x² + x)ⁿ (1 + x² − x)] + C, where C is the constant of integration and m, n ∈ N, then m + n is equal to ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "379",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "A card from a pack of 52 cards is lost. From the remaining 51 cards, n cards are drawn and are found to be spades. If the probability of the lost card being a spade is 11/50, then n is equal to ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "2",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let m and n (m < n) be two 2-digit numbers. Then the total number of pairs (m, n) such that gcd(m, n) = 6 is ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "64",
+      "subject": "maths", "difficulty": "hard"
+    },
+    {
+      "questionText": "Let the three sides of a triangle ABC be given by the vectors 2î − ĵ + k̂, î − 3ĵ − 5k̂ and 3î − 4ĵ − 4k̂. Let G be the centroid of the triangle ABC. Then 6(|AG|² + |BG|² + |CG|²) is equal to ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "164",
+      "subject": "maths", "difficulty": "hard"
+    }
+  ]
+}

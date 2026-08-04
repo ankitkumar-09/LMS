@@ -1,0 +1,224 @@
+{
+  "title": "JEE Main 2025 — 4 April Evening — Chemistry",
+  "subject": "chemistry",
+  "durationMinutes": 60,
+  "showScoreToStudent": true,
+  "questions": [
+    {
+      "questionText": "The correct order of basicity for the molecules P, Q and R shown in the figure is:",
+      "imageURL": null,
+      "options": { "A": "P > Q > R", "B": "R > P > Q", "C": "Q > P > R", "D": "R > Q > P" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "The incorrect relationship in the following pairs, in relation to ionisation enthalpies, is:",
+      "imageURL": null,
+      "options": { "A": "Mn⁺ < Cr⁺", "B": "Mn⁺ < Mn²⁺", "C": "Fe²⁺ < Fe³⁺", "D": "Mn²⁺ < Fe²⁺" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Which among the following compounds give a yellow solid when reacted with NaOI/NaOH? (Refer to the image for structures A–E.)  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(B), (C) and (E) only",
+        "B": "(A) and (C) only",
+        "C": "(C) and (D) only",
+        "D": "(A), (C) and (D) only"
+      },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "A dipeptide X on complete hydrolysis gives y and z. y on treatment with aqueous HNO₂ produces lactic acid. z on heating gives the cyclic molecule shown in the figure. Based on this information, the dipeptide X is:",
+      "imageURL": null,
+      "options": { "A": "valine-glycine", "B": "alanine-glycine", "C": "valine-leucine", "D": "alanine-alanine" },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "In which pairs is the first ion more stable than the second? (Refer to the image for the carbocation pairs A–D.)  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(B) and (D) only",
+        "B": "(A) and (B) only",
+        "C": "(B) and (C) only",
+        "D": "(A) and (C) only"
+      },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Statement (I): Alcohols are formed when alkyl chlorides are treated with aqueous potassium hydroxide by elimination reaction.  Statement (II): In alcoholic potassium hydroxide, alkyl chlorides form alkenes by abstracting the hydrogen from the β-carbon.  In the light of the above statements, choose the most appropriate answer:",
+      "imageURL": null,
+      "options": {
+        "A": "Both Statement I and Statement II are incorrect",
+        "B": "Statement I is incorrect but Statement II is correct",
+        "C": "Statement I is correct but Statement II is incorrect",
+        "D": "Both Statement I and Statement II are correct"
+      },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Statement (I): The molal depression constant K_f is given by M₁RT_f² / ΔS_fus, where the symbols have their usual meaning.  Statement (II): K_f for benzene is less than K_f for water.  In the light of the above statements, choose the most appropriate answer:",
+      "imageURL": null,
+      "options": {
+        "A": "Statement I is incorrect but Statement II is correct",
+        "B": "Both Statement I and Statement II are incorrect",
+        "C": "Both Statement I and Statement II are correct",
+        "D": "Statement I is correct but Statement II is incorrect"
+      },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "The IUPAC name of the compound HC≡C–CH₂–CH(OH)–CH₂–CH=CH₂ is:",
+      "imageURL": null,
+      "options": {
+        "A": "4-Hydroxyhept-1-en-6-yne",
+        "B": "4-Hydroxyhept-6-en-1-yne",
+        "C": "Hept-6-en-1-yn-4-ol",
+        "D": "Hept-1-en-6-yn-4-ol"
+      },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Match List-I with List-II.  List-I (Separation of): (A) Aniline from aniline–water mixture, (B) Glycerol from spent-lye in soap industry, (C) Different fractions of crude oil in petroleum industry, (D) Chloroform–aniline mixture.  List-II (Separation technique): (I) Simple distillation, (II) Fractional distillation, (III) Distillation at reduced pressure, (IV) Steam distillation.  Choose the correct answer:",
+      "imageURL": null,
+      "options": {
+        "A": "(A)-(IV), (B)-(III), (C)-(II), (D)-(I)",
+        "B": "(A)-(I), (B)-(II), (C)-(III), (D)-(IV)",
+        "C": "(A)-(III), (B)-(IV), (C)-(I), (D)-(II)",
+        "D": "(A)-(II), (B)-(I), (C)-(IV), (D)-(III)"
+      },
+      "correctOption": "A", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "A toxic compound A when reacted with NaCN in aqueous acidic medium yields an edible cooking component and food preservative B. B is converted to C by diborane and can be used as an additive to petrol to reduce emission. C upon reaction with oleum at 140 °C yields an inhalable anaesthetic D. Identify A, B, C and D respectively:",
+      "imageURL": null,
+      "options": {
+        "A": "Methanol; formaldehyde; methyl chloride; chloroform",
+        "B": "Ethanol; acetonitrile; ethylamine; ethylene",
+        "C": "Methanol; acetic acid; ethanol; diethyl ether",
+        "D": "Acetaldehyde; 2-hydroxypropanoic acid; propanoic acid; dipropyl ether"
+      },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "The correct order of [FeF₆]³⁻, [CoF₆]³⁻, [Ni(CO)₄] and [Ni(CN)₄]²⁻ complex species based on the number of unpaired electrons present is:",
+      "imageURL": null,
+      "options": {
+        "A": "[FeF₆]³⁻ > [CoF₆]³⁻ > [Ni(CN)₄]²⁻ > [Ni(CO)₄]",
+        "B": "[Ni(CN)₄]²⁻ > [FeF₆]³⁻ > [CoF₆]³⁻ > [Ni(CO)₄]",
+        "C": "[CoF₆]³⁻ > [FeF₆]³⁻ > [Ni(CO)₄] > [Ni(CN)₄]²⁻",
+        "D": "[FeF₆]³⁻ > [CoF₆]³⁻ > [Ni(CN)₄]²⁻ = [Ni(CO)₄]"
+      },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Consider the given data:  (a) HCl(g) + 10H₂O(l) → HCl·10H₂O, ΔH = −69.01 kJ mol⁻¹;  (b) HCl(g) + 40H₂O(l) → HCl·40H₂O, ΔH = −72.79 kJ mol⁻¹.  Choose the correct statement:",
+      "imageURL": null,
+      "options": {
+        "A": "Dissolution of gas in water is an endothermic process",
+        "B": "The heat of solution depends on the amount of solvent",
+        "C": "The heat of dilution for HCl (HCl·10H₂O to HCl·40H₂O) is 3.78 kJ mol⁻¹",
+        "D": "The heat of formation of HCl solution is represented by both (a) and (b)"
+      },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Consider the ground state of the chromium atom (Z = 24). How many electrons have azimuthal quantum number l = 1 and l = 2 respectively?",
+      "imageURL": null,
+      "options": { "A": "12 and 4", "B": "16 and 4", "C": "12 and 5", "D": "16 and 5" },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Statement (I): The first ionisation enthalpy of group 14 elements is higher than the corresponding elements of group 13.  Statement (II): Melting points and boiling points of group 13 elements are in general much higher than those of the corresponding elements of group 14.  In the light of the above statements, choose the most appropriate answer:",
+      "imageURL": null,
+      "options": {
+        "A": "Statement I is correct but Statement II is incorrect",
+        "B": "Statement I is incorrect but Statement II is correct",
+        "C": "Both Statement I and Statement II are incorrect",
+        "D": "Both Statement I and Statement II are correct"
+      },
+      "correctOption": "A", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Consider the plots of log k versus 1/T for three different reactions (labelled 1, 2 and 3 in the figure). The correct order of activation energies of these reactions is:",
+      "imageURL": null,
+      "options": {
+        "A": "Ea₂ > Ea₁ > Ea₃",
+        "B": "Ea₁ > Ea₃ > Ea₂",
+        "C": "Ea₁ > Ea₂ > Ea₃",
+        "D": "Ea₃ > Ea₂ > Ea₁"
+      },
+      "correctOption": "A", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "X is the number of electrons in t₂g orbitals of the most stable complex ion among [Fe(NH₃)₆]³⁺, [FeCl₆]³⁻, [Fe(C₂O₄)₃]³⁻ and [Fe(H₂O)₆]³⁺. The nature of the oxide of vanadium of the type V₂Oₓ is:",
+      "imageURL": null,
+      "options": { "A": "Acidic", "B": "Neutral", "C": "Basic", "D": "Amphoteric" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "The elements of Group 13 with the highest and lowest first ionisation enthalpies are respectively:",
+      "imageURL": null,
+      "options": { "A": "B and Ga", "B": "B and Tl", "C": "Tl and B", "D": "B and In" },
+      "correctOption": "D", "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "Consider the molecule (X) shown in the figure. The structure of X is: (Refer to the image for the four structural options.)",
+      "imageURL": null,
+      "options": { "A": "A", "B": "B", "C": "C", "D": "D" },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "Statement (I): For ClF₃, all three possible structures I, II and III may be drawn as shown in the figure.  Statement (II): Structure III is most stable, as the orbitals having the lone pairs are axial, where the lp–bp repulsion is minimum.  In the light of the above statements, choose the most appropriate answer:",
+      "imageURL": null,
+      "options": {
+        "A": "Statement I is incorrect but Statement II is correct",
+        "B": "Statement I is correct but Statement II is incorrect",
+        "C": "Both Statement I and Statement II are correct",
+        "D": "Both Statement I and Statement II are incorrect"
+      },
+      "correctOption": "B", "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "The half-life of the zero order reaction A → product is 1 hour when the initial concentration of the reactant is 2.0 mol L⁻¹. The time required to decrease the concentration of A from 0.50 to 0.25 mol L⁻¹ is:",
+      "imageURL": null,
+      "options": { "A": "0.5 hour", "B": "4 hour", "C": "15 min", "D": "60 min" },
+      "correctOption": "C", "subject": "chemistry", "difficulty": "medium"
+    },
+
+    {
+      "questionText": "Sea water, which can be considered as a 6 molar (6 M) solution of NaCl, has a density of 2 g mL⁻¹. The concentration of dissolved oxygen (O₂) in sea water is 5.8 ppm. Then the concentration of dissolved oxygen (O₂) in sea water is x × 10⁻⁴ m. x = ____. (Nearest integer)  Given: Molar mass of NaCl is 58.5 g mol⁻¹, molar mass of O₂ is 32 g mol⁻¹.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "2",
+      "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "The amount of calcium oxide produced on heating 150 kg limestone (75% pure) is ____ kg. (Nearest integer)  Given: Molar masses (in g mol⁻¹) Ca = 40, O = 16, C = 12.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "63",
+      "subject": "chemistry", "difficulty": "medium"
+    },
+    {
+      "questionText": "A metal complex with formula MCl₄·3NH₃ is involved in sp³d² hybridisation. Upon reaction with excess AgNO₃ solution it gives x moles of AgCl. Consider x to be equal to the number of lone pairs of electrons present on the central atom of BrF₅. Then the number of geometrical isomers exhibited by the complex is ____.",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "2",
+      "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "The molar conductance of an infinitely dilute solution of ammonium chloride was found to be 185 S cm² mol⁻¹, and the ionic conductances of hydroxyl and chloride ions are 170 and 70 S cm² mol⁻¹ respectively. If the molar conductance of a 0.02 M solution of ammonium hydroxide is 85.5 S cm² mol⁻¹, its degree of dissociation is given by x × 10⁻¹. The value of x is ____. (Nearest integer)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "3",
+      "subject": "chemistry", "difficulty": "hard"
+    },
+    {
+      "questionText": "x mg of Mg(OH)₂ (molar mass = 58) is required to be dissolved in 1.0 L of water to produce a pH of 10.0 at 298 K. The value of x is ____ mg. (Nearest integer)  (Given: Mg(OH)₂ is assumed to dissociate completely in H₂O)",
+      "imageURL": null,
+      "questionType": "numerical",
+      "numericalAnswer": "3",
+      "subject": "chemistry", "difficulty": "hard"
+    }
+  ]
+}
